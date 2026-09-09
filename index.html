@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0d0c" />
-  <title>YICHING SYSTEM · 易经系统</title>
+  <title>I CHING SYSTEM · 易经系统</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -144,13 +144,13 @@
   <div class="background"></div><div class="grain"></div>
   <div class="page">
     <header class="topbar">
-      <a href="#top" class="brand" aria-label="Yiching System home"><span class="brand-seal">☯</span><span><strong class="brand-name font-en">YICHING SYSTEM</strong><small class="brand-sub" data-i18n="brandSub">THE DIGITAL ORACLE</small></span></a>
+      <a href="#top" class="brand" aria-label="I Ching System home"><span class="brand-seal">☯</span><span><strong class="brand-name font-en">I CHING SYSTEM</strong><small class="brand-sub" data-i18n="brandSub">THE DIGITAL ORACLE</small></span></a>
       <div class="top-actions"><button id="langButton" class="lang-button" type="button">EN / 中文</button><button id="settingsButton" class="icon-button" type="button" aria-label="AI settings"><i data-lucide="sliders-horizontal" width="16"></i></button></div>
     </header>
 
     <section class="hero" id="top">
       <div class="bagua-wheel" aria-hidden="true"><span class="bagua-core">☯</span><span class="bagua-sigil" style="--angle:0deg">☰</span><span class="bagua-sigil" style="--angle:45deg">☱</span><span class="bagua-sigil" style="--angle:90deg">☲</span><span class="bagua-sigil" style="--angle:135deg">☳</span><span class="bagua-sigil" style="--angle:180deg">☴</span><span class="bagua-sigil" style="--angle:225deg">☵</span><span class="bagua-sigil" style="--angle:270deg">☶</span><span class="bagua-sigil" style="--angle:315deg">☷</span></div>
-      <div class="eyebrow" data-i18n="eyebrow">Ancient wisdom · Present moment</div><h1 class="font-en">YICHING SYSTEM</h1><p data-i18n="heroCopy">循生辰之数，观阴阳之变。以古老的易学意象，为当下的心念觅得一线澄明。</p>
+      <div class="eyebrow" data-i18n="eyebrow">Ancient wisdom · Present moment</div><h1 class="font-en">I CHING SYSTEM</h1><p data-i18n="heroCopy">循生辰之数，观阴阳之变。以古老的易学意象，为当下的心念觅得一线澄明。</p>
     </section>
 
     <main class="main-grid">
@@ -183,7 +183,7 @@
         </div>
       </section>
     </main>
-    <footer class="site-footer"><span class="footer-note">YICHING SYSTEM · DIGITAL ORACLE</span><span class="creator-mark" aria-label="Ruizhe Zhang watermark"><span class="creator-seal">RZ</span><span><strong>RUIZHE ZHANG</strong><small>CREATOR'S MARK</small></span></span></footer>
+    <footer class="site-footer"><span class="footer-note">I CHING SYSTEM · DIGITAL ORACLE</span><span class="creator-mark" aria-label="Ruizhe Zhang watermark"><span class="creator-seal">RZ</span><span><strong>RUIZHE ZHANG</strong><small>CREATOR'S MARK</small></span></span></footer>
   </div>
 
   <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -232,7 +232,7 @@
     }
     const escapeHtml = (text) => text.replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[char]));
     function populateHours() { const select = $('#hour'), previous = select.value || '6'; select.innerHTML = i18n[lang].hours.map((hour, index) => `<option value="${index}">${hour}</option>`).join(''); select.value = previous; }
-    function translate() { const copy = i18n[lang]; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; document.title = 'YICHING SYSTEM · Digital Oracle'; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (copy[key]) el.innerHTML = copy[key]; }); document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = copy[el.dataset.i18nPlaceholder] || ''; }); populateHours(); }
+    function translate() { const copy = i18n[lang]; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; document.title = 'I CHING SYSTEM · Digital Oracle'; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (copy[key]) el.innerHTML = copy[key]; }); document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = copy[el.dataset.i18nPlaceholder] || ''; }); populateHours(); }
     function toast(message) { const el = $('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toast.timer); toast.timer = setTimeout(() => el.classList.remove('show'), 2400); }
     function settings(open) { $('#settingsModal').classList.toggle('open', open); if(open) $('#baseUrl').focus(); }
     function fillConfig() { $('#baseUrl').value = localStorage.getItem('iching_base_url') || ''; $('#apiKey').value = localStorage.getItem('iching_api_key') || ''; $('#model').value = localStorage.getItem('iching_model') || ''; }
