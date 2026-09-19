@@ -1,276 +1,926 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0d0c" />
-  <title>I CHING SYSTEM · 易经系统</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    :root { --ink:#0b0d0c; --panel:rgba(21,25,22,.76); --panel-soft:rgba(27,32,28,.5); --gold:#d9af5c; --gold-pale:#f5dfaf; --red:#c95045; --muted:#9da19a; --line:rgba(225,190,118,.17); }
-    * { box-sizing: border-box; }
-    html { background: var(--ink); }
-    body { margin:0; min-width:320px; color:#e8e6de; background:var(--ink); font-family:"Noto Serif SC", Georgia, serif; overflow-x:hidden; }
-    button, input, select { font:inherit; }
-    button { cursor:pointer; }
-    .font-en { font-family:Cinzel, Georgia, serif; }
-    .background { position:fixed; inset:0; z-index:-2; overflow:hidden; background:radial-gradient(ellipse 80% 55% at 54% -8%, #283125 0%, transparent 68%), radial-gradient(ellipse 48% 40% at 100% 85%, rgba(125,73,30,.17), transparent 75%), #0b0d0c; }
-    .background:before, .background:after { content:""; position:absolute; border:1px solid rgba(214,175,91,.09); border-radius:50%; }
-    .background:before { width:860px; height:860px; top:-470px; left:calc(50% - 430px); box-shadow:0 0 160px rgba(201,159,74,.08), inset 0 0 100px rgba(219,179,88,.025); }
-    .background:after { width:480px; height:480px; right:-280px; bottom:-180px; box-shadow:0 0 80px rgba(184,70,49,.1); }
-    .grain { position:fixed; z-index:-1; inset:0; pointer-events:none; opacity:.16; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E"); mix-blend-mode:soft-light; }
-    .page { width:min(1180px, calc(100% - 40px)); margin:0 auto; padding:28px 0 48px; }
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:24px; padding-bottom:36px; }
-    .brand { display:flex; align-items:center; gap:13px; text-decoration:none; color:inherit; }
-    .brand-seal { width:43px; height:43px; display:grid; place-items:center; border:1px solid rgba(226,183,94,.47); border-radius:50%; color:var(--gold-pale); font-size:25px; box-shadow:inset 0 0 16px rgba(214,175,86,.12), 0 0 20px rgba(214,175,86,.08); }
-    .brand-name { display:block; font-size:17px; letter-spacing:.16em; line-height:1.2; color:#f1dfb6; }
-    .brand-sub { display:block; margin-top:3px; color:#85897e; font:10px Cinzel, serif; letter-spacing:.17em; }
-    .top-actions { display:flex; align-items:center; gap:9px; }
-    .icon-button, .lang-button { min-height:36px; border:1px solid rgba(215,211,190,.16); background:rgba(20,23,21,.52); color:#babcb5; border-radius:9px; transition:.2s ease; }
-    .icon-button { width:38px; display:grid; place-items:center; }
-    .lang-button { padding:0 12px; font-size:11px; letter-spacing:.08em; }
-    .icon-button:hover, .lang-button:hover { border-color:rgba(222,181,98,.7); color:#f1d9a3; background:rgba(82,69,36,.25); }
-    .hero { max-width:755px; margin:16px auto 42px; text-align:center; }
-    .eyebrow { display:flex; align-items:center; justify-content:center; gap:9px; color:#b8955a; font-size:10px; letter-spacing:.23em; text-transform:uppercase; }
-    .eyebrow:before, .eyebrow:after { content:""; width:29px; height:1px; background:linear-gradient(90deg, transparent, #ba9252); }
-    .eyebrow:after { transform:scaleX(-1); }
-    h1 { margin:14px 0 13px; font-weight:600; font-size:clamp(34px,5.4vw,60px); letter-spacing:.11em; line-height:1.18; background:linear-gradient(120deg,#f8e7be 10%,#d1a557 51%,#f5dfae 89%); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .hero p { max-width:590px; margin:auto; color:#a5a89f; font-size:14px; line-height:1.9; letter-spacing:.035em; }
-    .hero-chinese { margin:-4px 0 13px; color:#be9655; font-size:12px; letter-spacing:.38em; text-indent:.38em; }
-    .bagua-wheel { position:relative; width:144px; height:144px; margin:18px auto 17px; border:1px solid rgba(214,175,91,.24); border-radius:50%; box-shadow:inset 0 0 27px rgba(214,175,91,.06),0 0 35px rgba(200,150,56,.08); animation:wheel-drift 22s linear infinite; }
-    .bagua-wheel:before, .bagua-wheel:after { content:""; position:absolute; inset:18px; border:1px solid rgba(214,175,91,.21); border-radius:50%; }
-    .bagua-wheel:after { inset:38px; border-style:dashed; opacity:.65; }
-    .bagua-core { position:absolute; inset:0; display:grid; place-items:center; color:#e6c478; font-size:32px; text-shadow:0 0 14px rgba(219,174,80,.35); }
-    .bagua-sigil { position:absolute; top:50%; left:50%; color:#d7b36b; font-size:18px; line-height:1; transform:translate(-50%,-50%) rotate(var(--angle)) translateY(-57px) rotate(calc(-1 * var(--angle))); }
-    .trigram-ribbon { display:flex; justify-content:space-between; align-items:center; margin:16px 0 -2px; padding-top:14px; border-top:1px solid rgba(229,222,197,.08); color:rgba(224,185,105,.55); font-size:17px; }
-    .trigram-ribbon span { transition:color .2s,transform .2s; }
-    .trigram-ribbon span:hover { color:#f1d496; transform:translateY(-2px); }
-    .main-grid { display:grid; grid-template-columns:minmax(295px, .87fr) minmax(0, 1.3fr); gap:22px; align-items:start; }
-    .glass { position:relative; background:linear-gradient(145deg, rgba(29,34,30,.81), rgba(14,17,15,.76)); border:1px solid var(--line); border-radius:16px; box-shadow:0 18px 40px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,247,220,.035); backdrop-filter:blur(18px); }
-    .glass:before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(118deg, rgba(255,231,175,.035), transparent 25%, transparent 73%, rgba(255,231,175,.018)); }
-    .form-card { padding:26px; }
-    .card-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding-bottom:18px; border-bottom:1px solid rgba(229,222,197,.1); }
-    .card-heading h2 { margin:0; color:#f0eee5; font-size:18px; font-weight:600; letter-spacing:.06em; }
-    .card-heading h2 span { display:block; margin-top:3px; color:#918f83; font:9px Cinzel,serif; font-weight:500; letter-spacing:.12em; }
-    .card-heading p { margin:5px 0 0; color:#777c73; font-size:11px; letter-spacing:.05em; }
-    .compass { width:36px; height:36px; color:#d5a95c; border:1px solid rgba(211,170,87,.25); display:grid; place-items:center; border-radius:50%; }
-    form { margin-top:20px; display:grid; gap:16px; }
-    .field label { display:block; margin-bottom:7px; color:#b3b3aa; font-size:12px; }
-    .field label span { color:#757a71; font-size:10px; margin-left:4px; }
-    .control { width:100%; height:43px; border:1px solid rgba(209,207,188,.15); border-radius:8px; padding:0 12px; outline:none; background:rgba(5,7,6,.43); color:#e4e4dc; font-size:13px; transition:.2s ease; }
-    .control::placeholder { color:#5e645c; }
-    .control:focus { border-color:#c99e52; box-shadow:0 0 0 3px rgba(207,163,83,.08); }
-    select.control { appearance:none; background-image:linear-gradient(45deg, transparent 50%, #b69559 50%),linear-gradient(135deg, #b69559 50%,transparent 50%); background-position:calc(100% - 17px) 18px,calc(100% - 12px) 18px; background-size:5px 5px,5px 5px; background-repeat:no-repeat; }
-    input[type=date] { color-scheme:dark; }
-    .cast-button { display:flex; justify-content:center; align-items:center; gap:9px; height:48px; margin-top:5px; border:1px solid rgba(253,222,151,.25); border-radius:9px; color:#21180c; font-size:13px; font-weight:900; letter-spacing:.22em; background:linear-gradient(105deg,#b87828,#e6c170 48%,#b27429); box-shadow:0 7px 22px rgba(205,151,57,.18); transition:filter .2s, transform .2s; }
-    .cast-button:hover { filter:brightness(1.09); transform:translateY(-1px); }
-    .cast-button:active { transform:translateY(1px); }
-    .privacy { display:flex; align-items:center; justify-content:center; gap:5px; margin:2px 0 0; color:#666b63; font-size:10px; }
-    .privacy i { width:11px; }
-    .result-area { min-height:519px; }
-    .empty { min-height:519px; display:grid; place-items:center; padding:36px; text-align:center; }
-    .empty-inner { max-width:275px; }
-    .empty-symbol { position:relative; margin:0 auto 16px; width:88px; height:88px; display:grid; place-items:center; color:#4e534b; font-size:58px; }
-    .empty-symbol:before, .empty-symbol:after { content:""; position:absolute; inset:0; border:1px solid rgba(194,160,90,.12); border-radius:50%; }
-    .empty-symbol:after { inset:8px; border-style:dashed; animation:turn 20s linear infinite; }
-    .empty h2 { margin:0; color:#aaada4; font-size:17px; font-weight:500; }
-    .empty p { margin:8px 0 0; color:#686d65; font-size:12px; line-height:1.8; }
-    .result { display:none; }
-    .result.show { display:block; }
-    .oracle-card { padding:25px 27px 22px; overflow:hidden; }
-    .oracle-top { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#a29d8e; font-size:10px; letter-spacing:.12em; }
-    .reading-tag { display:flex; align-items:center; gap:7px; }
-    .reading-tag i { color:#ce9f54; width:14px; }
-    .date-tag { color:#72766f; white-space:nowrap; }
-    .hexagrams { display:grid; grid-template-columns:1fr 33px 1fr; align-items:center; gap:14px; margin:21px 0 19px; }
-    .hex { text-align:center; }
-    .hex-label { color:#a98e5b; font-size:10px; letter-spacing:.1em; }
-    .hex.changed .hex-label { color:#b96b63; }
-    .hex-char { height:59px; margin:7px 0 3px; display:grid; place-items:center; font-size:46px; color:#f2dda9; line-height:1; filter:drop-shadow(0 0 10px rgba(230,179,85,.16)); }
-    .hex.changed .hex-char { color:#e9b4a5; }
-    .hex-name { min-height:21px; color:#e7e5dd; font-size:15px; font-weight:600; }
-    .hex-en { margin-top:2px; min-height:15px; color:#7e837c; font:9px Cinzel, serif; letter-spacing:.06em; }
-    .bars { width:116px; min-height:80px; display:flex; flex-direction:column-reverse; justify-content:center; gap:6px; margin:13px auto 0; }
-    .yao { height:8px; border-radius:3px; background:linear-gradient(90deg,#a97835,#e1bf71 53%,#a87935); transition:box-shadow .3s, background .3s; }
-    .yao.yin { display:flex; justify-content:space-between; background:none; }
-    .yao.yin span { width:43.5%; border-radius:3px; background:linear-gradient(90deg,#a97835,#e1bf71 60%,#a87935); }
-    .yao.moving { background:#d54e41; box-shadow:0 0 15px rgba(220,75,62,.8),0 0 31px rgba(210,101,47,.32); animation:breathe 1.7s ease-in-out infinite; }
-    .yao.yin.moving span { background:#d54e41; box-shadow:0 0 14px rgba(220,75,62,.7); animation:breathe 1.7s ease-in-out infinite; }
-    .arrow { width:33px; height:33px; border-radius:50%; display:grid; place-items:center; color:#bd9261; border:1px solid rgba(197,155,91,.23); }
-    .oracle-summary { padding-top:14px; border-top:1px solid rgba(229,222,197,.1); color:#a9aaa1; font-size:12px; line-height:1.8; text-align:center; }
-    .oracle-summary strong { color:#ddb86d; font-weight:500; }
-    .interpretation { margin-top:20px; padding:23px 27px 27px; }
-    .interpretation-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:15px; border-bottom:1px solid rgba(229,222,197,.1); }
-    .interpretation-title { display:flex; align-items:center; gap:9px; color:#edebe1; font-size:14px; font-weight:600; letter-spacing:.04em; }
-    .interpretation-title i { width:16px; color:#d9ab59; }
-    .badge { border:1px solid rgba(217,175,91,.22); border-radius:12px; padding:3px 8px; color:#a48e62; font:9px Cinzel, serif; letter-spacing:.04em; white-space:nowrap; }
-    .ai-copy { min-height:150px; padding-top:17px; color:#b9bbb3; font-size:12px; line-height:1.92; }
-    .ai-copy p { margin:0 0 11px; }
-    .ai-copy strong { color:#ead5a2; font-weight:600; }
-    .ai-copy em { color:#8a9088; }
-    .ai-copy .notice { color:#81857d; font-size:11px; padding-top:2px; }
-    .error { color:#e0877d; }
-    .typing::after { content:"▋"; color:#d9a956; animation:blink .8s steps(1) infinite; margin-left:3px; }
-    .modal-backdrop { position:fixed; z-index:10; inset:0; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(1,3,2,.76); backdrop-filter:blur(9px); }
-    .modal-backdrop.open { display:flex; }
-    .modal { width:min(100%, 460px); padding:25px; background:linear-gradient(145deg,rgba(34,39,35,.98),rgba(15,18,16,.98)); border:1px solid rgba(218,177,95,.31); border-radius:16px; box-shadow:0 26px 90px rgba(0,0,0,.62); }
-    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:15px; }
-    .modal-head h2 { margin:0; color:#edebe3; font-size:17px; font-weight:600; }
-    .modal-close { background:none; border:0; color:#93978e; font-size:27px; line-height:1; padding:0 2px; }
-    .modal-close:hover { color:#f1d69f; }
-    .modal-desc { margin:10px 0 20px; color:#8f938b; font-size:11px; line-height:1.75; }
-    .modal-fields { display:grid; gap:14px; }
-    .modal-save { width:100%; height:42px; margin-top:20px; border:0; border-radius:8px; color:#241a0d; background:linear-gradient(105deg,#bd8537,#e3bd68,#bd8537); font-weight:700; font-size:12px; letter-spacing:.1em; }
-    .site-footer { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:32px; padding:18px 2px 0; border-top:1px solid rgba(222,185,105,.13); color:#70756d; }
-    .footer-note { font:9px Cinzel,serif; letter-spacing:.13em; }
-    .creator-mark { display:flex; align-items:center; gap:9px; color:rgba(219,184,108,.74); }
-    .creator-seal { display:grid; place-items:center; width:27px; height:27px; border:1px solid rgba(221,180,93,.45); border-radius:50%; color:#e7c778; font:10px Cinzel,serif; letter-spacing:-.05em; }
-    .creator-mark strong { display:block; font:10px Cinzel,serif; letter-spacing:.15em; font-weight:600; }
-    .creator-mark small { display:block; margin-top:2px; color:#6e716a; font:8px Cinzel,serif; letter-spacing:.11em; }
-    .toast { position:fixed; z-index:20; left:50%; bottom:25px; padding:10px 15px; color:#e9dfc8; background:rgba(36,39,35,.96); border:1px solid rgba(218,177,95,.35); border-radius:8px; font-size:12px; transform:translate(-50%,20px); opacity:0; transition:.25s; pointer-events:none; }
-    .toast.show { transform:translate(-50%,0); opacity:1; }
-    @keyframes breathe { 50% { filter:brightness(1.25); box-shadow:0 0 22px rgba(229,78,65,.94),0 0 42px rgba(222,116,54,.45); } }
-    @keyframes turn { to { transform:rotate(360deg); } }
-    @keyframes wheel-drift { to { transform:rotate(360deg); } }
-    @keyframes blink { 50% { opacity:0; } }
-    @media (max-width:760px) { .page { width:min(100% - 28px, 590px); padding-top:18px; } .topbar { padding-bottom:24px; } .brand-name { font-size:14px; } .hero { margin:10px auto 29px; } .hero p { font-size:12px; } .bagua-wheel { width:130px; height:130px; } .bagua-sigil { transform:translate(-50%,-50%) rotate(var(--angle)) translateY(-51px) rotate(calc(-1 * var(--angle))); } .main-grid { grid-template-columns:1fr; } .result-area,.empty { min-height:0; } .empty { min-height:330px; } .form-card { padding:22px; } .site-footer { align-items:flex-start; flex-direction:column; gap:13px; } }
-    @media (max-width:385px) { .page { width:calc(100% - 22px); } .brand-sub { display:none; } .hexagrams { gap:6px; grid-template-columns:1fr 27px 1fr; } .oracle-card,.interpretation { padding-left:17px; padding-right:17px; } .bars { width:97px; } .hex-char { font-size:40px; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易·數靈 | Cyber I-Ching & Musical Composition</title>
+    <!-- Tailwind CSS & Lucide Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+SC:wght@400;600;900&display=swap');
+        
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            font-family: 'Noto Serif SC', serif;
+        }
+        .font-en { font-family: 'Cinzel', serif; }
+        
+        .glass-panel {
+            background: rgba(18, 20, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fce0ad 0%, #dfac6c 50%, #c68b45 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .yao-yang {
+            height: 11px;
+            background: #d4af37;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .yao-yin {
+            height: 11px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .yao-yin-part {
+            width: 44%;
+            height: 100%;
+            background: #d4af37;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .moving-active {
+            box-shadow: 0 0 12px #ef4444;
+            background: #ef4444 !important;
+        }
+        .moving-active .yao-yin-part {
+            background: #ef4444 !important;
+        }
+    </style>
 </head>
-<body>
-  <div class="background"></div><div class="grain"></div>
-  <div class="page">
-    <header class="topbar">
-      <a href="#top" class="brand" aria-label="I Ching System home"><span class="brand-seal">☯</span><span><strong class="brand-name font-en">I CHING SYSTEM</strong><small class="brand-sub" data-i18n="brandSub">THE DIGITAL ORACLE</small></span></a>
-      <div class="top-actions"><button id="langButton" class="lang-button" type="button">EN / 中文</button><button id="settingsButton" class="icon-button" type="button" aria-label="AI settings"><i data-lucide="sliders-horizontal" width="16"></i></button></div>
+<body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
+
+    <!-- 顶栏 -->
+    <header class="w-full max-w-5xl flex justify-between items-center mb-8">
+        <div class="flex items-center space-x-3">
+            <span class="text-3xl text-amber-500">☯</span>
+            <div>
+                <span class="text-xl font-bold tracking-widest gold-gradient-text">CYBER I-CHING</span>
+                <span class="block text-[10px] text-stone-500 tracking-wider font-en">FORTUNE-TELLING COMPOSITION SYSTEM</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button id="openRulesModalBtn" class="px-3 py-1.5 rounded border border-amber-600/60 bg-amber-950/30 hover:bg-amber-900/50 text-xs text-amber-400 flex items-center gap-1.5 transition">
+                <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                <span data-i18n="btn_view_rules">作曲规则表</span>
+            </button>
+            <button id="langToggleBtn" class="px-3 py-1.5 rounded border border-stone-700 hover:border-amber-500 text-xs text-stone-300 transition">
+                EN / 中文
+            </button>
+            <button id="openAiModalBtn" class="p-2 rounded border border-stone-700 hover:border-amber-500 text-stone-300 hover:text-amber-400 transition">
+                <i data-lucide="settings" class="w-4 h-4"></i>
+            </button>
+        </div>
     </header>
 
-    <section class="hero" id="top">
-      <div class="bagua-wheel" aria-hidden="true"><span class="bagua-core">☯</span><span class="bagua-sigil" style="--angle:0deg">☰</span><span class="bagua-sigil" style="--angle:45deg">☱</span><span class="bagua-sigil" style="--angle:90deg">☲</span><span class="bagua-sigil" style="--angle:135deg">☳</span><span class="bagua-sigil" style="--angle:180deg">☴</span><span class="bagua-sigil" style="--angle:225deg">☵</span><span class="bagua-sigil" style="--angle:270deg">☶</span><span class="bagua-sigil" style="--angle:315deg">☷</span></div>
-      <div class="eyebrow" data-i18n="eyebrow">Ancient wisdom · Present moment</div><h1 class="font-en">I CHING SYSTEM</h1><p data-i18n="heroCopy">循生辰之数，观阴阳之变。以古老的易学意象，为当下的心念觅得一线澄明。</p>
-    </section>
+    <!-- 主面板 -->
+    <main class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- 左侧输入表单 -->
+        <section class="md:col-span-4 space-y-6">
+            <div class="glass-panel p-6 rounded-2xl space-y-5">
+                <div class="border-b border-stone-800 pb-3">
+                    <h2 class="text-lg font-bold text-stone-100" data-i18n="input_title">求问者生辰</h2>
+                    <p class="text-xs text-stone-500 mt-1" data-i18n="input_desc">梅花象数 · 先天起卦 · 气数感应</p>
+                </div>
 
-    <main class="main-grid">
-      <section class="glass form-card">
-        <div class="card-heading"><div><h2 data-i18n="inputTitle">求问者生辰</h2><p data-i18n="inputDesc">梅花象数 · 先天起卦 · 气数感应</p></div><span class="compass"><i data-lucide="compass" width="17"></i></span></div>
-        <div class="trigram-ribbon" aria-label="Eight trigrams"><span>☰</span><span>☱</span><span>☲</span><span>☳</span><span>☴</span><span>☵</span><span>☶</span><span>☷</span></div>
-        <form id="oracleForm">
-          <div class="field"><label for="name" data-i18n="nameLabel">姓名 <span>(中 / 英文皆可)</span></label><input class="control" id="name" required maxlength="80" data-i18n-placeholder="namePlaceholder" placeholder="如：张三丰 / Alan Turing" /></div>
-          <div class="field"><label for="birthdate" data-i18n="dateLabel">公历出生日期</label><input class="control" type="date" id="birthdate" required /></div>
-          <div class="field"><label for="hour" data-i18n="hourLabel">出生时辰</label><select class="control" id="hour"></select></div>
-          <div class="field"><label for="question" data-i18n="questionLabel">心中所求之事 <span>(可选)</span></label><input class="control" id="question" maxlength="160" data-i18n-placeholder="questionPlaceholder" placeholder="如：近期事业转型吉凶" /></div>
-          <button class="cast-button" type="submit"><i data-lucide="sparkles" width="15"></i><span data-i18n="castButton">启 卦 排 盘</span></button>
-          <p class="privacy"><i data-lucide="shield-check"></i><span data-i18n="privacy">你的生辰资料只用于本次起卦，不会被保存</span></p>
-        </form>
-      </section>
+                <form id="oracleForm" class="space-y-4 text-xs md:text-sm">
+                    <div>
+                        <label class="block text-stone-400 mb-1" data-i18n="label_name">姓名 (中/英文皆可)</label>
+                        <input type="text" id="inputName" required placeholder="如: 张三丰 / Alan Turing"
+                               class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-200 focus:outline-none focus:border-amber-500">
+                    </div>
 
-      <section class="result-area">
-        <div class="glass empty" id="emptyState"><div class="empty-inner"><div class="empty-symbol">䷀</div><h2 data-i18n="emptyTitle">此心若静，万象自明</h2><p data-i18n="emptyCopy">输入你的生辰与所问之事<br>开启一场与内心的对话</p></div></div>
-        <div class="result" id="resultCard">
-          <section class="glass oracle-card">
-            <div class="oracle-top"><span class="reading-tag"><i data-lucide="orbit"></i><span data-i18n="readingTag">易数感应已成</span></span><span class="date-tag" id="readingDate"></span></div>
-            <div class="hexagrams">
-              <div class="hex"><div class="hex-label" data-i18n="presentLabel">本 卦 · 现 状</div><div class="hex-char" id="presentSymbol">䷀</div><div class="hex-name" id="presentName">乾为天</div><div class="bars" id="presentBars"></div></div>
-              <div class="arrow"><i data-lucide="arrow-right" width="15"></i></div>
-              <div class="hex changed"><div class="hex-label" data-i18n="changedLabel">变 卦 · 走 向</div><div class="hex-char" id="futureSymbol">䷁</div><div class="hex-name" id="futureName">坤为地</div><div class="bars" id="futureBars"></div></div>
+                    <div>
+                        <label class="block text-stone-400 mb-1" data-i18n="label_dob">出生日期</label>
+                        <input type="date" id="inputDob" required
+                               class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-200 focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-stone-400 mb-1" data-i18n="label_hour">出生时辰</label>
+                        <select id="inputHour" class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-200 focus:outline-none focus:border-amber-500">
+                            <!-- 动态加载时辰 -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-stone-400 mb-1" data-i18n="label_question">心中所求之事 (可选)</label>
+                        <input type="text" id="inputQuestion" placeholder="如: 换工作吉凶 / 合作能否成功 / 感情走向"
+                               class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-200 focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 mt-2 rounded-lg font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 hover:opacity-90 text-stone-950 transition duration-300">
+                        <span data-i18n="btn_cast">启 卦 · 排 盘 谱 曲</span>
+                    </button>
+                </form>
             </div>
-            <div class="oracle-summary" id="hexSummary"></div>
-          </section>
-          <section class="glass interpretation"><div class="interpretation-head"><div class="interpretation-title"><i data-lucide="sparkles"></i><span data-i18n="interpretTitle">易数灵感解读</span></div><span class="badge" id="aiBadge">LOCAL ORACLE</span></div><div class="ai-copy" id="aiResponse"></div></section>
-        </div>
-      </section>
+        </section>
+
+        <!-- 右侧展示区 -->
+        <section class="md:col-span-8 space-y-6">
+            
+            <div id="emptyState" class="glass-panel p-16 rounded-2xl text-center space-y-4 flex flex-col items-center justify-center min-h-[460px]">
+                <span class="text-7xl text-stone-700">䷀</span>
+                <p class="text-stone-400 text-sm tracking-wider" data-i18n="empty_state">诚心合十，输入生辰名字后开启命卦与专属音律</p>
+            </div>
+
+            <div id="resultCard" class="hidden space-y-6">
+                
+                <!-- 1. 卦象卡片 -->
+                <div class="glass-panel p-6 rounded-2xl grid grid-cols-2 gap-4 text-center">
+                    <div class="space-y-3">
+                        <span class="text-xs text-amber-400 font-semibold" data-i18n="present_hex">【本卦 · 现状】</span>
+                        <div class="text-4xl text-amber-200" id="presentUnicode">䷀</div>
+                        <h3 class="text-base font-bold text-stone-100" id="presentName">--</h3>
+                        <div id="presentBars" class="w-28 mx-auto flex flex-col-reverse gap-2"></div>
+                    </div>
+                    <div class="space-y-3 border-l border-stone-800">
+                        <span class="text-xs text-rose-400 font-semibold" data-i18n="future_hex">【变卦 · 走向】</span>
+                        <div class="text-4xl text-rose-200" id="futureUnicode">䷁</div>
+                        <h3 class="text-base font-bold text-stone-100" id="futureName">--</h3>
+                        <div id="futureBars" class="w-28 mx-auto flex flex-col-reverse gap-2"></div>
+                    </div>
+                </div>
+
+                <!-- 2. 深度情境化运势与案例剖析卡片 (中英完全独立响应) -->
+                <div class="glass-panel p-6 rounded-2xl space-y-4">
+                    <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="compass" class="w-4 h-4 text-amber-400"></i>
+                            <h3 class="font-bold text-stone-200 text-sm" data-i18n="ai_title">周易生辰运势与生活实例推演</h3>
+                        </div>
+                        <span id="aiBadge" class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-400">Local Rule</span>
+                    </div>
+
+                    <div id="aiResponse" class="text-xs md:text-sm text-stone-300 leading-relaxed space-y-4 min-h-[80px]">
+                        <!-- 动态注入中英文运势与案例 -->
+                    </div>
+                </div>
+
+                <!-- 3. 手动作曲家工作台 -->
+                <div class="glass-panel p-6 rounded-2xl space-y-4 border border-amber-500/30">
+                    <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="sliders" class="w-4 h-4 text-amber-400"></i>
+                            <h3 class="font-bold text-stone-100 text-sm" data-i18n="comp_manual_title">手动作曲映射参数 (Acoustic Parameters)</h3>
+                        </div>
+                        <span class="text-xs text-amber-500/80 font-en" data-i18n="comp_target">For Sibelius / Traditional Score</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                        <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
+                            <span class="text-stone-500 block" data-i18n="param_scale">调式音阶 (Scale)</span>
+                            <span id="musicScale" class="text-amber-400 font-semibold mt-1 block">--</span>
+                        </div>
+                        <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
+                            <span class="text-stone-500 block" data-i18n="param_meter">节拍速度 (Tempo/Meter)</span>
+                            <span id="musicBpm" class="text-amber-400 font-semibold mt-1 block">--</span>
+                        </div>
+                        <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
+                            <span class="text-stone-500 block" data-i18n="param_inst">配器编制 (Timbres)</span>
+                            <span id="musicInstruments" class="text-amber-400 font-semibold mt-1 block truncate">--</span>
+                        </div>
+                        <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
+                            <span class="text-stone-500 block" data-i18n="param_tension">和声张力模型</span>
+                            <span id="musicTension" class="text-amber-400 font-semibold mt-1 block">太极和弦体系 (Zhao)</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-900/50 p-3 rounded-lg border border-stone-800/80 text-xs text-stone-400 space-y-1">
+                        <div class="flex items-center gap-1.5 text-stone-300 font-medium">
+                            <i data-lucide="info" class="w-3.5 h-3.5 text-amber-500"></i>
+                            <span data-i18n="comp_guide_title">微观创作指引 (Micro-Development)：</span>
+                        </div>
+                        <p id="musicFormGuide" class="leading-relaxed pl-5">--</p>
+                    </div>
+                </div>
+
+                <!-- 4. Suno AI 算命作曲工作台 -->
+                <div class="glass-panel p-6 rounded-2xl space-y-4 border border-amber-500/30">
+                    <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="music" class="w-4 h-4 text-amber-400"></i>
+                            <h3 class="font-bold text-stone-100 text-sm" data-i18n="suno_title">Suno AI 算命作曲引擎</h3>
+                        </div>
+                        <div class="flex space-x-2 bg-stone-900 p-1 rounded-lg border border-stone-700 text-xs">
+                            <button id="modeRealistic" class="px-2.5 py-1 rounded bg-amber-600 text-stone-950 font-bold transition" data-i18n="mode_real">卦象写实曲</button>
+                            <button id="modeTurnaround" class="px-2.5 py-1 rounded text-stone-400 hover:text-stone-200 transition" data-i18n="mode_turn">转运破局曲</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-xs text-stone-400 font-medium" data-i18n="suno_style_label">Suno [Style of Music] 风格模型提示词：</label>
+                                <button onclick="copyToClipboard('sunoStyleText')" class="text-[11px] text-amber-400 hover:underline flex items-center gap-1">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> <span data-i18n="copy_btn">复制</span>
+                                </button>
+                            </div>
+                            <div id="sunoStyleText" class="w-full bg-stone-900 border border-stone-800 rounded-lg p-3 text-xs text-stone-300 font-mono select-all">--</div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-xs text-stone-400 font-medium" data-i18n="suno_meta_label">Suno [Lyrics & Meta-Tags] 曲式结构指令：</label>
+                                <button onclick="copyToClipboard('sunoStructureText')" class="text-[11px] text-amber-400 hover:underline flex items-center gap-1">
+                                    <i data-lucide="copy" class="w-3 h-3"></i> <span data-i18n="copy_btn">复制</span>
+                                </button>
+                            </div>
+                            <pre id="sunoStructureText" class="w-full bg-stone-900 border border-stone-800 rounded-lg p-3 text-xs text-stone-300 font-mono whitespace-pre-wrap select-all">--</pre>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </main>
-    <footer class="site-footer"><span class="footer-note">I CHING SYSTEM · DIGITAL ORACLE</span><span class="creator-mark" aria-label="Ruizhe Zhang watermark"><span class="creator-seal">RZ</span><span><strong>RUIZHE ZHANG</strong><small>CREATOR'S MARK</small></span></span></footer>
-  </div>
 
-  <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <section class="modal"><div class="modal-head"><h2 id="modalTitle" data-i18n="modalTitle">AI 灵感引擎</h2><button class="modal-close" id="closeSettings" type="button" aria-label="Close">×</button></div><p class="modal-desc" data-i18n="modalDesc">可选：连接任何兼容 OpenAI 的接口，获得更长、更个性化的解读。配置仅保存在此浏览器中。</p><div class="modal-fields"><div class="field"><label for="baseUrl">API Endpoint <span>(Base URL)</span></label><input class="control" id="baseUrl" placeholder="https://api.openai.com/v1" /></div><div class="field"><label for="apiKey">API Key</label><input class="control" id="apiKey" type="password" placeholder="sk-..." autocomplete="off" /></div><div class="field"><label for="model">Model Name</label><input class="control" id="model" placeholder="gpt-4o-mini / deepseek-chat" /></div></div><button class="modal-save" type="button" id="saveSettings" data-i18n="saveButton">保 存 本 地 配 置</button></section>
-  </div>
-  <div class="toast" id="toast"></div>
+    <!-- 弹窗 1：手动作曲规则矩阵表格 Modal -->
+    <div id="rulesModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 overflow-y-auto">
+        <div class="glass-panel w-full max-w-3xl p-6 md:p-8 rounded-2xl space-y-6 bg-stone-950 border border-amber-500/40 my-8">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="text-amber-500 text-lg">☯</span>
+                    <h3 class="text-base font-bold text-stone-100" data-i18n="rules_modal_title">易经作曲系统：学术映射规则矩阵</h3>
+                </div>
+                <button id="closeRulesModalBtn" class="text-stone-400 hover:text-stone-100 text-xl">&times;</button>
+            </div>
 
-  <script>
-  (() => {
-    const $ = (selector) => document.querySelector(selector);
-    const i18n = {
-      zh: { brandSub:'THE DIGITAL ORACLE', eyebrow:'Ancient wisdom · Present moment', heroTitle:'易 · 数 · 灵', heroCopy:'循生辰之数，观阴阳之变。以古老的易学意象，为当下的心念觅得一线澄明。', inputTitle:'求问者生辰', inputDesc:'梅花象数 · 先天起卦 · 气数感应', nameLabel:'姓名 <span>(中 / 英文皆可)</span>', namePlaceholder:'如：张三丰 / Alan Turing', dateLabel:'公历出生日期', hourLabel:'出生时辰', questionLabel:'心中所求之事 <span>(可选)</span>', questionPlaceholder:'如：近期事业转型吉凶', castButton:'启 卦 排 盘', privacy:'你的生辰资料只用于本次起卦，不会被保存', emptyTitle:'此心若静，万象自明', emptyCopy:'输入你的生辰与所问之事<br>开启一场与内心的对话', readingTag:'易数感应已成', presentLabel:'本 卦 · 现 状', changedLabel:'变 卦 · 走 向', interpretTitle:'易数灵感解读', modalTitle:'AI 灵感引擎', modalDesc:'可选：连接任何兼容 OpenAI 的接口，获得更长、更个性化的解读。配置仅保存在此浏览器中。', saveButton:'保 存 本 地 配 置', saved:'配置已安全保存在当前浏览器', apiError:'AI 连接未成功，请检查接口地址、密钥和浏览器 CORS 设置。', dateFormat:'zh-CN', defaultQuestion:'综合运势', hours:['子时 · 23:00 — 01:00','丑时 · 01:00 — 03:00','寅时 · 03:00 — 05:00','卯时 · 05:00 — 07:00','辰时 · 07:00 — 09:00','巳时 · 09:00 — 11:00','午时 · 11:00 — 13:00','未时 · 13:00 — 15:00','申时 · 15:00 — 17:00','酉时 · 17:00 — 19:00','戌时 · 19:00 — 21:00','亥时 · 21:00 — 23:00'] },
-      en: { brandSub:'THE DIGITAL ORACLE', eyebrow:'Ancient wisdom · Present moment', heroTitle:'CYBER I-CHING', heroCopy:'Read the pattern of your birth moment, observe the movement of yin and yang, and find a lucid thread through the question held today.', inputTitle:'Querent’s Details', inputDesc:'Plum Blossom Numerology · Pre-Heaven Casting', nameLabel:'Full name <span>(Chinese / English)</span>', namePlaceholder:'e.g. Alan Turing / 张三丰', dateLabel:'Date of birth', hourLabel:'Birth hour', questionLabel:'Question held in mind <span>(optional)</span>', questionPlaceholder:'e.g. A career transition', castButton:'CAST THE ORACLE', privacy:'Your details are used only to cast this reading', emptyTitle:'When the heart is still, the signs appear', emptyCopy:'Enter your birth details and a question<br>to begin a conversation with the present.', readingTag:'ORACLE PATTERN FORMED', presentLabel:'ORIGINAL · NOW', changedLabel:'CHANGED · FLOW', interpretTitle:'Oracle Reflection', modalTitle:'AI Reflection Engine', modalDesc:'Optional: connect any OpenAI-compatible service for a longer, personal reading. Settings stay only in this browser.', saveButton:'SAVE SETTINGS LOCALLY', saved:'Settings saved locally in this browser', apiError:'The AI connection failed. Check the endpoint, key, and browser CORS settings.', dateFormat:'en-GB', defaultQuestion:'your current path', hours:['Rat · 23:00 — 01:00','Ox · 01:00 — 03:00','Tiger · 03:00 — 05:00','Rabbit · 05:00 — 07:00','Dragon · 07:00 — 09:00','Snake · 09:00 — 11:00','Horse · 11:00 — 13:00','Goat · 13:00 — 15:00','Monkey · 15:00 — 17:00','Rooster · 17:00 — 19:00','Dog · 19:00 — 21:00','Pig · 21:00 — 23:00'] }
-    };
-    let lang = 'zh';
-    const trigrams = { 1:{zh:'乾',en:'Heaven',lines:[1,1,1]}, 2:{zh:'兑',en:'Lake',lines:[1,1,0]}, 3:{zh:'离',en:'Fire',lines:[1,0,1]}, 4:{zh:'震',en:'Thunder',lines:[1,0,0]}, 5:{zh:'巽',en:'Wind',lines:[0,1,1]}, 6:{zh:'坎',en:'Water',lines:[0,1,0]}, 7:{zh:'艮',en:'Mountain',lines:[0,0,1]}, 0:{zh:'坤',en:'Earth',lines:[0,0,0]} };
-    // King Wen sequence: key is upper-lower trigram, lower trigram is written after the hyphen.
-    const hexagrams = {
-      '1-1':['䷀','乾为天','The Creative','元亨利贞。天行健，君子以自强不息。'], '0-0':['䷁','坤为地','The Receptive','厚德载物，顺势而为。'], '6-4':['䷂','水雷屯','Difficulty at the Beginning','万事初创多有阻滞，宜守正徐图。'], '7-6':['䷃','山水蒙','Youthful Folly','蒙以养正，谦心求教则明。'], '6-1':['䷄','水天需','Waiting','云上于天，养其锋芒，静候时机。'], '1-6':['䷅','天水讼','Conflict','慎争戒讼，以诚化解分歧。'], '0-6':['䷆','地水师','The Army','行师有律，凝聚同道而后成事。'], '6-0':['䷇','水地比','Holding Together','亲比有道，择善而从。'], '5-1':['䷈','风天小畜','Taming Power of the Small','小有积蓄，未可强进。'], '1-2':['䷉','天泽履','Treading','履虎尾而不咥人，谨慎可通。'], '0-1':['䷊','地天泰','Peace','天地交而万物通，守其和泰。'], '1-0':['䷋','天地否','Standstill','否极藏机，内守其志。'], '1-3':['䷌','天火同人','Fellowship','同人于野，求同存异。'], '3-1':['䷍','火天大有','Great Possession','盛而有礼，光明可久。'], '0-7':['䷎','地山谦','Modesty','谦谦君子，厚积而不自满。'], '4-0':['䷏','雷地豫','Enthusiasm','顺势而动，乐而不纵。'], '2-4':['䷐','泽雷随','Following','随时之义，守心而应变。'], '7-5':['䷑','山风蛊','Work on What Has Been Spoiled','整饬旧弊，先难后获。'], '0-2':['䷒','地泽临','Approach','以诚临下，柔中有行。'], '5-0':['䷓','风地观','Contemplation','观我生，修己以感人。'], '3-4':['䷔','火雷噬嗑','Biting Through','明辨是非，果断去障。'], '7-3':['䷕','山火贲','Grace','文质彬彬，饰而不过。'], '7-0':['䷖','山地剥','Splitting Apart','剥落之时，守静蓄力。'], '0-4':['䷗','地雷复','Return','一阳来复，归根即是新生。'], '1-4':['䷘','天雷无妄','Innocence','无妄而行，真诚自有所得。'], '7-1':['䷙','山天大畜','Taming Power of the Great','厚积其力，待时而发。'], '7-4':['䷚','山雷颐','Nourishment','慎言语，节饮食，养正。'], '2-5':['䷛','泽风大过','Great Preponderance','栋桡之际，以非常之举济事。'], '6-6':['䷜','坎为水','The Abysmal Water','习坎而行，守信不失其心。'], '3-3':['䷝','离为火','The Clinging Fire','明以继明，附丽于正。'], '2-7':['䷞','泽山咸','Influence','感而遂通，真心相应。'], '4-5':['䷟','雷风恒','Duration','立不易方，恒其德贞。'], '1-7':['䷠','天山遁','Retreat','审时而退，保全锋芒。'], '4-1':['䷡','雷天大壮','Great Power','盛而知止，强而守礼。'], '3-0':['䷢','火地晋','Progress','明出地上，循序进展。'], '0-3':['䷣','地火明夷','Darkening of the Light','明夷于外，守光于内。'], '5-3':['䷤','风火家人','The Family','正家而后齐事，各安其位。'], '3-2':['䷥','火泽睽','Opposition','异中求同，不必强合。'], '6-7':['䷦','水山蹇','Obstruction','见险而止，反身修德。'], '4-6':['䷧','雷水解','Deliverance','解开郁结，宽而有度。'], '7-2':['䷨','山泽损','Decrease','损上益下，去繁就简。'], '5-4':['䷩','风雷益','Increase','自利利他，增益乃长。'], '2-1':['䷪','泽天夬','Breakthrough','决而能和，果敢却不偏执。'], '1-5':['䷫','天风姤','Coming to Meet','猝然相遇，宜辨其来意。'], '2-0':['䷬','泽地萃','Gathering Together','聚众有道，以诚相感。'], '0-5':['䷭','地风升','Pushing Upward','积小成大，柔顺上行。'], '2-6':['䷮','泽水困','Oppression','困而不失其所亨，修心待变。'], '6-5':['䷯','水风井','The Well','改邑不改井，回到根本资源。'], '2-3':['䷰','泽火革','Revolution','革故鼎新，时至则行。'], '3-5':['䷱','火风鼎','The Cauldron','调和诸材，成就新局。'], '4-4':['䷲','震为雷','The Arousing Thunder','震来虩虩，惊而知省。'], '7-7':['䷳','艮为山','Keeping Still','止其所止，静定生慧。'], '5-7':['䷴','风山渐','Development','渐进有序，终获佳境。'], '4-2':['䷵','雷泽归妹','Marrying Maiden','位未正时，勿急定局。'], '4-3':['䷶','雷火丰','Abundance','丰盛之时，更须明察。'], '3-7':['䷷','火山旅','The Wanderer','行旅在外，谦谨自安。'], '5-5':['䷸','巽为风','The Gentle Wind','随风入物，柔而能渗。'], '2-2':['䷹','兑为泽','The Joyous Lake','和悦以待，守其正道。'], '5-6':['䷺','风水涣','Dispersion','涣散重聚，先立中心。'], '6-2':['䷻','水泽节','Limitation','节而能通，取舍有度。'], '5-2':['䷼','风泽中孚','Inner Truth','诚于中，信自外达。'], '4-7':['䷽','雷山小过','Preponderance of the Small','小事可为，大事宜慎。'], '6-3':['䷾','水火既济','After Completion','既济思患，慎终如始。'], '3-6':['䷿','火水未济','Before Completion','事未尽成，保持明辨与耐心。']
-    };
-    // The conversion uses the full upper/lower pattern; an absent textual record gets a graceful trigram fallback.
-    const fallback = (upper, lower) => ['䷾', `${trigrams[upper].zh}${trigrams[lower].zh}卦`, `${trigrams[upper].en} over ${trigrams[lower].en}`, '阴阳递嬗，守正观变，顺势而行。'];
+            <!-- 表格 1: 八卦象数与乐器音色映射 -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="rule_tbl_1_title">1. 先天八卦声学生态与音阶映射 (Trigrams to Acoustic Ontology)</h4>
+                <div class="overflow-x-auto border border-stone-800 rounded-lg">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-stone-900/80 text-stone-300 border-b border-stone-800">
+                                <th class="p-2.5">卦名 (Trigram)</th>
+                                <th class="p-2.5">自然象意</th>
+                                <th class="p-2.5">调式体系 (Mode/Scale)</th>
+                                <th class="p-2.5">主导乐器与声学特质 (Timbres)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-800/60 text-stone-400" id="rulesTbody1"></tbody>
+                    </table>
+                </div>
+            </div>
 
-    const hashString = (text) => Array.from(text).reduce((sum, char, index) => sum + char.codePointAt(0) * (index + 3), 0);
-    const triByLines = (lines) => Number(Object.keys(trigrams).find((key) => trigrams[key].lines.every((n, i) => n === lines[i])));
-    function cast(name, date, hour) {
-      const clean = name.trim().replace(/\s+/g, ' ');
-      const words = clean.split(' ');
-      let first, second;
-      if (/^[\u0000-\u024F\s.'-]+$/u.test(clean)) { first = hashString(words[0]); second = hashString(words.slice(1).join('') || words[0]); }
-      else { const chars = Array.from(clean); const cut = Math.max(1, Math.ceil(chars.length / 2)); first = hashString(chars.slice(0,cut).join('')); second = hashString(chars.slice(cut).join('') || chars[0]); }
-      const [year, month, day] = date.split('-').map(Number);
-      const upper = first % 8, lower = (second + month + day) % 8;
-      const moving = (first + second + year + month + day + hour) % 6;
-      const originalLines = [...trigrams[lower].lines, ...trigrams[upper].lines];
-      const changedLines = [...originalLines]; changedLines[moving] = changedLines[moving] ? 0 : 1;
-      const futureLower = triByLines(changedLines.slice(0,3)), futureUpper = triByLines(changedLines.slice(3));
-      return { upper, lower, futureUpper, futureLower, moving, originalLines, changedLines };
-    }
-    const getHex = (upper, lower) => hexagrams[`${upper}-${lower}`] || fallback(upper, lower);
-    function renderBars(target, lines, moving = -1) { $(target).innerHTML = lines.map((line,index) => line ? `<div class="yao ${index===moving?'moving':''}"></div>` : `<div class="yao yin ${index===moving?'moving':''}"><span></span><span></span></div>`).join(''); }
-    function localReading(present, future, moving, question) {
-      const query = question || i18n[lang].defaultQuestion;
-      if (lang === 'en') return `<p><strong>Reading the image.</strong> ${present[2]} speaks to the condition around <em>${escapeHtml(query)}</em>. Its movement at line ${moving + 1} asks for attention to what is already in motion—not a forced answer.</p><p><strong>The turning.</strong> The path leans toward ${future[2]}. Let the next step be measured and sincere; clarity arrives through one grounded action, then a pause to observe its response.</p><p class="notice">This is a reflective tool, not a prediction or professional advice.</p>`;
-      return `<p><strong>象意所示。</strong> 本卦「${present[1]}」映照你对「<em>${escapeHtml(query)}</em>」的此刻心境。第 ${moving + 1} 爻发动，提示变化正在发生，不宜以急切之心强求定论。</p><p><strong>转化之机。</strong> 变至「${future[1]}」，可将注意力收回一件当下能稳稳完成的小事。先正其心与节奏，再观察外界的回应，路径会在行动中逐渐显现。</p><p class="notice">此为文化与自我反思体验，不构成预测或专业建议。</p>`;
-    }
-    const escapeHtml = (text) => text.replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[char]));
-    function populateHours() { const select = $('#hour'), previous = select.value || '6'; select.innerHTML = i18n[lang].hours.map((hour, index) => `<option value="${index}">${hour}</option>`).join(''); select.value = previous; }
-    function translate() { const copy = i18n[lang]; document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; document.title = 'I CHING SYSTEM · Digital Oracle'; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.dataset.i18n; if (copy[key]) el.innerHTML = copy[key]; }); document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = copy[el.dataset.i18nPlaceholder] || ''; }); populateHours(); }
-    function toast(message) { const el = $('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toast.timer); toast.timer = setTimeout(() => el.classList.remove('show'), 2400); }
-    function settings(open) { $('#settingsModal').classList.toggle('open', open); if(open) $('#baseUrl').focus(); }
-    function fillConfig() { $('#baseUrl').value = localStorage.getItem('iching_base_url') || ''; $('#apiKey').value = localStorage.getItem('iching_api_key') || ''; $('#model').value = localStorage.getItem('iching_model') || ''; }
-    const formatAiCopy = (text) => text.trim().split(/\n{2,}/).filter(Boolean).map(part => `<p>${escapeHtml(part).replace(/\n/g,'<br>')}</p>`).join('');
-    async function aiReading(context) {
-      const key = localStorage.getItem('iching_api_key'), endpoint = localStorage.getItem('iching_base_url'), model = localStorage.getItem('iching_model');
-      if (!key || !endpoint || !model) { $('#aiBadge').textContent = 'LOCAL ORACLE'; $('#aiResponse').innerHTML = localReading(context.present, context.future, context.moving, context.question); return; }
-      $('#aiBadge').textContent = 'THINKING…'; $('#aiResponse').innerHTML = `<p class="typing">${lang === 'zh' ? '正在感应卦象的流转' : 'Following the movement of the hexagram'}</p>`;
-      const prompt = lang === 'zh' ? `你是兼具易经知识与现代同理心的中文解读者。用简洁雅致、非确定性的口吻，为用户做文化与自我反思角度的卦象解读。姓名：${context.name}；出生日期：${context.date}；所问：${context.question || '综合运势'}；本卦：${context.present[1]}；变卦：${context.future[1]}；动爻：第${context.moving+1}爻。分为“象意”“转化”“可尝试的一步”三小段，不要做绝对预测，不要提供医疗、法律或投资建议。` : `You are a thoughtful I Ching cultural interpreter with modern empathy. Give a concise, non-deterministic reflection in English. Name: ${context.name}; birth date: ${context.date}; question: ${context.question || 'current path'}; original: ${context.present[2]}; changed: ${context.future[2]}; moving line: ${context.moving+1}. Use three short sections: Image, Transition, One grounded step. Do not make absolute predictions or offer medical, legal, or financial advice.`;
-      try {
-        const response = await fetch(`${endpoint.replace(/\/+$/, '')}/chat/completions`, { method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`}, body:JSON.stringify({model, messages:[{role:'user',content:prompt}], temperature:.7, stream:true}) });
-        if (!response.ok) { const detail = await response.json().catch(() => ({})); throw new Error(detail?.error?.message || 'AI request failed'); }
-        if (!response.body) throw new Error('Streaming is not available in this browser');
-        $('#aiBadge').textContent = model.toUpperCase();
-        const reader = response.body.getReader(), decoder = new TextDecoder(); let pending = '', fullText = '';
-        $('#aiResponse').innerHTML = '<p class="typing"></p>'; const target = $('#aiResponse p');
-        const consume = (block) => {
-          block.split(/\r?\n/).filter(line => line.startsWith('data:')).forEach(line => {
-            const value = line.slice(5).trim(); if (!value || value === '[DONE]') return;
-            const packet = JSON.parse(value); fullText += packet?.choices?.[0]?.delta?.content || '';
-          });
-          target.textContent = fullText;
+            <!-- 表格 2: 阴阳数理与音程转换 -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="rule_tbl_2_title">2. 阴阳爻与结构动力学规则 (Yin/Yang Micro-Mechanics)</h4>
+                <div class="overflow-x-auto border border-stone-800 rounded-lg">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-stone-900/80 text-stone-300 border-b border-stone-800">
+                                <th class="p-2.5">物理维度</th>
+                                <th class="p-2.5">阳爻 (⚊ / 1)</th>
+                                <th class="p-2.5">阴爻 (⚋ / 0)</th>
+                                <th class="p-2.5">动爻爆发 (Moving Line)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-800/60 text-stone-400" id="rulesTbody2"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-stone-500 leading-relaxed italic" data-i18n="rules_footer_note">
+                * 理论基础源自研究提案《Hexagram Resonance: Contemporary Music Composition Practices through the Symbolic System of the I Ching》，融合赵晓生太极和弦体系与宏观宇宙演化六阶段[cite: 3]。
+            </p>
+        </div>
+    </div>
+
+    <!-- 弹窗 2：OpenAI API 大模型配置 Modal -->
+    <div id="aiModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="glass-panel w-full max-w-md p-6 rounded-2xl space-y-4 bg-stone-900 border border-amber-500/30">
+            <div class="flex justify-between items-center border-b border-stone-800 pb-3">
+                <h3 class="font-bold text-stone-100" data-i18n="modal_title">AI 大模型配置</h3>
+                <button id="closeAiModalBtn" class="text-stone-400 hover:text-stone-200 text-xl">&times;</button>
+            </div>
+            <p class="text-xs text-stone-400" data-i18n="modal_desc">兼容任何 OpenAI 规范接口（如 DeepSeek, OpenAI, Moonshot 等）</p>
+            
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-stone-300 mb-1">API Endpoint (Base URL)</label>
+                    <input id="cfgBaseUrl" type="text" placeholder="https://api.deepseek.com/v1" class="w-full bg-stone-800 border border-stone-700 rounded px-3 py-2 text-stone-200">
+                </div>
+                <div>
+                    <label class="block text-stone-300 mb-1">API Key</label>
+                    <input id="cfgApiKey" type="password" placeholder="sk-xxxx" class="w-full bg-stone-800 border border-stone-700 rounded px-3 py-2 text-stone-200">
+                </div>
+                <div>
+                    <label class="block text-stone-300 mb-1">Model Name</label>
+                    <input id="cfgModel" type="text" placeholder="deepseek-chat" class="w-full bg-stone-800 border border-stone-700 rounded px-3 py-2 text-stone-200">
+                </div>
+            </div>
+            <button id="saveCfgBtn" class="w-full py-2 rounded bg-amber-600 hover:bg-amber-500 font-bold text-stone-950 text-xs transition" data-i18n="btn_save_cfg">保存配置</button>
+        </div>
+    </div>
+
+    <script>
+        // ======================= 完整中英文双语字典 (i18n) =======================
+        const i18n = {
+            zh: {
+                btn_view_rules: "作曲规则表",
+                input_title: "求问者生辰",
+                input_desc: "梅花象数 · 先天起卦 · 气数感应",
+                label_name: "姓名 (中/英文皆可)",
+                label_dob: "出生日期",
+                label_hour: "出生时辰",
+                label_question: "心中所求之事 (可选)",
+                btn_cast: "启 卦 · 排 盘 谱 曲",
+                empty_state: "诚心合十，输入生辰名字后开启命卦与专属音律",
+                present_hex: "【本卦 · 现状】",
+                future_hex: "【变卦 · 走向】",
+                ai_title: "周易生辰运势与生活实例推演",
+                comp_manual_title: "手动作曲映射参数 (Acoustic Parameters)",
+                comp_target: "适用于 Sibelius / 传统总谱",
+                param_scale: "调式音阶 (Scale)",
+                param_meter: "节拍速度 (Tempo/Meter)",
+                param_inst: "配器编制 (Timbres)",
+                param_tension: "和声张力模型",
+                comp_guide_title: "微观创作指引 (Micro-Development)：",
+                suno_title: "Suno AI 算命作曲引擎",
+                mode_real: "卦象写实曲",
+                mode_turn: "转运破局曲",
+                suno_style_label: "Suno [Style of Music] 风格模型提示词：",
+                suno_meta_label: "Suno [Lyrics & Meta-Tags] 曲式结构指令：",
+                copy_btn: "复制",
+                modal_title: "AI 接口配置",
+                modal_desc: "兼容任何 OpenAI 规范接口（如 DeepSeek, OpenAI 等）",
+                btn_save_cfg: "保存配置",
+                rules_modal_title: "易经作曲系统：学术映射规则矩阵",
+                rule_tbl_1_title: "1. 先天八卦声学生态与音阶映射 (Trigrams to Acoustic Ontology)",
+                rule_tbl_2_title: "2. 阴阳爻与结构动力学规则 (Yin/Yang Micro-Mechanics)",
+                rules_footer_note: "* 理论基础源自研究提案《Hexagram Resonance》，将周易象数理占融入现代作曲本体[cite: 3]。",
+                card_moving_title: "【动爻暗机】：",
+                card_moving_desc: "此爻发动，意味着在此关键节点需防范急躁或轻信口头承诺，动爻直接催生了后期的变卦格局。",
+                card_tip: "提示：点击右上角 ⚙️ 可配置 DeepSeek/OpenAI，针对个人具体提问定制超千字详测。",
+                yao_names: ["初", "二", "三", "四", "五", "上"],
+                hours: ["子时 (23-01)", "丑时 (01-03)", "寅时 (03-05)", "卯时 (05-07)", "辰时 (07-09)", "巳时 (09-11)", 
+                        "午时 (11-13)", "未时 (13-15)", "申时 (15-17)", "酉时 (17-19)", "戌时 (19-21)", "亥时 (21-23)"],
+                rules1: [
+                    { name: "乾 ☰ (1)", nature: "天 / 纯阳", scale: "全音阶 (Whole-tone) / 利底亚", timbres: "编钟、铜管组、明亮管风琴、高频合成器" },
+                    { name: "兑 ☱ (2)", nature: "泽 / 喜悦", scale: "宫调式五声 / 混合利底亚", timbres: "阮咸、木琴、竖琴拨弦、轻盈打击乐" },
+                    { name: "离 ☲ (3)", nature: "火 / 明丽", scale: "弗里几亚调式 / 爵士扩展和弦", timbres: "琵琶扫弦/轮指、电小提琴、Neo-Soul Rhodes" },
+                    { name: "震 ☳ (4)", nature: "雷 / 震动", scale: "十二音半音化 / 激进多利亚", timbres: "中国大堂鼓、定音鼓、失真电吉他、重击低音" },
+                    { name: "巽 ☴ (5)", nature: "风 / 柔顺", scale: "气流悬浮调式 / 羽调式", timbres: "竹笛/洞箫气流声 (Air sound)、原声木吉他、轻揉弦乐" },
+                    { name: "坎 ☵ (6)", nature: "水 / 险陷", scale: "布鲁斯小调 / 微分音暗黑氛围", timbres: "古筝水音摇指、低音大提琴、深层水声混响、无品贝斯" },
+                    { name: "艮 ☶ (7)", nature: "山 / 止定", scale: "四度叠置静止调式 / 空灵休止", timbres: "颂钵、钟磬、钢琴孤单低音、手碟 (Hang Drum)" },
+                    { name: "坤 ☷ (0)", nature: "地 / 纯阴", scale: "微分音簇 / 序列十二音", timbres: "古埙、大管、808超低音、温暖绵长长音铺底" }
+                ],
+                rules2: [
+                    { dim: "旋律跳进 (Melody)", yang: "大二度 / 纯五度向上跳进 (全音动势)", yin: "半音级进 / 小二度向下微调 (半音受纳)", moving: "三全音反转或八度剧烈跃迁" },
+                    { dim: "和声结构 (Harmony)", yang: "协和、开阔泛音列、四五度叠置", yin: "减七和弦、密集二度集群音块", moving: "赵晓生太极和弦不协和爆发点[cite: 3]" },
+                    { dim: "织体节奏 (Rhythm)", yang: "连续稳定全音符、宏大长音", yin: "点状断奏 (Staccato)、不规则碎拍", moving: "复节拍爆发 (Polyrhythm) 或静默休止" }
+                ]
+            },
+            en: {
+                btn_view_rules: "Composition Rules",
+                input_title: "Querent's Info",
+                input_desc: "Plum Blossom Numerology · Pre-Heaven Hexagram",
+                label_name: "Full Name (English / Chinese)",
+                label_dob: "Date of Birth",
+                label_hour: "Birth Hour (Branch)",
+                label_question: "Specific Question (Optional)",
+                btn_cast: "Cast Hexagram & Score Music",
+                empty_state: "Center your mind, enter your details to reveal the oracle & sonic ontology",
+                present_hex: "[Original · Present]",
+                future_hex: "[Changed · Future]",
+                ai_title: "I Ching Fortune & Life Simulation",
+                comp_manual_title: "Manual Acoustic Parameters",
+                comp_target: "For Sibelius / Score Writing",
+                param_scale: "Modal Scale",
+                param_meter: "Tempo & Meter",
+                param_inst: "Dominant Timbres",
+                param_tension: "Harmonic Model",
+                comp_guide_title: "Micro-Developmental Guide:",
+                suno_title: "Suno AI Composition Engine",
+                mode_real: "Realistic Hexagram",
+                mode_turn: "Turnaround Piece",
+                suno_style_label: "Suno [Style of Music] Prompts:",
+                suno_meta_label: "Suno [Lyrics & Meta-Tags] Structure:",
+                copy_btn: "Copy",
+                modal_title: "AI Model Config",
+                modal_desc: "Compatible with any OpenAI-compatible API (DeepSeek, OpenAI, etc.)",
+                btn_save_cfg: "Save Config",
+                rules_modal_title: "I-Ching Composition System: Mapping Rules Matrix",
+                rule_tbl_1_title: "1. Trigrams to Acoustic Ontology Mapping",
+                rule_tbl_2_title: "2. Yin/Yang Micro-Mechanics and Line Mutation Rules",
+                rules_footer_note: "* Academic basis derived from research proposal 'Hexagram Resonance', bridging I Ching semiotics into sonic ontology[cite: 3].",
+                card_moving_title: "[Moving Line Dynamic]: ",
+                card_moving_desc: "This line mutation warns against premature haste or relying on verbal promises. It directly drives the transformed future state.",
+                card_tip: "Tip: Click ⚙️ to configure DeepSeek/OpenAI for personalized, long-form inquiry analysis.",
+                yao_names: ["1st (Bottom)", "2nd", "3rd", "4th", "5th", "Top"],
+                hours: ["Rat (23-01)", "Ox (01-03)", "Tiger (03-05)", "Rabbit (05-07)", "Dragon (07-09)", "Snake (09-11)", 
+                        "Horse (11-13)", "Goat (13-15)", "Monkey (15-17)", "Rooster (17-19)", "Dog (19-21)", "Pig (21-23)"],
+                rules1: [
+                    { name: "Qian ☰ (1)", nature: "Heaven / Pure Yang", scale: "Whole-tone / Lydian Mode", timbres: "Bronze Chimes, Brass Section, Bright Pipe Organ, Synth" },
+                    { name: "Dui ☱ (2)", nature: "Lake / Joyful", scale: "Major Pentatonic / Mixolydian", timbres: "Ruan, Marimba, Plucked Harp, Light Percussion" },
+                    { name: "Li ☲ (3)", nature: "Fire / Radiant", scale: "Flamenco Phrygian / Neo-Soul Chords", timbres: "Pipa sweeps, Electric Violin, Bright Rhodes Piano" },
+                    { name: "Zhen ☳ (4)", nature: "Thunder / Arousing", scale: "12-Tone Chromatic / Aggressive Dorian", timbres: "Taiko Drums, Timpani, Distorted Guitar, Heavy Trap Bass" },
+                    { name: "Xun ☴ (5)", nature: "Wind / Gentle", scale: "Air-Sound Pentatonic / Suspended", timbres: "Bamboo Flute/Dizi breath, Sul-tasto Strings, Acoustic Guitar" },
+                    { name: "Kan ☵ (6)", nature: "Water / Abyssal", scale: "Blues Minor / Microtonal Ambient", timbres: "Guzheng water-tremolo, Cello, Sub-bass Pad, Fretless Bass" },
+                    { name: "Gen ☶ (7)", nature: "Mountain / Still", scale: "Sparse Quartal / Resonant Silence", timbres: "Singing Bowl, Isolated Low Piano, Hang Drum, Temple Bell" },
+                    { name: "Kun ☷ (0)", nature: "Earth / Pure Yin", scale: "Microtonal Cluster / Serialism", timbres: "Ancient Xun, Contrabassoon, 808 Sub-Bass, Warm Strings" }
+                ],
+                rules2: [
+                    { dim: "Melodic Contour", yang: "Ascending Major 2nd / Perfect 5th", yin: "Descending Minor 2nd / Semitone resolution", moving: "Tritone leap or violent octave transformation" },
+                    { dim: "Harmonic Color", yang: "Consonant, open quartal/quintal stacks", yin: "Diminished chords, dense 2nd cluster tone", moving: "Zhao Xiaosheng's Tai Chi Chord dissonance burst[cite: 3]" },
+                    { dim: "Rhythmic Texture", yang: "Sustained long tones, even metrics", yin: "Fragmented staccato, irregular pauses", moving: "Polyrhythmic torrent (6/8 vs 4/4) or abrupt silence" }
+                ]
+            }
         };
-        while (true) {
-          const {value, done} = await reader.read(); if (done) break;
-          pending += decoder.decode(value, {stream:true}); const blocks = pending.split(/\r?\n\r?\n/); pending = blocks.pop(); blocks.forEach(consume);
+
+        let currentLang = 'zh';
+        let currentCompositionMode = 'realistic';
+        let latestHexResult = null;
+
+        // ======================= 先天八卦与卦象数据库（完整双语） =======================
+        const TRIGRAMS = {
+            1: { zh: "乾", en: "Heaven", yao: [1, 1, 1] },
+            2: { zh: "兑", en: "Lake", yao: [1, 1, 0] },
+            3: { zh: "离", en: "Fire", yao: [1, 0, 1] },
+            4: { zh: "震", en: "Thunder", yao: [1, 0, 0] },
+            5: { zh: "巽", en: "Wind", yao: [0, 1, 1] },
+            6: { zh: "坎", en: "Water", yao: [0, 1, 0] },
+            7: { zh: "艮", en: "Mountain", yao: [0, 0, 1] },
+            0: { zh: "坤", en: "Earth", yao: [0, 0, 0] }
+        };
+
+        const HEXAGRAM_DETAILS = {
+            "1-1": {
+                code: "䷀", zh: "乾为天", en: "The Creative",
+                trend: {
+                    zh: "【当前大势】：纯阳刚健，如日中天。运势强劲，主动权完全在自己手中，但锋芒过露易引来反弹。",
+                    en: "[Current Trend]: Pure Yang force at its peak. Supreme drive, yet over-assertiveness risks alienating collaborators."
+                },
+                example: {
+                    zh: "【现实生活写照】：近期在职场或学业中大概率面临‘挑大梁竞聘、独立启动项目’的重要窗口。但容易遇到‘权威上司暗中设卡’或‘合伙人抱怨你不听劝’，导致推进受阻。",
+                    en: "[Life Scenario]: You are likely spearheading a project or competing for a promotion. Expect potential pushback from authoritative figures or friction if you act unilaterally."
+                },
+                strategy: {
+                    zh: "【破局解法】：切忌孤注一掷！行事需多做备份，克制说教语气；顺水推舟方能长久，切莫‘亢龙有悔’。",
+                    en: "[Strategy]: Avoid hubris. Build alliances, document every procedure carefully, and balance executive drive with genuine humility."
+                }
+            },
+            "0-0": {
+                code: "䷁", zh: "坤为地", en: "The Receptive",
+                trend: {
+                    zh: "【当前大势】：厚德载物，以退为进。眼下绝不可强行出头，宜当幕后推手，等待顺理成章的契机。",
+                    en: "[Current Trend]: Deep receptivity. Success comes through patience and support rather than aggressive disruption."
+                },
+                example: {
+                    zh: "【现实生活写照】：正处于‘多劳少得、暂时看不到掌声’的积累期。近期容易遇到‘拖延审批的合作方’或感情中单方面迁就，令人内心感到被动委屈。",
+                    en: "[Life Scenario]: Heavy background efforts without immediate applause. You may deal with slow decision-makers or feel you are giving more than you receive."
+                },
+                strategy: {
+                    zh: "【破局解法】：宽厚包容但不做无底线妥协。默默积累硬实力与人脉网络，‘先迷后得主’，数月后自有公论。",
+                    en: "[Strategy]: Cultivate quiet endurance. Master your core craft behind the scenes; external recognition will catch up naturally."
+                }
+            },
+            "6-4": {
+                code: "䷂", zh: "水雷屯", en: "Difficulty at Beginning",
+                trend: {
+                    zh: "【当前大势】：万事开头难，草创之艰。新机遇已经萌发，但周围环境暗流涌动，缺乏现成资源支撑。",
+                    en: "[Current Trend]: The friction of new beginnings. Raw potential is breaking through frozen ground, but structural resources remain scarce."
+                },
+                example: {
+                    zh: "【现实生活写照】：若在筹划‘换赛道、启动新课题或建立新关系’，会发现阻力超出预期——如刚接手就遭遇架构调整或预算短缺，陷入进退两难。",
+                    en: "[Life Scenario]: Launching an enterprise, changing careers, or entering a new stage feels chaotic. Missing documentation, delays, and friction are widespread."
+                },
+                strategy: {
+                    zh: "【破局解法】：千万不可乱了阵脚而频繁变道！应广结贵人、请教前辈，把大目标拆解为每日最小动作，稳扎稳打。",
+                    en: "[Strategy]: Do not pivot abruptly. Seek experienced counsel, establish step-by-step milestones, and endure initial turbulence."
+                }
+            },
+            "7-6": {
+                code: "䷃", zh: "山水蒙", en: "Youthful Folly",
+                trend: {
+                    zh: "【当前大势】：云雾锁山，启蒙求索。自身经验或信息尚存盲区，切忌盲目投资、凭直觉自作聪明做重大决断。",
+                    en: "[Current Trend]: Clouded judgment and knowledge blindspots. A crucial phase for humble learning rather than speculative gambles."
+                },
+                example: {
+                    zh: "【现实生活写照】：可能正面对陌生的合同条款、学术瓶颈或利益分成；甚至有人用诱人前景拉你入伙。若直觉‘看不清对方底牌’，切莫侥幸。",
+                    en: "[Life Scenario]: Dealing with unfamiliar clauses, opaque financial proposals, or confusing partnerships. Information asymmetry is currently working against you."
+                },
+                strategy: {
+                    zh: "【破局解法】：‘童蒙求我’。收起自满，向经过时间检验的资深专家求证核实，搞懂底层逻辑再做决定。",
+                    en: "[Strategy]: Clear confusion before taking action. Consult proven mentors and scrutinize terms with objective rigor."
+                }
+            },
+            "6-1": {
+                code: "䷄", zh: "水天需", en: "Waiting (Nourishment)",
+                trend: {
+                    zh: "【当前大势】：守正待机，静观其变。大方向是吉兆，但时间窗口未到，越是急躁催促越容易节外生枝。",
+                    en: "[Current Trend]: Strategic patience. Favorable conditions are forming, but pushing prematurely will derail progress."
+                },
+                example: {
+                    zh: "【现实生活写照】：很可能在等待某项‘关键审批、签证结果、录用Offer或对方回复’。精神内耗严重，但催逼对方反而容易激发戒备和反感。",
+                    en: "[Life Scenario]: Waiting for an important verdict (grant, visa, career offer, or critical answer). Forcing the issue now creates needless tension."
+                },
+                strategy: {
+                    zh: "【破局解法】：‘君子以饮食宴乐’。把精力收回照顾好身体、修整生活。蓄养元气，静待时机自然水到渠成。",
+                    en: "[Strategy]: Focus on self-care, daily routines, and refinement. Let timing mature naturally without burning out."
+                }
+            },
+            "1-6": {
+                code: "䷅", zh: "天水讼", en: "Conflict",
+                trend: {
+                    zh: "【当前大势】：意见相左，纷争暗起。双方诉求背道而驰，即使在道理上占优，强行争斗也会两败俱伤。",
+                    en: "[Current Trend]: Severe polarization and conflict. Even if morally justified, winning a prolonged battle yields a hollow victory."
+                },
+                example: {
+                    zh: "【现实生活写照】：近期在职场合作、租约、版权归属或亲密关系中极易发生言语对撞或冷战。对方态度僵硬，若执意辩驳对错，摩擦必将公开化。",
+                    en: "[Life Scenario]: High risk of contract friction, intellectual disputes, or domestic fallout. Both parties are locked into rigid positions."
+                },
+                strategy: {
+                    zh: "【破局解法】：‘有利见大人’。主动寻求公信第三方出面斡旋。哪怕在细枝末节处退让一步，也要尽快从消耗性纷争中止损抽身。",
+                    en: "[Strategy]: Seek an impartial mediator. Concede minor secondary points to secure your core interests and exit the feud quickly."
+                }
+            }
+        };
+
+        // ======================= 排卦计算 =======================
+        function calculateHexagram(name, dob, hour) {
+            let val1 = 0, val2 = 0;
+            const cleanName = name.trim();
+            const isEnglish = /^[A-Za-z\s]+$/.test(cleanName);
+
+            if (isEnglish) {
+                const parts = cleanName.split(/\s+/);
+                if (parts.length >= 2) {
+                    val1 = [...parts[0]].reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                    val2 = [...parts.slice(1).join("")].reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                } else {
+                    const mid = Math.floor(cleanName.length / 2);
+                    val1 = [...cleanName.slice(0, mid)].reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                    val2 = [...cleanName.slice(mid)].reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                }
+            } else {
+                val1 = cleanName.charCodeAt(0);
+                val2 = cleanName.length > 1 ? [...cleanName.slice(1)].reduce((acc, c) => acc + c.charCodeAt(0), 0) : val1;
+            }
+
+            const [y, m, d] = dob.split("-").map(Number);
+            const upper = val1 % 8;
+            const lower = (val2 + m + d) % 8;
+            const movingYaoIndex = (val1 + val2 + y + m + d + hour) % 6;
+
+            const presentYao = [...TRIGRAMS[lower].yao, ...TRIGRAMS[upper].yao];
+            const futureYao = [...presentYao];
+            futureYao[movingYaoIndex] = futureYao[movingYaoIndex] === 1 ? 0 : 1;
+
+            function findTrigram(yao3) {
+                for (let k in TRIGRAMS) {
+                    if (TRIGRAMS[k].yao.every((v, i) => v === yao3[i])) return parseInt(k, 10);
+                }
+                return 0;
+            }
+
+            const futureLower = findTrigram(futureYao.slice(0, 3));
+            const futureUpper = findTrigram(futureYao.slice(3, 6));
+
+            return {
+                upper, lower,
+                futureUpper, futureLower,
+                movingYaoIndex,
+                presentYao, futureYao
+            };
         }
-        pending += decoder.decode(); if (pending.trim().startsWith('{')) { const packet = JSON.parse(pending); fullText += packet?.choices?.[0]?.message?.content || ''; } else consume(pending);
-        if (!fullText.trim()) throw new Error('No text received from AI');
-        $('#aiResponse').innerHTML = formatAiCopy(fullText);
-      } catch (error) { $('#aiBadge').textContent = 'LOCAL FALLBACK'; $('#aiResponse').innerHTML = `<p class="error">${i18n[lang].apiError}</p>${localReading(context.present, context.future, context.moving, context.question)}`; }
-    }
-    $('#oracleForm').addEventListener('submit', async event => { event.preventDefault(); const name = $('#name').value.trim(), date = $('#birthdate').value, hour = Number($('#hour').value), question = $('#question').value.trim(); const result = cast(name, date, hour), present = getHex(result.upper,result.lower), future = getHex(result.futureUpper,result.futureLower); $('#presentSymbol').textContent=present[0]; $('#presentName').textContent=lang==='zh'?present[1]:present[2]; $('#futureSymbol').textContent=future[0]; $('#futureName').textContent=lang==='zh'?future[1]:future[2]; renderBars('#presentBars',result.originalLines,result.moving); renderBars('#futureBars',result.changedLines); $('#hexSummary').innerHTML = lang==='zh' ? `<strong>${present[3]}</strong> 动而化为 <strong>${future[1]}</strong>。` : `<strong>${present[2]}.</strong> Moving toward <strong>${future[2]}.</strong>`; $('#readingDate').textContent=new Intl.DateTimeFormat(i18n[lang].dateFormat,{year:'numeric',month:'short',day:'numeric'}).format(new Date()); $('#emptyState').style.display='none'; $('#resultCard').classList.add('show'); $('#resultCard').scrollIntoView({behavior:'smooth',block:'nearest'}); if(window.lucide) lucide.createIcons(); await aiReading({name,date,question,present,future,moving:result.moving}); });
-    $('#langButton').addEventListener('click',() => { lang=lang==='zh'?'en':'zh'; translate(); if($('#resultCard').classList.contains('show')) $('#resultCard').classList.remove('show'), $('#emptyState').style.display='grid'; });
-    $('#settingsButton').addEventListener('click',() => { fillConfig(); settings(true); }); $('#closeSettings').addEventListener('click',() => settings(false)); $('#settingsModal').addEventListener('click',e => { if(e.target===$('#settingsModal')) settings(false); }); document.addEventListener('keydown',e=>{if(e.key==='Escape')settings(false);});
-    $('#saveSettings').addEventListener('click',() => { localStorage.setItem('iching_base_url',$('#baseUrl').value.trim()); localStorage.setItem('iching_api_key',$('#apiKey').value.trim()); localStorage.setItem('iching_model',$('#model').value.trim()); settings(false); toast(i18n[lang].saved); });
-    translate(); if(window.lucide) lucide.createIcons();
-  })();
-  </script>
+
+        function getHexDetail(upper, lower) {
+            const key = `${upper}-${lower}`;
+            return HEXAGRAM_DETAILS[key] || {
+                code: "䷾",
+                zh: `${TRIGRAMS[upper].zh}${TRIGRAMS[lower].zh}卦`,
+                en: `${TRIGRAMS[upper].en} over ${TRIGRAMS[lower].en}`,
+                trend: {
+                    zh: `【当前大势】：上${TRIGRAMS[upper].zh}下${TRIGRAMS[lower].zh}，阴阳重构，时位正在发生深刻演化。`,
+                    en: `[Current Trend]: Interplay of ${TRIGRAMS[upper].en} and ${TRIGRAMS[lower].en}. Universal dynamics are shifting.`
+                },
+                example: {
+                    zh: "【现实生活写照】：近期在多项事务或角色转换中分身乏术，虽然感到疲惫，但也是打破过去陈旧平衡的必经阶段。",
+                    en: "[Life Scenario]: You are juggling multiple roles or shifting duties. Stressful, yet fertile ground for breaking past plateaus."
+                },
+                strategy: {
+                    zh: "【破局解法】：守住内心定力，专注核心要务，静观动爻带来的格局变化。",
+                    en: "[Strategy]: Anchor your inner core. Prioritize non-negotiable tasks and observe how events unfold after the mutation."
+                }
+            };
+        }
+
+        // ======================= 渲染解卦结果 (保证中英文完全独立对应) =======================
+        function renderFortuneInterpretation() {
+            if (!latestHexResult) return;
+
+            const { upper, lower, movingYaoIndex } = latestHexResult;
+            const p = getHexDetail(upper, lower);
+            const dict = i18n[currentLang];
+            const yaoLabel = dict.yao_names[movingYaoIndex];
+
+            const trendText = p.trend[currentLang];
+            const exampleText = p.example[currentLang];
+            const strategyText = p.strategy[currentLang];
+
+            const html = `
+                <div class="space-y-3">
+                    <p class="text-amber-400 font-medium">${trendText}</p>
+                    <div class="bg-stone-900/80 p-3.5 rounded-lg border border-stone-800 text-stone-300">
+                        <p>${exampleText}</p>
+                    </div>
+                    <div class="border-l-2 border-red-500/80 pl-3 py-1.5 text-stone-300">
+                        <span class="text-red-400 font-semibold block mb-0.5">${dict.card_moving_title} ${yaoLabel}</span>
+                        <p class="text-stone-400">${dict.card_moving_desc}</p>
+                    </div>
+                    <div class="bg-amber-950/20 border border-amber-500/30 p-3.5 rounded-lg text-amber-300">
+                        ${strategyText}
+                    </div>
+                    <p class="text-stone-500 italic text-[11px] pt-1">${dict.card_tip}</p>
+                </div>
+            `;
+            document.getElementById("aiResponse").innerHTML = html;
+        }
+
+        // ======================= 更新手动作曲与 Suno 面板 =======================
+        function updateCompositionPanels() {
+            if (!latestHexResult) return;
+
+            const { upper, lower, futureUpper, futureLower, movingYaoIndex } = latestHexResult;
+            const bpm = 70 + (upper + lower) * 5;
+            const timeSig = (movingYaoIndex % 2 === 0) ? "4/4" : "6/8";
+            const isTurn = (currentCompositionMode === 'turnaround');
+
+            const rLower = i18n[currentLang].rules1.find(r => r.name.includes(TRIGRAMS[lower][currentLang])) || i18n[currentLang].rules1[lower];
+            const rUpper = i18n[currentLang].rules1.find(r => r.name.includes(TRIGRAMS[upper][currentLang])) || i18n[currentLang].rules1[upper];
+            const rfUpper = i18n[currentLang].rules1.find(r => r.name.includes(TRIGRAMS[futureUpper][currentLang])) || i18n[currentLang].rules1[futureUpper];
+
+            document.getElementById("musicScale").innerText = isTurn ? `${rfUpper.scale}` : rLower.scale;
+            document.getElementById("musicBpm").innerText = `${bpm} BPM (${timeSig})`;
+            document.getElementById("musicInstruments").innerText = `${rLower.timbres.split(/、|,/)[0]} & ${rUpper.timbres.split(/、|,/)[0]}`;
+
+            if (currentLang === 'zh') {
+                document.getElementById("musicFormGuide").innerText = 
+                    `建议以【无极 (Wuji)】气流音铺底[cite: 3]；A段以【${TRIGRAMS[lower].zh}卦】乐器刻画现实阻力[cite: 3]；在第 ${movingYaoIndex + 1} 爻处触发【动爻突变】，以太极和弦不协和度爆发[cite: 3]；${isTurn ? '后半程强力转向【' + TRIGRAMS[futureUpper].zh + '卦】明朗音阶，完成音乐上的相生转运破局[cite: 3]。' : '尾声呈现【' + TRIGRAMS[futureUpper].zh + '卦】变卦形态，回归静谧[cite: 3]。'}`;
+            } else {
+                document.getElementById("musicFormGuide").innerText = 
+                    `Begin with Wuji air-sounds[cite: 3]. Section A portrays the struggle with [${TRIGRAMS[lower].en}] timbres[cite: 3]. Line ${movingYaoIndex + 1} triggers the mutation burst[cite: 3]. ${isTurn ? 'Modulate toward [' + TRIGRAMS[futureUpper].en + '] mode to musically enact fortune-turning balance[cite: 3].' : 'Fade into [' + TRIGRAMS[futureUpper].en + '] transformed state towards stillness[cite: 3].'}`;
+            }
+
+            // Suno 提示词生成
+            let style = `Contemporary East-West Hybrid, ${rLower.timbres}, ${rUpper.timbres}, `;
+            if (isTurn) {
+                style += `transitioning into triumphant ${rfUpper.scale} resolution, uplifting spiritual climax, harmonic healing, `;
+            } else {
+                style += `meditative avant-garde atmosphere, microtonal tension, dark mystical aesthetic, `;
+            }
+            style += `${bpm} BPM, Tai Chi chord resonance, modern cinematic score[cite: 3].`;
+            document.getElementById("sunoStyleText").innerText = style;
+
+            const structure = `[Intro: Primordial Chaos (Wuji) - Flute air-sounds, bow-on-tailpiece, dark sub drone][cite: 3]
+[Verse 1: Present Hexagram - ${TRIGRAMS[upper].en} over ${TRIGRAMS[lower].en}]
+(${rLower.timbres.split(/、|,/)[0]} portraying the realistic struggle and tension)
+[Pre-Chorus: Rising Conflict - Yin and Yang opposing forces]
+[Chorus: Moving Line ${movingYaoIndex + 1} Cataclysm]
+(${isTurn ? 'Dramatic modulation breaking obstacles, bright triumphant burst' : 'Dissonant percussion outburst with polyrhythms'})
+[Bridge: Metaphysical Transformation]
+[Outro: Changed Hexagram - Harmonious balance fading into silence]`;
+            document.getElementById("sunoStructureText").innerText = structure;
+        }
+
+        // ======================= 渲染规则表格 =======================
+        function renderRulesModalTables() {
+            const tbody1 = document.getElementById("rulesTbody1");
+            tbody1.innerHTML = "";
+            i18n[currentLang].rules1.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold text-amber-300 font-mono">${item.name}</td>
+                    <td class="p-2.5 text-stone-300">${item.nature}</td>
+                    <td class="p-2.5 text-amber-400/90">${item.scale}</td>
+                    <td class="p-2.5 text-stone-300">${item.timbres}</td>
+                `;
+                tbody1.appendChild(tr);
+            });
+
+            const tbody2 = document.getElementById("rulesTbody2");
+            tbody2.innerHTML = "";
+            i18n[currentLang].rules2.forEach(item => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold text-stone-200">${item.dim}</td>
+                    <td class="p-2.5 text-amber-400">${item.yang}</td>
+                    <td class="p-2.5 text-stone-400">${item.yin}</td>
+                    <td class="p-2.5 text-red-400 font-semibold">${item.moving}</td>
+                `;
+                tbody2.appendChild(tr);
+            });
+        }
+
+        // ======================= 爻线渲染与辅助 =======================
+        function renderBars(containerId, yaoArray, movingIndex = -1) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            yaoArray.forEach((yao, idx) => {
+                const isMoving = idx === movingIndex;
+                const div = document.createElement("div");
+                if (yao === 1) {
+                    div.className = `yao-yang ${isMoving ? 'moving-active' : ''}`;
+                } else {
+                    div.className = `yao-yin ${isMoving ? 'moving-active' : ''}`;
+                    div.innerHTML = `<span class="yao-yin-part"></span><span class="yao-yin-part"></span>`;
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert(currentLang === 'zh' ? "已复制提示词！可直接粘贴至 Suno AI 使用。" : "Copied to clipboard! Ready to paste into Suno AI.");
+            });
+        }
+
+        document.getElementById("modeRealistic").addEventListener("click", function() {
+            currentCompositionMode = 'realistic';
+            this.className = "px-2.5 py-1 rounded bg-amber-600 text-stone-950 font-bold transition";
+            document.getElementById("modeTurnaround").className = "px-2.5 py-1 rounded text-stone-400 hover:text-stone-200 transition";
+            updateCompositionPanels();
+        });
+
+        document.getElementById("modeTurnaround").addEventListener("click", function() {
+            currentCompositionMode = 'turnaround';
+            this.className = "px-2.5 py-1 rounded bg-amber-600 text-stone-950 font-bold transition";
+            document.getElementById("modeRealistic").className = "px-2.5 py-1 rounded text-stone-400 hover:text-stone-200 transition";
+            updateCompositionPanels();
+        });
+
+        // ======================= OpenAI 兼容大模型接入 =======================
+        async function callAiInterpretation(payload) {
+            const apiKey = localStorage.getItem("iching_api_key");
+            const baseUrl = localStorage.getItem("iching_base_url") || "https://api.deepseek.com/v1";
+            const model = localStorage.getItem("iching_model") || "deepseek-chat";
+
+            const aiBadge = document.getElementById("aiBadge");
+            const aiResponse = document.getElementById("aiResponse");
+
+            // 无 API Key 时，直接输出经过完整双语适配的本地运势
+            if (!apiKey) {
+                aiBadge.innerText = "Local Engine";
+                renderFortuneInterpretation();
+                return;
+            }
+
+            aiBadge.innerText = `${model} (Thinking...)`;
+            aiResponse.innerHTML = `<span class="animate-pulse">${currentLang === 'zh' ? '正在向大模型感应推演生活案例与吉凶...' : 'AI model is simulating real-life scenarios...'}</span>`;
+
+            const prompt = currentLang === 'zh' ? 
+`你是一位精通周易哲学与现代社会心理学的国学宗师。
+求问者：${payload.name}，出生日期：${payload.dob}，所问之事：${payload.question || "综合运势与事业抉择"}。
+本卦：${payload.presentHex.zh}，变卦：${payload.futureHex.zh}，动爻：第 ${payload.movingYaoIndex + 1} 爻。
+请用极其生动透彻、接地气的口吻解卦，严禁空话，必须包含现实生活/职场实例：
+1. 【现状大势】：直击目前的生活与心理状态。
+2. 【典型事件推演（工作/生活例子）】：近期大概率会遇到哪种具体的人或事（例如：合同纠纷、领导压制、合伙人画大饼等生动实例）。
+3. 【动爻玄机与变卦趋势】：动爻发动意味着什么？未来走向如何？
+4. 【破局开运锦囊】：给出 2~3 条极为具体的实操行动建议。` :
+`You are a master of I-Ching philosophy and modern social psychology.
+Querent: ${payload.name}, Date of Birth: ${payload.dob}, Inquiry: ${payload.question || "Overall fortune and life decisions"}.
+Original Hexagram: ${payload.presentHex.en}, Changed Hexagram: ${payload.futureHex.en}, Moving Line: Line ${payload.movingYaoIndex + 1}.
+Please provide a sharp, grounded interpretation in pure English with realistic everyday examples:
+1. [Current Dynamic]: Direct assessment of their current emotional and situational state.
+2. [Realistic Scenario Simulation]: Concrete examples of events/people they are likely to encounter soon (e.g., contract friction, toxic boss, false promises).
+3. [Moving Line & Future Trajectory]: What does this line transformation signal?
+4. [Actionable Strategies]: 2-3 specific, pragmatic steps to resolve disharmony.`;
+
+            try {
+                const res = await fetch(`${baseUrl.replace(/\/+$/, "")}/chat/completions`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: [{ role: "user", content: prompt }],
+                        temperature: 0.75
+                    })
+                });
+
+                const data = await res.json();
+                if (data.choices && data.choices[0]) {
+                    aiBadge.innerText = model;
+                    aiResponse.innerHTML = data.choices[0].message.content.replace(/\n/g, "<br>");
+                } else {
+                    throw new Error("Invalid API response");
+                }
+            } catch (err) {
+                aiBadge.innerText = "API Error";
+                renderFortuneInterpretation();
+            }
+        }
+
+        // ======================= 表单提交排卦 =======================
+        document.getElementById("oracleForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("inputName").value;
+            const dob = document.getElementById("inputDob").value;
+            const hour = parseInt(document.getElementById("inputHour").value, 10);
+            const question = document.getElementById("inputQuestion").value;
+
+            latestHexResult = calculateHexagram(name, dob, hour);
+            const pData = getHexDetail(latestHexResult.upper, latestHexResult.lower);
+            const fData = getHexDetail(latestHexResult.futureUpper, latestHexResult.futureLower);
+
+            document.getElementById("presentUnicode").innerText = pData.code;
+            document.getElementById("presentName").innerText = currentLang === 'zh' ? pData.zh : pData.en;
+            document.getElementById("futureUnicode").innerText = fData.code;
+            document.getElementById("futureName").innerText = currentLang === 'zh' ? fData.zh : fData.en;
+
+            renderBars("presentBars", latestHexResult.presentYao, latestHexResult.movingYaoIndex);
+            renderBars("futureBars", latestHexResult.futureYao, -1);
+
+            updateCompositionPanels();
+
+            document.getElementById("emptyState").classList.add("hidden");
+            document.getElementById("resultCard").classList.remove("hidden");
+
+            // 触发解卦推演
+            await callAiInterpretation({
+                name, dob, question,
+                presentHex: pData,
+                futureHex: fData,
+                movingYaoIndex: latestHexResult.movingYaoIndex
+            });
+        });
+
+        // ======================= 弹窗控制与语言切换联动 =======================
+        const rulesModal = document.getElementById("rulesModal");
+        document.getElementById("openRulesModalBtn").addEventListener("click", () => {
+            renderRulesModalTables();
+            rulesModal.classList.remove("hidden");
+        });
+        document.getElementById("closeRulesModalBtn").addEventListener("click", () => rulesModal.classList.add("hidden"));
+
+        const aiModal = document.getElementById("aiModal");
+        document.getElementById("openAiModalBtn").addEventListener("click", () => {
+            document.getElementById("cfgBaseUrl").value = localStorage.getItem("iching_base_url") || "";
+            document.getElementById("cfgApiKey").value = localStorage.getItem("iching_api_key") || "";
+            document.getElementById("cfgModel").value = localStorage.getItem("iching_model") || "";
+            aiModal.classList.remove("hidden");
+        });
+        document.getElementById("closeAiModalBtn").addEventListener("click", () => aiModal.classList.add("hidden"));
+        document.getElementById("saveCfgBtn").addEventListener("click", () => {
+            localStorage.setItem("iching_base_url", document.getElementById("cfgBaseUrl").value.trim());
+            localStorage.setItem("iching_api_key", document.getElementById("cfgApiKey").value.trim());
+            localStorage.setItem("iching_model", document.getElementById("cfgModel").value.trim());
+            aiModal.classList.add("hidden");
+            alert(currentLang === 'zh' ? "AI 配置已保存在本地浏览器！" : "AI config saved locally!");
+        });
+
+        // 语言全局刷新函数
+        function updateLocale() {
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (i18n[currentLang][key]) el.innerText = i18n[currentLang][key];
+            });
+
+            const hourSelect = document.getElementById("inputHour");
+            const curVal = hourSelect.value || "6";
+            hourSelect.innerHTML = "";
+            i18n[currentLang].hours.forEach((h, idx) => {
+                const opt = document.createElement("option");
+                opt.value = idx;
+                opt.innerText = h;
+                if (idx == curVal) opt.selected = true;
+                hourSelect.appendChild(opt);
+            });
+
+            renderRulesModalTables();
+            if (latestHexResult) {
+                const pData = getHexDetail(latestHexResult.upper, latestHexResult.lower);
+                const fData = getHexDetail(latestHexResult.futureUpper, latestHexResult.futureLower);
+                document.getElementById("presentName").innerText = currentLang === 'zh' ? pData.zh : pData.en;
+                document.getElementById("futureName").innerText = currentLang === 'zh' ? fData.zh : fData.en;
+                
+                // 关键：切换语言时，立刻重新以当前语言重新渲染运势解卦卡片！
+                renderFortuneInterpretation();
+                updateCompositionPanels();
+            }
+        }
+
+        document.getElementById("langToggleBtn").addEventListener("click", () => {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateLocale();
+        });
+
+        updateLocale();
+        lucide.createIcons();
+    </script>
 </body>
 </html>
