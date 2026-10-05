@@ -106,7 +106,7 @@
                     <div>
                         <label class="block text-stone-400 mb-1" data-i18n="label_hour">出生时辰</label>
                         <select id="inputHour" class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-200 focus:outline-none focus:border-amber-500">
-                            <!-- 动态加载时辰 -->
+                            <!-- 动态填充时辰 -->
                         </select>
                     </div>
 
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- 2. 深度情境化运势与案例剖析卡片 (中英完全独立响应) -->
+                <!-- 2. 深度情境化运势与案例剖析卡片 -->
                 <div class="glass-panel p-6 rounded-2xl space-y-4">
                     <div class="flex justify-between items-center border-b border-stone-800 pb-3">
                         <div class="flex items-center space-x-2">
@@ -159,12 +159,10 @@
                         <span id="aiBadge" class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-400">Local Rule</span>
                     </div>
 
-                    <div id="aiResponse" class="text-xs md:text-sm text-stone-300 leading-relaxed space-y-4 min-h-[80px]">
-                        <!-- 动态注入中英文运势与案例 -->
-                    </div>
+                    <div id="aiResponse" class="text-xs md:text-sm text-stone-300 leading-relaxed space-y-4 min-h-[80px]"></div>
                 </div>
 
-                <!-- 3. 手动作曲家工作台 -->
+                <!-- 3. 手动作曲家工作台 (Acoustic Workbench) -->
                 <div class="glass-panel p-6 rounded-2xl space-y-4 border border-amber-500/30">
                     <div class="flex justify-between items-center border-b border-stone-800 pb-3">
                         <div class="flex items-center space-x-2">
@@ -176,7 +174,7 @@
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                         <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
-                            <span class="text-stone-500 block" data-i18n="param_scale">调式音阶 (Scale)</span>
+                            <span class="text-stone-500 block" data-i18n="param_scale">核心音高原型 (Pitch Cell)</span>
                             <span id="musicScale" class="text-amber-400 font-semibold mt-1 block">--</span>
                         </div>
                         <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
@@ -188,15 +186,15 @@
                             <span id="musicInstruments" class="text-amber-400 font-semibold mt-1 block truncate">--</span>
                         </div>
                         <div class="bg-stone-900/70 p-3 rounded-lg border border-stone-800">
-                            <span class="text-stone-500 block" data-i18n="param_tension">和声张力模型</span>
-                            <span id="musicTension" class="text-amber-400 font-semibold mt-1 block">太极和弦体系 (Zhao)</span>
+                            <span class="text-stone-500 block" data-i18n="param_tension">声部与对位机制</span>
+                            <span id="musicTension" class="text-amber-400 font-semibold mt-1 block">复调复调式交织 (Polymodal)</span>
                         </div>
                     </div>
 
                     <div class="bg-stone-900/50 p-3 rounded-lg border border-stone-800/80 text-xs text-stone-400 space-y-1">
                         <div class="flex items-center gap-1.5 text-stone-300 font-medium">
                             <i data-lucide="info" class="w-3.5 h-3.5 text-amber-500"></i>
-                            <span data-i18n="comp_guide_title">微观创作指引 (Micro-Development)：</span>
+                            <span data-i18n="comp_guide_title">微观与宏观结构生成规则指引：</span>
                         </div>
                         <p id="musicFormGuide" class="leading-relaxed pl-5">--</p>
                     </div>
@@ -242,28 +240,140 @@
         </section>
     </main>
 
-    <!-- 弹窗 1：手动作曲规则矩阵表格 Modal -->
-    <div id="rulesModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 overflow-y-auto">
-        <div class="glass-panel w-full max-w-3xl p-6 md:p-8 rounded-2xl space-y-6 bg-stone-950 border border-amber-500/40 my-8">
+    <!-- 弹窗 1：学术级易经作曲规则体系与六十四卦演变图示 Modal -->
+    <div id="rulesModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4 z-50 overflow-y-auto">
+        <div class="glass-panel w-full max-w-4xl p-6 md:p-8 rounded-2xl space-y-8 bg-stone-950 border border-amber-500/40 my-8 max-h-[90vh] overflow-y-auto">
+            
             <div class="flex justify-between items-center border-b border-stone-800 pb-3">
                 <div class="flex items-center space-x-2">
                     <span class="text-amber-500 text-lg">☯</span>
-                    <h3 class="text-base font-bold text-stone-100" data-i18n="rules_modal_title">易经作曲系统：学术映射规则矩阵</h3>
+                    <h3 class="text-base font-bold text-stone-100" data-i18n="rules_modal_title">易经当代音乐生成系统：学术规则与演变图式</h3>
                 </div>
-                <button id="closeRulesModalBtn" class="text-stone-400 hover:text-stone-100 text-xl">&times;</button>
+                <button id="closeRulesModalBtn" class="text-stone-400 hover:text-stone-100 text-2xl">&times;</button>
             </div>
 
-            <!-- 表格 1: 八卦象数与乐器音色映射 -->
+            <!-- 理论总纲说明 -->
+            <div class="p-4 rounded-xl bg-stone-900/70 border border-stone-800 text-xs leading-relaxed text-stone-300 space-y-2">
+                <p class="font-semibold text-amber-400" data-i18n="rules_intro_title">【核心目的与技法超越】</p>
+                <p data-i18n="rules_intro_desc">超越约翰·凯奇（John Cage）将投筮作为随机数发生器的离散手法，以及赵晓生等人的十二音集合限制；将易经生成逻辑（无极→太极→两仪→四象→八卦→六十四卦）系统转化为当代音乐微观音程、中观动机细胞与宏观声部滑动演进的严密语法。</p>
+            </div>
+
+            <!-- 图式 1：易经当代音乐生成系统三级架构图 -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span data-i18n="arch_title">【图式 1】三层级音乐生成架构体系 (Hierarchical Generative Architecture)</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <!-- 微观 -->
+                    <div class="p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+                        <div class="font-bold text-amber-300 border-b border-stone-800 pb-1.5" data-i18n="arch_micro_title">1. 微观层级 (Micro-Level)</div>
+                        <p class="text-stone-400" data-i18n="arch_micro_p1"><b>阴阳单爻参数</b>：阳爻(⚊/1)映射为全音阶(C→D)、协和四/五度；连音(Legato)、饱满实音。</p>
+                        <p class="text-stone-400" data-i18n="arch_micro_p2">阴爻(⚋/0)映射为半音阶(C→C#)、增四度张力；断奏(Staccato)、气鸣音(Air sound)、抓拔奏。</p>
+                    </div>
+                    <!-- 中观 -->
+                    <div class="p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+                        <div class="font-bold text-amber-300 border-b border-stone-800 pb-1.5" data-i18n="arch_meso_title">2. 中观层级 (Meso-Level)</div>
+                        <p class="text-stone-400" data-i18n="arch_meso_p1"><b>八卦动机细胞</b>：三爻自下而上叠加，生成8组核心音高原型(Pitch Cells)。</p>
+                        <p class="text-stone-400" data-i18n="arch_meso_p2">如乾(C-D-E全音阶)、坤(C-C#-D音簇)、坎(C-G-G#五度波动)、离(C-C#-D-G点描火光)。</p>
+                    </div>
+                    <!-- 宏观 -->
+                    <div class="p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+                        <div class="font-bold text-amber-300 border-b border-stone-800 pb-1.5" data-i18n="arch_macro_title">3. 宏观层级 (Macro-Level)</div>
+                        <p class="text-stone-400" data-i18n="arch_macro_p1"><b>六十四卦与变爻滑动</b>：下卦映射室内乐伴奏基底，上卦映射独奏乐器(琵琶/世界乐器)，纵向复调对位。</p>
+                        <p class="text-stone-400" data-i18n="arch_macro_p2">动爻翻转直接触发半音平滑声部滑动(Voice-Leading Shift)，驱动自然转调发展。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图式 2：伏羲六十四卦圆图循环宏观模型 (Mandala) -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    <span data-i18n="mandala_title">【图式 2】伏羲六十四卦圆图循环宏观模型 (Fu Xi's 64 Hexagrams Circular Mandala)</span>
+                </h4>
+                <div class="p-4 rounded-xl bg-stone-900/80 border border-stone-800 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs text-center">
+                        <div class="p-2.5 rounded-lg bg-stone-950 border border-stone-800">
+                            <span class="text-amber-500 font-bold block mb-1">【底端 / 北】坤卦 ䷁ (000000)</span>
+                            <span class="text-stone-400 block text-[11px]">纯阴静止 · 宏观套曲起源基底 · 致密半音聚集簇、低音哑音摩擦、极暗虚空</span>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-stone-950 border border-stone-800">
+                            <span class="text-amber-500 font-bold block mb-1">【东】离卦 ䷲ (101101)</span>
+                            <span class="text-stone-400 block text-[11px]">阳爻生发 · 音程向外开阔扩散 · 火态明丽、点描大跳、金属高频摩擦碰撞</span>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-stone-950 border border-stone-800">
+                            <span class="text-amber-500 font-bold block mb-1">【顶端 / 南】乾卦 ䷀ (111111)</span>
+                            <span class="text-stone-400 block text-[11px]">纯阳刚健 · 结构演化能量顶峰 · 明亮全音阶与纯五度辉煌乐段、开阔长弓全奏</span>
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-stone-950 border border-stone-800">
+                            <span class="text-amber-500 font-bold block mb-1">【西】坎卦 ䷵ (010010)</span>
+                            <span class="text-stone-400 block text-[11px]">阴爻侵蚀 · 音响致密内敛 · 水流深渊、微幅滑音、琵琶轮指颤音、终归无极</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-stone-400 leading-relaxed italic" data-i18n="mandala_desc">
+                        六十四卦圆图不是死板代码表，而是一张宇宙能量呼吸周期的图解。从底端纯阴坤卦起步，历经阳爻生发、顶峰乾卦，到阴爻再次侵蚀，最终音响嫡增消融、回归初始的【无极】混沌，构成闭合循环大套曲（Cycle of Pieces）。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 图式 3：六阶段宇宙演变阶段与音乐递进图 -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="git-commit" class="w-4 h-4"></i>
+                    <span data-i18n="stages_title">【图式 3】易经六阶段宇宙演化与音乐递进 (The 6-Stage Cosmological Progression Cycle)</span>
+                </h4>
+                <div class="space-y-2 text-xs">
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 1: 无极 (Wuji)</span>
+                        <span class="text-stone-400 w-1/3">原始混沌未分、虚空与非音高噪音</span>
+                        <span class="text-stone-500 w-5/12 text-right">自由无节拍律动、微音色气鸣音 (Air sound)、微弱泛音静默</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 2: 太极 (Taiji)</span>
+                        <span class="text-stone-400 w-1/3">阴阳二元极性诞生、极端对立张力场</span>
+                        <span class="text-stone-500 w-5/12 text-right">确立纯五度 vs 增四度 (三全音)、全音阶与半音阶张力冲突</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 3: 两仪 (Liangyi)</span>
+                        <span class="text-stone-400 w-1/3">阴阳对立元素的线性复调交织与追逐</span>
+                        <span class="text-stone-500 w-5/12 text-right">阳性连音线条 vs 阴性断奏点描对话、规则与非规则节奏复合</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 4: 四象 (Sixiang)</span>
+                        <span class="text-stone-400 w-1/3">四季意象、四种鲜明音乐性格与调式调色板</span>
+                        <span class="text-stone-500 w-5/12 text-right">四种特色调式(五声、拉格、中古、人工音阶)、独立配器音色组</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 5: 八卦 (Bagua)</span>
+                        <span class="text-stone-400 w-1/3">八种自然属性动机细胞、文化特征手势原型</span>
+                        <span class="text-stone-500 w-5/12 text-right">严格确立乾全音、坤音簇、震爆发、巽气鸣等八卦特征织体单元</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-stone-900/60 border border-stone-800 flex justify-between items-center">
+                        <span class="font-bold text-amber-300 w-1/4">阶段 6: 64卦 (Hexagrams)</span>
+                        <span class="text-stone-400 w-1/3">全息宇宙系统、极限复调与多调式重叠巅峰</span>
+                        <span class="text-stone-500 w-5/12 text-right">上下双卦复调对位、变爻翻转驱动平滑声部滑动 (Voice-Leading)</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-amber-950/20 border border-amber-500/40 flex justify-between items-center text-amber-300">
+                        <span class="font-bold w-1/4">循环终点: 终归无极</span>
+                        <span class="w-1/3">极致复杂性向原始虚空消融</span>
+                        <span class="w-5/12 text-right">音响逐步退淡、重返虚空混沌与静默闭环</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 表格 1: 八卦调式与核心音高原型映射表 (Table 1) -->
             <div class="space-y-2">
-                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="rule_tbl_1_title">1. 先天八卦声学生态与音阶映射 (Trigrams to Acoustic Ontology)</h4>
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="table1_title">【表格 1】易经八卦调式与核心音高原型映射表 (Trigrams to Modal Nuclei & Pitch Cells)</h4>
                 <div class="overflow-x-auto border border-stone-800 rounded-lg">
                     <table class="w-full text-left text-xs border-collapse">
                         <thead>
                             <tr class="bg-stone-900/80 text-stone-300 border-b border-stone-800">
-                                <th class="p-2.5">卦名 (Trigram)</th>
-                                <th class="p-2.5">自然象意</th>
-                                <th class="p-2.5">调式体系 (Mode/Scale)</th>
-                                <th class="p-2.5">主导乐器与声学特质 (Timbres)</th>
+                                <th class="p-2.5">卦名与符号</th>
+                                <th class="p-2.5">爻象构成</th>
+                                <th class="p-2.5">核心音高原型 (Pitch Cell)</th>
+                                <th class="p-2.5">音响与象征特征</th>
+                                <th class="p-2.5">演奏技法与织体映射</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-stone-800/60 text-stone-400" id="rulesTbody1"></tbody>
@@ -271,17 +381,17 @@
                 </div>
             </div>
 
-            <!-- 表格 2: 阴阳数理与音程转换 -->
+            <!-- 表格 2: 阴阳单爻向音程与演奏法映射 -->
             <div class="space-y-2">
-                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="rule_tbl_2_title">2. 阴阳爻与结构动力学规则 (Yin/Yang Micro-Mechanics)</h4>
+                <h4 class="text-xs font-bold text-amber-400 tracking-wider" data-i18n="table2_title">【表格 2】阴阳单爻微观参数映射规则 (Yin-Yang Line Micro-Rules)</h4>
                 <div class="overflow-x-auto border border-stone-800 rounded-lg">
                     <table class="w-full text-left text-xs border-collapse">
                         <thead>
                             <tr class="bg-stone-900/80 text-stone-300 border-b border-stone-800">
-                                <th class="p-2.5">物理维度</th>
-                                <th class="p-2.5">阳爻 (⚊ / 1)</th>
-                                <th class="p-2.5">阴爻 (⚋ / 0)</th>
-                                <th class="p-2.5">动爻爆发 (Moving Line)</th>
+                                <th class="p-2.5">参数维度</th>
+                                <th class="p-2.5">阳爻 (⚊ / Solid / 1)</th>
+                                <th class="p-2.5">阴爻 (⚋ / Broken / 0)</th>
+                                <th class="p-2.5">变爻突变 (Mutating Line)</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-stone-800/60 text-stone-400" id="rulesTbody2"></tbody>
@@ -289,9 +399,12 @@
                 </div>
             </div>
 
-            <p class="text-[11px] text-stone-500 leading-relaxed italic" data-i18n="rules_footer_note">
-                * 理论基础源自研究提案《Hexagram Resonance: Contemporary Music Composition Practices through the Symbolic System of the I Ching》，融合赵晓生太极和弦体系与宏观宇宙演化六阶段[cite: 3]。
-            </p>
+            <!-- 编制说明与备选方案 -->
+            <div class="p-4 rounded-xl bg-stone-900/60 border border-stone-800 text-[11px] text-stone-400 space-y-1.5 leading-relaxed">
+                <p class="font-bold text-stone-200" data-i18n="inst_note_title">【编制灵活性与海外排演备选说明 (Instrumentation Flexibility)】</p>
+                <p data-i18n="inst_note_desc">独奏声部以中国传统乐器<b>琵琶 (Pipa)</b>为核心；根据英国当地实际排练可行性，可灵活扩展替换为<b>古筝、阮、二胡、竹笛</b>，世界传统乐器(乌德琴Oud、日本筝Koto、西塔琴Sitar)，西方加料钢琴/古典吉他，乃至<b>电子音乐实时音频交互采样</b>，确保研究与实践排演完全可控。</p>
+            </div>
+
         </div>
     </div>
 
@@ -323,7 +436,7 @@
     </div>
 
     <script>
-        // ======================= 完整中英文双语字典 (i18n) =======================
+        // ======================= 完整中英文学术与规则双语字典 =======================
         const i18n = {
             zh: {
                 btn_view_rules: "作曲规则表",
@@ -339,12 +452,12 @@
                 future_hex: "【变卦 · 走向】",
                 ai_title: "周易生辰运势与生活实例推演",
                 comp_manual_title: "手动作曲映射参数 (Acoustic Parameters)",
-                comp_target: "适用于 Sibelius / 传统总谱",
-                param_scale: "调式音阶 (Scale)",
+                comp_target: "适用于 Sibelius / 室内乐总谱",
+                param_scale: "核心音高原型 (Pitch Cell)",
                 param_meter: "节拍速度 (Tempo/Meter)",
                 param_inst: "配器编制 (Timbres)",
-                param_tension: "和声张力模型",
-                comp_guide_title: "微观创作指引 (Micro-Development)：",
+                param_tension: "声部与对位机制",
+                comp_guide_title: "微观与宏观结构生成规则指引：",
                 suno_title: "Suno AI 算命作曲引擎",
                 mode_real: "卦象写实曲",
                 mode_turn: "转运破局曲",
@@ -354,10 +467,26 @@
                 modal_title: "AI 接口配置",
                 modal_desc: "兼容任何 OpenAI 规范接口（如 DeepSeek, OpenAI 等）",
                 btn_save_cfg: "保存配置",
-                rules_modal_title: "易经作曲系统：学术映射规则矩阵",
-                rule_tbl_1_title: "1. 先天八卦声学生态与音阶映射 (Trigrams to Acoustic Ontology)",
-                rule_tbl_2_title: "2. 阴阳爻与结构动力学规则 (Yin/Yang Micro-Mechanics)",
-                rules_footer_note: "* 理论基础源自研究提案《Hexagram Resonance》，将周易象数理占融入现代作曲本体[cite: 3]。",
+                rules_modal_title: "易经当代音乐生成系统：学术规则与演变图式",
+                rules_intro_title: "【核心目的与技法超越】",
+                rules_intro_desc: "超越约翰·凯奇（John Cage）将投筮作为随机数发生器的离散手法，以及赵晓生等人的十二音集合限制；将易经生成逻辑（无极→太极→两仪→四象→八卦→六十四卦）系统转化为当代音乐微观音程、中观动机细胞与宏观声部滑动演进的严密语法。",
+                arch_title: "【图式 1】三层级音乐生成架构体系 (Hierarchical Generative Architecture)",
+                arch_micro_title: "1. 微观层级 (Micro-Level)",
+                arch_micro_p1: "阴阳单爻参数：阳爻(⚊/1)映射为全音阶(C→D)、协和四/五度；连音(Legato)、饱满实音。",
+                arch_micro_p2: "阴爻(⚋/0)映射为半音阶(C→C#)、增四度张力；断奏(Staccato)、气鸣音(Air sound)、抓拔奏。",
+                arch_meso_title: "2. 中观层级 (Meso-Level)",
+                arch_meso_p1: "八卦动机细胞：三爻自下而上叠加，生成8组核心音高原型(Pitch Cells)。",
+                arch_meso_p2: "如乾(C-D-E全音阶)、坤(C-C#-D音簇)、坎(C-G-G#五度波动)、离(C-C#-D-G点描火光)。",
+                arch_macro_title: "3. 宏观层级 (Macro-Level)",
+                arch_macro_p1: "六十四卦与变爻滑动：下卦映射室内乐伴奏基底，上卦映射独奏乐器(琵琶/世界乐器)，纵向复调对位。",
+                arch_macro_p2: "动爻翻转直接触发半音平滑声部滑动(Voice-Leading Shift)，驱动自然转调发展。",
+                mandala_title: "【图式 2】伏羲六十四卦圆图循环宏观模型 (Fu Xi's 64 Hexagrams Circular Mandala)",
+                mandala_desc: "六十四卦圆图不是死板代码表，而是一张宇宙能量呼吸周期的图解。从底端纯阴坤卦起步，历经阳爻生发、顶峰乾卦，到阴爻再次侵蚀，最终音响嫡增消融、回归初始的【无极】混沌，构成闭合循环大套曲（Cycle of Pieces）。",
+                stages_title: "【图式 3】易经六阶段宇宙演化与音乐递进 (The 6-Stage Cosmological Progression Cycle)",
+                table1_title: "【表格 1】易经八卦调式与核心音高原型映射表 (Trigrams to Modal Nuclei & Pitch Cells)",
+                table2_title: "【表格 2】阴阳单爻微观参数映射规则 (Yin-Yang Line Micro-Rules)",
+                inst_note_title: "【编制灵活性与海外排演备选说明 (Instrumentation Flexibility)】",
+                inst_note_desc: "独奏声部以中国传统乐器琵琶 (Pipa)为核心；根据英国当地实际排练可行性，可灵活扩展替换为古筝、阮、二胡、竹笛，世界传统乐器(乌德琴Oud、日本筝Koto、西塔琴Sitar)，西方加料钢琴/古典吉他，乃至电子音乐实时音频交互采样，确保研究与实践排演完全可控。",
                 card_moving_title: "【动爻暗机】：",
                 card_moving_desc: "此爻发动，意味着在此关键节点需防范急躁或轻信口头承诺，动爻直接催生了后期的变卦格局。",
                 card_tip: "提示：点击右上角 ⚙️ 可配置 DeepSeek/OpenAI，针对个人具体提问定制超千字详测。",
@@ -365,19 +494,19 @@
                 hours: ["子时 (23-01)", "丑时 (01-03)", "寅时 (03-05)", "卯时 (05-07)", "辰时 (07-09)", "巳时 (09-11)", 
                         "午时 (11-13)", "未时 (13-15)", "申时 (15-17)", "酉时 (17-19)", "戌时 (19-21)", "亥时 (21-23)"],
                 rules1: [
-                    { name: "乾 ☰ (1)", nature: "天 / 纯阳", scale: "全音阶 (Whole-tone) / 利底亚", timbres: "编钟、铜管组、明亮管风琴、高频合成器" },
-                    { name: "兑 ☱ (2)", nature: "泽 / 喜悦", scale: "宫调式五声 / 混合利底亚", timbres: "阮咸、木琴、竖琴拨弦、轻盈打击乐" },
-                    { name: "离 ☲ (3)", nature: "火 / 明丽", scale: "弗里几亚调式 / 爵士扩展和弦", timbres: "琵琶扫弦/轮指、电小提琴、Neo-Soul Rhodes" },
-                    { name: "震 ☳ (4)", nature: "雷 / 震动", scale: "十二音半音化 / 激进多利亚", timbres: "中国大堂鼓、定音鼓、失真电吉他、重击低音" },
-                    { name: "巽 ☴ (5)", nature: "风 / 柔顺", scale: "气流悬浮调式 / 羽调式", timbres: "竹笛/洞箫气流声 (Air sound)、原声木吉他、轻揉弦乐" },
-                    { name: "坎 ☵ (6)", nature: "水 / 险陷", scale: "布鲁斯小调 / 微分音暗黑氛围", timbres: "古筝水音摇指、低音大提琴、深层水声混响、无品贝斯" },
-                    { name: "艮 ☶ (7)", nature: "山 / 止定", scale: "四度叠置静止调式 / 空灵休止", timbres: "颂钵、钟磬、钢琴孤单低音、手碟 (Hang Drum)" },
-                    { name: "坤 ☷ (0)", nature: "地 / 纯阴", scale: "微分音簇 / 序列十二音", timbres: "古埙、大管、808超低音、温暖绵长长音铺底" }
+                    { name: "乾 ☰ (1)", lines: "阳-阳-阳 (1-1-1)", pitch: "C - D - E (全音阶核心 / Whole-Tone Core)", quality: "开放、虚空、刚健、向上张力", timbres: "连音 (Legato)、充盈实音、高透明度泛音、大动态开阔长弓" },
+                    { name: "坤 ☷ (0)", lines: "阴-阴-阴 (0-0-0)", pitch: "C - C# - D (半音聚集簇 / Chromatic Cluster)", quality: "深沉、紧密、地层承载、静止", timbres: "低音致密音块、微音簇磨弦 (Sul ponticello)、暗淡哑音、弱奏" },
+                    { name: "震 ☳ (4)", lines: "阳-阴-阴 (1-0-0)", pitch: "C - G - G# / C - F# - G (低音跳进+顶部挤压)", quality: "突发爆发、动能释放、电光闪击", timbres: "强重音 (Sforzando)、暴烈切分跳音、突发掌击与刮奏" },
+                    { name: "巽 ☴ (5)", lines: "阴-阳-阳 (0-1-1)", pitch: "C - C# - D# - F (微半音根基+上行全音冠)", quality: "柔韧渗透、无孔不入、微动风感", timbres: "管乐气鸣 (Air sound)、弦乐极轻碎弓微动态、飞动连奏音群" },
+                    { name: "坎 ☵ (6)", lines: "阴-阳-阴 (0-1-0)", pitch: "C - G - G# (外裹半音张力+中央纯五度)", quality: "外冷内动、深渊流动、起伏波澜", timbres: "弦乐微幅滑音 (Glissando)、流动琶音轮指、泛音颤音 (Tremolo)" },
+                    { name: "离 ☲ (3)", lines: "阳-阴-阳 (1-0-1)", pitch: "C - C# - D - G (开阔外框+内部摩擦)", quality: "明亮闪烁、点描火光、附着燃烧", timbres: "尖锐大跳、点描跳音 (Staccato)、高频金属打击、快速颗粒感" },
+                    { name: "艮 ☶ (7)", lines: "阴-阴-阳 (0-0-1)", pitch: "C - C# - D - A (低层音簇+悬空纯五度)", quality: "岿然不动、凝固止步、山峦界标", timbres: "长踏板持续音 (Pedal tone)、静态块状和声阻断、突发完全休止" },
+                    { name: "兑 ☱ (2)", lines: "阳-阳-阴 (1-1-0)", pitch: "C - D - G - G# (协和支柱+顶层半音反照)", quality: "波光反照、水面涟漪、活泼弹性", timbres: "琵琶快速轮指 (Lunzhi) 细腻颤动、高区柔和钟铃击奏、波音颤音" }
                 ],
                 rules2: [
-                    { dim: "旋律跳进 (Melody)", yang: "大二度 / 纯五度向上跳进 (全音动势)", yin: "半音级进 / 小二度向下微调 (半音受纳)", moving: "三全音反转或八度剧烈跃迁" },
-                    { dim: "和声结构 (Harmony)", yang: "协和、开阔泛音列、四五度叠置", yin: "减七和弦、密集二度集群音块", moving: "赵晓生太极和弦不协和爆发点[cite: 3]" },
-                    { dim: "织体节奏 (Rhythm)", yang: "连续稳定全音符、宏大长音", yin: "点状断奏 (Staccato)、不规则碎拍", moving: "复节拍爆发 (Polyrhythm) 或静默休止" }
+                    { dim: "音程选择 (Interval)", yang: "全音 (Whole Tone) / 纯四五度 (协和开放)", yin: "半音 (Semitone) / 小二度/增四度 (张力摩擦)", moving: "三全音反转或八度剧烈跃迁" },
+                    { dim: "演奏技法 (Articulation)", yang: "连音 (Legato)、保持音 (Tenuto)、饱满实音长弓", yin: "断奏 (Staccato)、泛音、气鸣声 (Air sound)、抓拨奏", moving: "滑音滑动 (Voice-Leading Shift)" },
+                    { dim: "织体节奏 (Texture)", yang: "纵向开阔支撑、平稳长时值线条", yin: "点描断续织体、不规则微节奏脉冲", moving: "复节拍爆发 (Polyrhythm) 或极静消融" }
                 ]
             },
             en: {
@@ -394,12 +523,12 @@
                 future_hex: "[Changed · Future]",
                 ai_title: "I Ching Fortune & Life Simulation",
                 comp_manual_title: "Manual Acoustic Parameters",
-                comp_target: "For Sibelius / Score Writing",
-                param_scale: "Modal Scale",
+                comp_target: "For Sibelius / Chamber Score",
+                param_scale: "Pitch Cell Prototype",
                 param_meter: "Tempo & Meter",
                 param_inst: "Dominant Timbres",
-                param_tension: "Harmonic Model",
-                comp_guide_title: "Micro-Developmental Guide:",
+                param_tension: "Voice-Leading & Counterpoint",
+                comp_guide_title: "Micro & Macro Generative Rules:",
                 suno_title: "Suno AI Composition Engine",
                 mode_real: "Realistic Hexagram",
                 mode_turn: "Turnaround Piece",
@@ -409,10 +538,26 @@
                 modal_title: "AI Model Config",
                 modal_desc: "Compatible with any OpenAI-compatible API (DeepSeek, OpenAI, etc.)",
                 btn_save_cfg: "Save Config",
-                rules_modal_title: "I-Ching Composition System: Mapping Rules Matrix",
-                rule_tbl_1_title: "1. Trigrams to Acoustic Ontology Mapping",
-                rule_tbl_2_title: "2. Yin/Yang Micro-Mechanics and Line Mutation Rules",
-                rules_footer_note: "* Academic basis derived from research proposal 'Hexagram Resonance', bridging I Ching semiotics into sonic ontology[cite: 3].",
+                rules_modal_title: "I-Ching Contemporary Music System: Academic Rules & Mandala",
+                rules_intro_title: "[Core Purpose & Theoretical Breakthrough]",
+                rules_intro_desc: "Transcending John Cage's discrete coin divination as random parameter generators and Zhao Xiaosheng's 12-tone serial constraints; systematically transforming the I Ching cosmology (Wuji→Taiji→Liangyi→Sixiang→Bagua→64 Hexagrams) into rigorous micro-intervals, meso pitch-cells, and macro voice-leading shifts.",
+                arch_title: "[Figure 1] Hierarchical Generative Architecture",
+                arch_micro_title: "1. Micro-Level",
+                arch_micro_p1: "Yin-Yang Line Parameters: Yang (⚊/1) maps to Whole Tones (C→D), consonant 4ths/5ths; Legato, full tone.",
+                arch_micro_p2: "Yin (⚋/0) maps to Semitones (C→C#), tritone tension; Staccato, air sounds, snap pizzicato.",
+                arch_meso_title: "2. Meso-Level",
+                arch_meso_p1: "Trigram Motivic Cells: Stacking 3 lines generates 8 distinct Pitch Cell Prototypes.",
+                arch_meso_p2: "e.g., Qian (C-D-E), Kun (C-C#-D cluster), Kan (C-G-G# fluid 5th), Li (C-C#-D-G pointillistic fire).",
+                arch_macro_title: "3. Macro-Level",
+                arch_macro_p1: "64 Hexagrams & Voice-Leading: Lower trigram maps to chamber foundation, upper trigram to solo voice (Pipa/World/Elec.).",
+                arch_macro_p2: "Line mutation triggers smooth voice-leading slides, driving continuous harmonic modulation.",
+                mandala_title: "[Figure 2] Fu Xi's 64 Hexagrams Circular Mandala",
+                mandala_desc: "The circular mandala is a living cycle of cosmic energy rather than a static code table. Originating from Kun (000000) with subterranean chromatic clusters, ascending through Yang expansion to Qian (111111) radiant whole-tones, and dissipating back into Wuji stillness.",
+                stages_title: "[Figure 3] The 6-Stage Cosmological Progression Cycle",
+                table1_title: "[Table 1] Trigrams to Distinct Modal Nuclei and Pitch Cells",
+                table2_title: "[Table 2] Yin-Yang Line Micro-Level Rules",
+                inst_note_title: "[Instrumentation Flexibility & Contingency Options]",
+                inst_note_desc: "The solo voice is anchored by the Chinese Pipa; depending on rehearsal availability in the UK, it pragmatically extends to Guzheng, Ruan, Erhu, Dizi, world instruments (Oud, Koto, Sitar), Western prepared piano/guitar, or electroacoustic live synthesis.",
                 card_moving_title: "[Moving Line Dynamic]: ",
                 card_moving_desc: "This line mutation warns against premature haste or relying on verbal promises. It directly drives the transformed future state.",
                 card_tip: "Tip: Click ⚙️ to configure DeepSeek/OpenAI for personalized, long-form inquiry analysis.",
@@ -420,19 +565,19 @@
                 hours: ["Rat (23-01)", "Ox (01-03)", "Tiger (03-05)", "Rabbit (05-07)", "Dragon (07-09)", "Snake (09-11)", 
                         "Horse (11-13)", "Goat (13-15)", "Monkey (15-17)", "Rooster (17-19)", "Dog (19-21)", "Pig (21-23)"],
                 rules1: [
-                    { name: "Qian ☰ (1)", nature: "Heaven / Pure Yang", scale: "Whole-tone / Lydian Mode", timbres: "Bronze Chimes, Brass Section, Bright Pipe Organ, Synth" },
-                    { name: "Dui ☱ (2)", nature: "Lake / Joyful", scale: "Major Pentatonic / Mixolydian", timbres: "Ruan, Marimba, Plucked Harp, Light Percussion" },
-                    { name: "Li ☲ (3)", nature: "Fire / Radiant", scale: "Flamenco Phrygian / Neo-Soul Chords", timbres: "Pipa sweeps, Electric Violin, Bright Rhodes Piano" },
-                    { name: "Zhen ☳ (4)", nature: "Thunder / Arousing", scale: "12-Tone Chromatic / Aggressive Dorian", timbres: "Taiko Drums, Timpani, Distorted Guitar, Heavy Trap Bass" },
-                    { name: "Xun ☴ (5)", nature: "Wind / Gentle", scale: "Air-Sound Pentatonic / Suspended", timbres: "Bamboo Flute/Dizi breath, Sul-tasto Strings, Acoustic Guitar" },
-                    { name: "Kan ☵ (6)", nature: "Water / Abyssal", scale: "Blues Minor / Microtonal Ambient", timbres: "Guzheng water-tremolo, Cello, Sub-bass Pad, Fretless Bass" },
-                    { name: "Gen ☶ (7)", nature: "Mountain / Still", scale: "Sparse Quartal / Resonant Silence", timbres: "Singing Bowl, Isolated Low Piano, Hang Drum, Temple Bell" },
-                    { name: "Kun ☷ (0)", nature: "Earth / Pure Yin", scale: "Microtonal Cluster / Serialism", timbres: "Ancient Xun, Contrabassoon, 808 Sub-Bass, Warm Strings" }
+                    { name: "Qian ☰ (1)", lines: "Solid-Solid-Solid (1-1-1)", pitch: "C - D - E (Whole-Tone Core)", quality: "Expansive, ascendant, transparent void", timbres: "Legato, resonant bowed timbres, full sustained vibrations" },
+                    { name: "Kun ☷ (0)", lines: "Broken-Broken-Broken (0-0-0)", pitch: "C - C# - D (Chromatic Cluster)", quality: "Dense, heavy, subterranean, static bedrock", timbres: "Bass clusters, bowed-bridge scraping, muted dynamics" },
+                    { name: "Zhen ☳ (4)", lines: "Solid-Broken-Broken (1-0-0)", pitch: "C - G - G# / C - F# - G (Bass Leap + Squeeze)", quality: "Sudden kinetic burst, electric release", timbres: "Violent sforzandi, syncopated attacks, sudden col legno" },
+                    { name: "Xun ☴ (5)", lines: "Broken-Solid-Solid (0-1-1)", pitch: "C - C# - D# - F (Semitone Root + WT Canopy)", quality: "Gentle dispersion, floating whisper", timbres: "Breath/air sounds, light whispering bow, rapid agile gestures" },
+                    { name: "Kan ☵ (6)", lines: "Broken-Solid-Broken (0-1-0)", pitch: "C - G - G# (Flanked 5th with tension)", quality: "Fluid depth, undulating wave, abyss", timbres: "Subtle pitch slides, rolling arpeggios, shimmering tremoli" },
+                    { name: "Li ☲ (3)", lines: "Solid-Broken-Solid (1-0-1)", pitch: "C - C# - D - G (Open Frame + Inner Friction)", quality: "Pointillistic flash, clinging brilliance", timbres: "Angular leaps, pointillistic bursts, metallic overtone attacks" },
+                    { name: "Gen ☶ (7)", lines: "Broken-Broken-Solid (0-0-1)", pitch: "C - C# - D - A (Dense Base + Suspended 5th)", quality: "Stony arrest, immobility, boundary", timbres: "Static block chords, heavy sustain pedals, absolute silence/rests" },
+                    { name: "Dui ☱ (2)", lines: "Solid-Solid-Broken (1-1-0)", pitch: "C - D - G - G# (Consonant Pillars + Shimmer)", quality: "Buoyant liquid sheen, shimmering joy", timbres: "Rapid Pipa Lunzhi tremolos, delicate chime strikes, trills" }
                 ],
                 rules2: [
-                    { dim: "Melodic Contour", yang: "Ascending Major 2nd / Perfect 5th", yin: "Descending Minor 2nd / Semitone resolution", moving: "Tritone leap or violent octave transformation" },
-                    { dim: "Harmonic Color", yang: "Consonant, open quartal/quintal stacks", yin: "Diminished chords, dense 2nd cluster tone", moving: "Zhao Xiaosheng's Tai Chi Chord dissonance burst[cite: 3]" },
-                    { dim: "Rhythmic Texture", yang: "Sustained long tones, even metrics", yin: "Fragmented staccato, irregular pauses", moving: "Polyrhythmic torrent (6/8 vs 4/4) or abrupt silence" }
+                    { dim: "Interval Selection", yang: "Whole Tone / Perfect 4th & 5th (Consonant, open)", yin: "Semitone / Minor 2nd, Tritone (Friction, tension)", moving: "Tritone flip or dramatic octave leap" },
+                    { dim: "Articulations", yang: "Legato, Tenuto, resonant full tones, long bowing", yin: "Staccato, harmonics, air sounds, snap pizzicato", moving: "Smooth Voice-Leading Shift (Glissando)" },
+                    { dim: "Textures & Rhythms", yang: "Expansive vertical pillars, even long lines", yin: "Pointillistic sparse textures, irregular micro-pulses", moving: "Polyrhythmic burst or dissolution into stillness" }
                 ]
             }
         };
@@ -615,7 +760,7 @@
             };
         }
 
-        // ======================= 渲染解卦结果 (保证中英文完全独立对应) =======================
+        // ======================= 渲染解卦结果 =======================
         function renderFortuneInterpretation() {
             if (!latestHexResult) return;
 
@@ -660,54 +805,57 @@
             const rUpper = i18n[currentLang].rules1.find(r => r.name.includes(TRIGRAMS[upper][currentLang])) || i18n[currentLang].rules1[upper];
             const rfUpper = i18n[currentLang].rules1.find(r => r.name.includes(TRIGRAMS[futureUpper][currentLang])) || i18n[currentLang].rules1[futureUpper];
 
-            document.getElementById("musicScale").innerText = isTurn ? `${rfUpper.scale}` : rLower.scale;
+            document.getElementById("musicScale").innerText = isTurn ? `${rfUpper.pitch.split('(')[0]}` : rLower.pitch.split('(')[0];
             document.getElementById("musicBpm").innerText = `${bpm} BPM (${timeSig})`;
-            document.getElementById("musicInstruments").innerText = `${rLower.timbres.split(/、|,/)[0]} & ${rUpper.timbres.split(/、|,/)[0]}`;
+            document.getElementById("musicInstruments").innerText = `独奏琵琶(或备选) & 西方室内乐组`;
 
             if (currentLang === 'zh') {
                 document.getElementById("musicFormGuide").innerText = 
-                    `建议以【无极 (Wuji)】气流音铺底[cite: 3]；A段以【${TRIGRAMS[lower].zh}卦】乐器刻画现实阻力[cite: 3]；在第 ${movingYaoIndex + 1} 爻处触发【动爻突变】，以太极和弦不协和度爆发[cite: 3]；${isTurn ? '后半程强力转向【' + TRIGRAMS[futureUpper].zh + '卦】明朗音阶，完成音乐上的相生转运破局[cite: 3]。' : '尾声呈现【' + TRIGRAMS[futureUpper].zh + '卦】变卦形态，回归静谧[cite: 3]。'}`;
+                    `【引子】：呈现阶段1【无极】气鸣音与微弱泛音；【A段】：下卦【${TRIGRAMS[lower].zh}】(${rLower.pitch})作为室内乐低音织体，叠置上卦【${TRIGRAMS[upper].zh}】独奏琵琶核心线条，构成纵向复调对位；在第 ${movingYaoIndex + 1} 爻处触发【变爻突变】，以半音平滑声部滑动(Voice-Leading Shift)打破平衡；${isTurn ? '【后半程】：向变卦【' + TRIGRAMS[futureUpper].zh + '】(' + rfUpper.pitch + ')调式强力调制，完成五行转运破局。' : '【尾声】：向变卦【' + TRIGRAMS[futureUpper].zh + '】过渡，最终音响消融归入虚空无极闭环。'}`;
             } else {
                 document.getElementById("musicFormGuide").innerText = 
-                    `Begin with Wuji air-sounds[cite: 3]. Section A portrays the struggle with [${TRIGRAMS[lower].en}] timbres[cite: 3]. Line ${movingYaoIndex + 1} triggers the mutation burst[cite: 3]. ${isTurn ? 'Modulate toward [' + TRIGRAMS[futureUpper].en + '] mode to musically enact fortune-turning balance[cite: 3].' : 'Fade into [' + TRIGRAMS[futureUpper].en + '] transformed state towards stillness[cite: 3].'}`;
+                    `[Intro]: Stage 1 Wuji air-sounds & micro-harmonics; [Section A]: Lower trigram [${TRIGRAMS[lower].en}] (${rLower.pitch}) as chamber foundation polyphonically coupled with upper trigram [${TRIGRAMS[upper].en}] solo Pipa voice; At Line ${movingYaoIndex + 1}, trigger line mutation via smooth voice-leading shift; ${isTurn ? '[Later Half]: Strongly modulate toward [' + TRIGRAMS[futureUpper].en + '] mode (' + rfUpper.pitch + ') to enact fortune-turning balance.' : '[Outro]: Seamlessly transition into transformed state [' + TRIGRAMS[futureUpper].en + '] and dissolve back into Wuji cycle.'}`;
             }
 
             // Suno 提示词生成
-            let style = `Contemporary East-West Hybrid, ${rLower.timbres}, ${rUpper.timbres}, `;
+            let style = `Contemporary Chamber Music, East-West Hybrid, Solo Pipa with Western Strings and Flute, ${rLower.timbres}, ${rUpper.timbres}, `;
             if (isTurn) {
-                style += `transitioning into triumphant ${rfUpper.scale} resolution, uplifting spiritual climax, harmonic healing, `;
+                style += `transitioning into triumphant ${rfUpper.pitch.split('(')[0]} resolution, uplifting spiritual climax, `;
             } else {
                 style += `meditative avant-garde atmosphere, microtonal tension, dark mystical aesthetic, `;
             }
-            style += `${bpm} BPM, Tai Chi chord resonance, modern cinematic score[cite: 3].`;
+            style += `${bpm} BPM, Wuji to 64 Hexagrams generative cycle, modern acoustic score.`;
             document.getElementById("sunoStyleText").innerText = style;
 
-            const structure = `[Intro: Primordial Chaos (Wuji) - Flute air-sounds, bow-on-tailpiece, dark sub drone][cite: 3]
-[Verse 1: Present Hexagram - ${TRIGRAMS[upper].en} over ${TRIGRAMS[lower].en}]
-(${rLower.timbres.split(/、|,/)[0]} portraying the realistic struggle and tension)
+            const structure = `[Intro: Stage 1 Wuji Primordial Chaos - Flute air-sounds, bow-on-tailpiece, dark bass drone]
+[Verse 1: Lower Trigram Chamber Foundation - ${TRIGRAMS[lower].en} (${rLower.pitch.split('(')[0]})]
+(Solo Pipa enters with Upper Trigram theme ${TRIGRAMS[upper].en}, polymodal counterpoint)
 [Pre-Chorus: Rising Conflict - Yin and Yang opposing forces]
-[Chorus: Moving Line ${movingYaoIndex + 1} Cataclysm]
-(${isTurn ? 'Dramatic modulation breaking obstacles, bright triumphant burst' : 'Dissonant percussion outburst with polyrhythms'})
-[Bridge: Metaphysical Transformation]
-[Outro: Changed Hexagram - Harmonious balance fading into silence]`;
+[Chorus: Mutating Line ${movingYaoIndex + 1} Cataclysm]
+(${isTurn ? 'Smooth voice-leading shift breaking obstacles, bright triumphant burst' : 'Dissonant percussion outburst with polyrhythms'})
+[Bridge: The 6-Stage Cosmological Transformation]
+[Outro: Final Return to Wuji - Fading into eternal silence]`;
             document.getElementById("sunoStructureText").innerText = structure;
         }
 
-        // ======================= 渲染规则表格 =======================
+        // ======================= 渲染手动作曲学术规则矩阵表格 =======================
         function renderRulesModalTables() {
+            // 表格 1
             const tbody1 = document.getElementById("rulesTbody1");
             tbody1.innerHTML = "";
             i18n[currentLang].rules1.forEach(item => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td class="p-2.5 font-bold text-amber-300 font-mono">${item.name}</td>
-                    <td class="p-2.5 text-stone-300">${item.nature}</td>
-                    <td class="p-2.5 text-amber-400/90">${item.scale}</td>
-                    <td class="p-2.5 text-stone-300">${item.timbres}</td>
+                    <td class="p-2.5 text-stone-300">${item.lines}</td>
+                    <td class="p-2.5 text-amber-400 font-mono">${item.pitch}</td>
+                    <td class="p-2.5 text-stone-300">${item.quality}</td>
+                    <td class="p-2.5 text-stone-400">${item.timbres}</td>
                 `;
                 tbody1.appendChild(tr);
             });
 
+            // 表格 2
             const tbody2 = document.getElementById("rulesTbody2");
             tbody2.innerHTML = "";
             i18n[currentLang].rules2.forEach(item => {
@@ -769,7 +917,6 @@
             const aiBadge = document.getElementById("aiBadge");
             const aiResponse = document.getElementById("aiResponse");
 
-            // 无 API Key 时，直接输出经过完整双语适配的本地运势
             if (!apiKey) {
                 aiBadge.innerText = "Local Engine";
                 renderFortuneInterpretation();
@@ -850,7 +997,6 @@ Please provide a sharp, grounded interpretation in pure English with realistic e
             document.getElementById("emptyState").classList.add("hidden");
             document.getElementById("resultCard").classList.remove("hidden");
 
-            // 触发解卦推演
             await callAiInterpretation({
                 name, dob, question,
                 presentHex: pData,
@@ -883,7 +1029,6 @@ Please provide a sharp, grounded interpretation in pure English with realistic e
             alert(currentLang === 'zh' ? "AI 配置已保存在本地浏览器！" : "AI config saved locally!");
         });
 
-        // 语言全局刷新函数
         function updateLocale() {
             document.querySelectorAll("[data-i18n]").forEach(el => {
                 const key = el.getAttribute("data-i18n");
@@ -908,7 +1053,6 @@ Please provide a sharp, grounded interpretation in pure English with realistic e
                 document.getElementById("presentName").innerText = currentLang === 'zh' ? pData.zh : pData.en;
                 document.getElementById("futureName").innerText = currentLang === 'zh' ? fData.zh : fData.en;
                 
-                // 关键：切换语言时，立刻重新以当前语言重新渲染运势解卦卡片！
                 renderFortuneInterpretation();
                 updateCompositionPanels();
             }
