@@ -1,56 +1,29 @@
-# 易经作曲研究 · 命格作曲
+# 最小干预规则更新包 / Minimum-intervention rules v2
 
-创作者：张睿哲 Ruizhe Zhang
+张睿哲 Ruizhe Zhang · 21 October 2026
 
-双语静态网站，包含七阶段作曲体系、64卦文化调式档案、《太初 Primordial》作品案例，以及命格解读、Suno提示词和专业委托需求单。
+## 上传网站 / Website replacement
+用 index.html 替换原 GitHub 仓库中的同名文件，完整保留原 assets 文件夹。未自动推送或部署。rules-preview.html 可单独预览规则页；主网站已内嵌规则及入门图，不需额外引用 rule-engine.js。主网站的作品资源仍依赖原 assets。
+Replace index.html and retain the original assets folder. No remote push or deployment has been performed. The main file embeds its rules and explanatory graphics. Portfolio media still require the existing assets folder.
 
-## 文件结构
+## 规则优先级 / Rule priority
+1. 纯乾明确保留全音极点：CDE + F# G# A#，上卦 +6。此为艺术约束，不称为不受限制的最小移位。
+2. 其余卦：原始上下音核没有共同音级，就保留原样（T0）。例如需卦 CDE + GAB。
+3. 有重音才固定下卦，整体移动上卦，依次尝试 0,+1,-1,+2,-2,+3,-3,+4,-4,+5,-5,+6；取首个六音互异方案。保持三音核内部音程，等距时优先向上。纯坤自然得到 +3：CC#D + D#EF。
+4. 不同卦可以共享集合，不再以64集合互异为目标。音序、中心、节奏、技法、音色、织体及曲式也构成差异。
+5. 上卦整体移位、单声部动爻、变卦重新生成是三个操作。详细规则页默认关闭动爻；试听和 MIDI 使用页面最后一行的发声音高。动爻后重音可以作为声部汇合保留。
+6. 文化参照独立选择。中国、欧洲、日本、匈牙利式及希贾兹四音核等仅是有条件的创作参照；不把一个十二平均律音阶当成完整 raga 或 maqam，不把唐代雅乐、敦煌、宋代曲调混称一个古调式。历史对应须注明具体谱本、转译及律制。
 
-```text
-index.html
-README.md
-.nojekyll
-assets/
-  Primordial.mp3
-  Primordial-score.pdf
-  Primordial-cover.png
-  Primordial-opening.png
-```
+English summary: preserve the whole-tone Qian pole as an explicit +6 exception; otherwise retain disjoint nuclei and shift only overlapping upper cells by the smallest circular semitone distance, with upward tie-breaking. Kun uses the ordinary +3 minimum. Different hexagrams may share collections. Upper transposition, one-node slides and changed-hexagram regeneration remain separate. Cultural references do not establish historical derivation.
 
-`index.html` 包含完整的 HTML、CSS 和 JavaScript；两个板块通过内嵌页面组织。可以用 VS Code 或其他文本编辑器打开并编辑。搜索页面上的文字即可找到对应内容。音频、乐谱和图片使用相对路径，适用于 GitHub Pages 的项目子目录。
+## Word 文件 / Word documents
+修订标注版包含原有批注、本次中文批注和真实 Word 增删修订。Word 中选择“审阅 → 所有标记”查看；选择“无标记”可看最终文本。阅读版是接受同一组修订后的整洁副本。原主体样式、页面设置与旧图保留，需卦图更新，并在摘要后、背景前加入两张中英文图。新增说明不代表已完成实证验证。
+The marked copy has native Word insertions/deletions plus Chinese comments. Review > All Markup displays the edits. The reading copy accepts the same edits. Existing formatting and page setup are retained; the Xu example is updated and two bilingual introductory figures are placed before the background. Proposed evaluation is not presented as completed evidence.
 
-## 上传 GitHub
+## 建议的研究记录 / Research documentation
+每次保存规则版本、原始音列、移位理由、手动覆盖、动爻、发声音高、文化来源及排练反馈。用原始拼合、推荐最小干预、自由改配作对照；评价动机保持、听觉连续性、可演奏性和文化解释，而非只数音高。
+Save rule versions, raw cells, shift reasons, overrides, slide settings, sounding pitches, cultural sources and rehearsal feedback. Compare raw, recommended and freely remapped studies. Assess motivic identity, continuity, performability and cultural interpretation, not just pitch counts.
 
-1. 新建一个仓库，例如 `iching-composition`。
-2. 解压代码包，将里面的 `index.html`、`README.md`、`.nojekyll` 和整个 `assets` 文件夹上传到仓库根目录。不要只上传 ZIP，也不要在它们外面再套一层 `github-site` 目录。
-3. 提交文件到 `main` 分支。
-4. 打开仓库的 **Settings → Pages**。
-5. Source 选择 **Deploy from a branch**，分支选择 **main**，目录选择 **/(root)**，点击 **Save**。
-6. 部署完成后，在 Pages 设置页面打开 GitHub 提供的网站地址。
-
-官方说明：https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
-
-## 本地查看
-
-双击 `index.html` 即可打开；保留同级的 `assets` 文件夹。浏览器音频播放需由用户点击启动。联网AI功能取决于网关的跨域设置，使用 GitHub Pages 的 HTTPS 地址更便于配置。
-
-## 内容与功能
-
-- 七阶段：无极、太极、两仪、四象、八卦、六十四卦、归无极，可组织单首作品或作品集大循环。
-- 《太初》明确定位为无极阶段作品，为琵琶与弦乐四重奏而作。
-- 支持中英文、合成乐器试听、本地单音采样导入、多调式和泛调性实验。
-- 算卦为本站自定义种子算法，日常解读用于象征性娱乐与创作。
-- Suno提示词可直接复制使用；AI请求需填写你自己的服务端网关地址。GitHub Pages只托管静态前端，不会自动提供AI服务端。
-- 专业道士、易学顾问和作曲家服务目前提供需求单与用户自填联系页，没有真实预约或付款系统。
-
-## AI网关约定
-
-前端会向配置的HTTPS地址发送JSON POST请求。服务器应支持此网站来源的CORS请求，并自行处理鉴权、额度和供应商密钥。前端不保存API Key。
-
-请求包含 `action`、`provider`、`context`、`style`、`structure` 和 `instructions`；`action` 可为 `expand_composition`、`fortune_reading` 或 `suno_generate`。用户勾选附带问句时，解读请求还会包含 `question`。
-
-返回JSON可使用 `text`、`output_text` 或 `message` 字段，页面会显示其内容。Suno音乐生成的供应商协议需要由服务器适配。
-
-## 作者与素材
-
-网站展示张睿哲 Ruizhe Zhang 的作曲研究及作者提供的《太初》音频、乐谱。此代码包未额外授予作品音频、乐谱或其他素材的复制与商业使用许可。
+## 核对范围 / Verification
+64 个默认方案及 63 个普通最小移位规则已通过检查；无重音的组合均保持T0；纯乾极点例外单独检查。DOM 执行检查覆盖中英切换、自由移位、恢复推荐、动爻关闭／开启、非C主音下试听与MIDI一致性及命格板块同源数据。Word修订、批注、图像、样式和页面设置结构核对通过；图像已目视核对。当前环境无法进行浏览器视觉验收，且缺少LibreOffice，Word分页未渲染核对。请正式上传或提交前在浏览器和Word中打开检查。
+Data and DOM tests passed. Native Word revisions/comments, matching accepted content, figures, styles and page setup checked. Graphics visually inspected. Browser visual rendering and Word pagination remain unverified in this environment.
