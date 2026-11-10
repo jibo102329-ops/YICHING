@@ -1,0 +1,79 @@
+/* Listening studies and the research notebook share the site's green/gold palette. */
+.home-demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.home-demo-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:15px;min-height:235px;padding:28px 30px 32px;text-align:left;color:#e9e8da;border:1px solid #bda96e3d;background:linear-gradient(135deg,#203c30,#13291f);border-radius:5px;cursor:pointer;overflow:hidden;transition:transform .3s,border-color .3s,background .3s}
+.home-demo-card::after{content:"";position:absolute;inset:auto -20px -80px auto;width:200px;height:200px;border:1px solid #d4bd7b18;border-radius:50%;pointer-events:none}
+.home-demo-card:hover{transform:translateY(-5px);border-color:#d4bd7b88;background:linear-gradient(135deg,#294838,#172f24)}
+.home-demo-card:focus-visible{outline:2px solid #e3cd91;outline-offset:5px}
+.home-demo-card .example-index{font:10px/1.5 var(--sans,sans-serif);letter-spacing:.16em;color:#cbb679}
+.home-demo-card strong{font:400 25px/1.5 var(--serif,Georgia,serif)}
+.home-demo-card .example-pitches{font:20px/1.5 var(--serif,Georgia,serif);letter-spacing:.06em;color:#e1ca8d}
+.home-demo-card small{max-width:90%;font:11px/1.8 var(--sans,sans-serif);color:#a7b4a2}
+.home-demo-card .example-arrow{position:absolute;right:27px;bottom:26px;color:#d3bd80;font-size:21px}
+.listening-section{padding-top:58px;padding-bottom:35px}
+body[data-application] .experiment-examples{margin:28px 0;border:1px solid #bea86e40;border-radius:5px;background:linear-gradient(140deg,#1c352b,#11271f);overflow:hidden}
+body[data-application] .experiment-section-title{padding:23px 26px 8px}
+body[data-application] .experiment-section-title h3{margin:8px 0 6px;font:400 24px/1.5 var(--serif,Georgia,serif);color:#e4d19b}
+body[data-application] .experiment-section-title p{margin:0;color:#a0b09d;font-size:11px;line-height:1.9}
+body[data-application] .demo-pairings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:17px 26px 23px}
+body[data-application] .demo-pairing{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-height:145px;padding:17px 18px;text-align:left;border:1px solid #c1b47f27;border-radius:3px;background:#0e241c70;color:#cbd3c2;cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
+body[data-application] .demo-pairing:hover{background:#294334;transform:translateY(-2px);border-color:#d2bb7b88}
+body[data-application] .demo-pairing.active{background:linear-gradient(135deg,#d1bf7b22,#c3ac6610);border-color:#d2bb7ba0}
+body[data-application] .demo-index{font-size:9px;letter-spacing:.12em;color:#9ba98f}
+body[data-application] .demo-pairing.active .demo-index{color:#e1c679}
+body[data-application] .demo-pairing strong{font:400 18px/1.5 var(--serif,Georgia,serif);color:#e5d19b}
+body[data-application] .demo-pitches{font:15px/1.6 var(--serif,Georgia,serif);letter-spacing:.04em;color:#dddcbf}
+body[data-application] .demo-pairing small{font-size:10px;line-height:1.8;color:#a5b29b}
+body[data-application] .phase-player{padding:21px 26px;background:#091c1540;border-top:1px solid #bea86e24}
+body[data-application] .phase-options{display:inline-flex;flex-wrap:wrap;gap:3px;border:1px solid #b5a66f38;background:#0d211a;padding:4px;border-radius:4px}
+body[data-application] .phase-options button{padding:8px 13px;border:0;background:transparent;color:#aebba5;font-size:10px;cursor:pointer;border-radius:2px}
+body[data-application] .phase-options button.active{background:#dbc78f;color:#173125;box-shadow:0 1px 5px #0002}
+body[data-application] .phase-options button:hover:not(.active){color:#e3d5ac;background:#b9a57312}
+body[data-application] .phase-notes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin:20px 0}
+body[data-application] .pitch-chip{display:flex;align-items:center;justify-content:center;min-height:67px;border:1px solid #c2ad6b28;border-radius:3px;background:#172e23;font:400 23px/1.4 var(--serif,Georgia,serif);color:#e2cb8a;transition:background .2s,border-color .2s,transform .2s}
+body[data-application] .pitch-chip.sounding{background:#d2ba7c;color:#193227;border-color:#ecdaaa;transform:translateY(-3px)}
+body[data-application] .phase-footer{display:flex;align-items:center;justify-content:space-between;gap:24px}
+body[data-application] .phase-description{font-size:10px;line-height:1.9;color:#a5b29b;max-width:730px;margin:0}
+body[data-application] .phase-listen{white-space:nowrap;min-width:148px}
+body[data-application] .experiment-studio{margin:28px 0;border:1px solid #baa66c40;border-radius:5px;overflow:hidden;background:#142b21}
+body[data-application] .experiment-studio .panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:25px;padding:23px 26px;background:#c5b47407;border-bottom:1px solid #baa66c27}
+body[data-application] .experiment-studio .panel-head h3{margin:0 0 7px;font:400 24px/1.5 var(--serif,Georgia,serif);color:#e1cd94}
+body[data-application] .experiment-studio .panel-head p{margin:0;font-size:11px;line-height:1.9;color:#a0af97}
+body[data-application] .experiment-studio .eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.14em;color:#bea569}
+body[data-application] .notebook-body{padding:25px 26px 17px}
+body[data-application] .notebook-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+body[data-application] .notebook-grid label,body[data-application] .reflection-field{display:flex;flex-direction:column;gap:9px;font-size:11px;color:#c6d0b8;line-height:1.7}
+body[data-application] .reflection-field{margin-top:20px}
+body[data-application] .experiment-studio input,body[data-application] .experiment-studio select,body[data-application] .experiment-studio textarea{width:100%;min-height:43px;padding:10px 12px;border:1px solid #b4a26936;border-radius:3px;background:#0e231a;color:#e3e5d5;font:12px/1.8 var(--sans,Arial,sans-serif)}
+body[data-application] .experiment-studio textarea{resize:vertical;min-height:98px}
+body[data-application] .experiment-studio input::placeholder,body[data-application] .experiment-studio textarea::placeholder{color:#8e9b83;opacity:.85}
+body[data-application] .experiment-studio input:focus,body[data-application] .experiment-studio select:focus,body[data-application] .experiment-studio textarea:focus{outline:2px solid #c8b27970;outline-offset:2px;border-color:#c8b279}
+body[data-application] .notebook-actions,body[data-application] .saved-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+body[data-application] .notebook-actions .button,body[data-application] .saved-actions .button{padding:10px 15px;font-size:10px;line-height:1.6}
+body[data-application] .experiment-studio .button{border:1px solid #bca66f45;background:#c2b17c0b;color:#d4d6bd;border-radius:3px;cursor:pointer}
+body[data-application] .experiment-studio .button:hover{border-color:#c8b278;background:#c2b17c1c}
+body[data-application] .experiment-studio .button.primary,body[data-application] .phase-listen{background:#d4c18b;border:1px solid #d4c18b;color:#173024;border-radius:3px;cursor:pointer;padding:10px 17px;font-size:10px;line-height:1.6}
+body[data-application] .experiment-studio .button.primary:hover,body[data-application] .phase-listen:hover{background:#e6d29c}
+body[data-application] .notebook-storage{font-size:9px;line-height:1.8;color:#94a388;margin:12px 0 22px}
+body[data-application] .saved-experiments{border-top:1px solid #bba66a25;padding-top:21px}
+body[data-application] .saved-experiments>label{display:block;font-size:11px;color:#c8cfb8;margin-bottom:9px}
+body[data-application] .saved-actions{margin-top:10px}
+body[data-application] .saved-actions .subtle-danger{color:#c2a797;border-color:#ae897630}
+body[data-application] .experiment-status{min-height:20px;margin:16px 0 0;font-size:10px;line-height:1.8;color:#dfc688}
+body[data-application] #modalLab .matrix-scroll{border:1px solid #bba56f40;border-radius:4px;max-height:620px;overflow:auto;margin-top:24px;scrollbar-color:#9a8752 #10271d;scrollbar-width:thin}
+body[data-application] #modalLab table{min-width:940px;width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:11px}
+body[data-application] #modalLab th,body[data-application] #modalLab td{border:0;border-right:1px solid #af9e6b26;border-bottom:1px solid #af9e6b26;white-space:normal;vertical-align:middle;text-align:center;padding:8px 6px;line-height:1.6}
+body[data-application] #modalLab thead th{position:sticky;top:0;z-index:2;background:#223b2c;color:#e2cb8a;font-size:10px;font-weight:400}
+body[data-application] #modalLab th:first-child{position:sticky;left:0;z-index:1;background:#1e3528;color:#d9c58b;width:135px}
+body[data-application] #modalLab thead th:first-child{z-index:3}
+body[data-application] #modalLab td{background:#142b21;padding:4px}
+body[data-application] #modalLab tr:hover td{background:#1b3427}
+body[data-application] #modalLab td button{display:block;width:100%;min-height:46px;padding:7px 4px;white-space:normal;font-size:10px;line-height:1.6;border:1px solid transparent;border-radius:3px;background:transparent;color:#c1cbb5;cursor:pointer;transition:background .18s,color .18s}
+body[data-application] #modalLab td button:hover{background:#b5a06b1c;border-color:#c5ad6940;color:#eddfb5}
+body[data-application] #modalLab td button.active{background:#dfcb91;color:#1b3124;border-color:#eddaa5;box-shadow:0 1px 6px #0002}
+body[data-application] #modalLab button:focus-visible{outline:2px solid #e0cb90;outline-offset:2px}
+body[data-application] #modalLab .studio-body>.experiment-examples{margin:0 0 25px}
+html[data-motion="off"] .home-demo-card,html[data-motion="off"] .demo-pairing,html[data-motion="off"] .pitch-chip{transition:none;transform:none}
+@media(max-width:1050px){.home-demo-card{padding:24px;min-height:245px}.home-demo-card strong{font-size:22px}.home-demo-card .example-pitches{font-size:17px}body[data-application] .demo-pairing{padding:14px}body[data-application] .demo-pairing strong{font-size:16px}}
+@media(max-width:760px){.home-demo-grid{grid-template-columns:1fr}.home-demo-card{min-height:190px;gap:11px}.home-demo-card strong{font-size:25px}.listening-section{padding-top:32px}body[data-application] .experiment-section-title{padding:19px 18px 8px}body[data-application] .demo-pairings{padding:12px 18px 18px;gap:8px}body[data-application] .demo-pairing{min-height:145px;padding:12px 9px}body[data-application] .demo-pairing strong{font-size:14px}body[data-application] .demo-pitches{font-size:12px}body[data-application] .demo-pairing small{font-size:8px}body[data-application] .phase-player{padding:17px 18px}body[data-application] .phase-options{display:flex}body[data-application] .phase-options button{flex:1;padding:8px 5px;font-size:9px}body[data-application] .phase-notes{gap:6px;margin:17px 0}body[data-application] .pitch-chip{min-height:51px;font-size:20px}body[data-application] .phase-footer{align-items:stretch;flex-direction:column;gap:15px}body[data-application] .phase-listen{align-self:flex-start}body[data-application] .experiment-studio .panel-head{display:block;padding:19px 18px}body[data-application] .experiment-studio .panel-head h3{font-size:22px}body[data-application] .experiment-studio .eyebrow{display:block;margin-top:12px}body[data-application] .notebook-body{padding:20px 18px 14px}body[data-application] .notebook-grid{grid-template-columns:1fr;gap:17px}body[data-application] .notebook-actions .button,body[data-application] .saved-actions .button{font-size:10px;padding:9px 12px}body[data-application] #modalLab table{min-width:910px}}
+@media(max-width:430px){body[data-application] .demo-pairings{grid-template-columns:1fr}body[data-application] .demo-pairing{min-height:auto;display:grid;grid-template-columns:25px 1fr;gap:5px 8px;padding:11px 13px}body[data-application] .demo-index{grid-row:1/4}body[data-application] .demo-pairing strong{font-size:16px}body[data-application] .demo-pitches{font-size:13px}body[data-application] .demo-pairing small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.home-demo-card,body[data-application] .demo-pairing,body[data-application] .pitch-chip{transition:none;transform:none}}

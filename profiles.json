@@ -1,0 +1,3074 @@
+{
+  "qian-qian": {
+    "number": 1,
+    "zh": "乾",
+    "en": "The Creative",
+    "shift": 6,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      6,
+      8,
+      10
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "signedShift": 6,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 3,
+    "reason": "whole-tone-pole"
+  },
+  "kun-kun": {
+    "number": 2,
+    "zh": "坤",
+    "en": "The Receptive",
+    "shift": 3,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      3,
+      4,
+      5
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-zhen": {
+    "number": 3,
+    "zh": "屯",
+    "en": "Difficulty at the Beginning",
+    "shift": 11,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      6,
+      8,
+      10
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      6,
+      8,
+      10
+    ],
+    "sorted": [
+      0,
+      1,
+      6,
+      7,
+      8,
+      10
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "qian-zhen": {
+    "number": 25,
+    "zh": "无妄",
+    "en": "Innocence",
+    "shift": 2,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      2,
+      4,
+      6
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      2,
+      4,
+      6
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-qian": {
+    "number": 34,
+    "zh": "大壮",
+    "en": "Great Power",
+    "shift": 10,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      5,
+      10,
+      11
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      5,
+      10,
+      11
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      5,
+      10,
+      11
+    ],
+    "signedShift": -2,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-kan": {
+    "number": 40,
+    "zh": "解",
+    "en": "Deliverance",
+    "shift": 1,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      8,
+      1,
+      2
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      8,
+      1,
+      2
+    ],
+    "sorted": [
+      1,
+      2,
+      7,
+      8,
+      9,
+      11
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-kan": {
+    "number": 4,
+    "zh": "蒙",
+    "en": "Youthful Folly",
+    "shift": 1,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      3,
+      4,
+      8
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      3,
+      4,
+      8
+    ],
+    "sorted": [
+      3,
+      4,
+      7,
+      8,
+      9,
+      11
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-qian": {
+    "number": 9,
+    "zh": "小畜",
+    "en": "Small Taming",
+    "shift": 1,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      5,
+      6,
+      10
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      10
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "qian-li": {
+    "number": 13,
+    "zh": "同人",
+    "en": "Fellowship",
+    "shift": 9,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      9,
+      11,
+      1
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      9,
+      11,
+      1
+    ],
+    "sorted": [
+      0,
+      1,
+      3,
+      4,
+      9,
+      11
+    ],
+    "signedShift": -3,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "li-qian": {
+    "number": 14,
+    "zh": "大有",
+    "en": "Great Possession",
+    "shift": 3,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      3,
+      6,
+      7
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      3,
+      6,
+      7
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      4,
+      6,
+      7
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-zhen": {
+    "number": 17,
+    "zh": "随",
+    "en": "Following",
+    "shift": 2,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      11,
+      2,
+      4
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      11,
+      2,
+      4
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      4,
+      7,
+      11
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-dui": {
+    "number": 19,
+    "zh": "临",
+    "en": "Approach",
+    "shift": 3,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      3,
+      4,
+      5
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      3,
+      4,
+      5
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      9
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "li-zhen": {
+    "number": 21,
+    "zh": "噬嗑",
+    "en": "Biting Through",
+    "shift": 11,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      11,
+      2,
+      3
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      11,
+      2,
+      3
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-qian": {
+    "number": 26,
+    "zh": "大畜",
+    "en": "Great Taming",
+    "shift": 3,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      5,
+      6,
+      10
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      10
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      10
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-xun": {
+    "number": 28,
+    "zh": "大过",
+    "en": "Great Exceeding",
+    "shift": 1,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      10,
+      1,
+      3
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      10,
+      1,
+      3
+    ],
+    "sorted": [
+      1,
+      3,
+      4,
+      5,
+      9,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-gen": {
+    "number": 31,
+    "zh": "咸",
+    "en": "Influence",
+    "shift": 11,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      8,
+      11,
+      1
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      8,
+      11,
+      1
+    ],
+    "sorted": [
+      1,
+      2,
+      3,
+      7,
+      8,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "qian-gen": {
+    "number": 33,
+    "zh": "遯",
+    "en": "Retreat",
+    "shift": 9,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      9,
+      11,
+      1
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      9,
+      11,
+      1
+    ],
+    "sorted": [
+      1,
+      2,
+      3,
+      7,
+      9,
+      11
+    ],
+    "signedShift": -3,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "li-dui": {
+    "number": 38,
+    "zh": "睽",
+    "en": "Opposition",
+    "shift": 1,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      1,
+      4,
+      5
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      1,
+      4,
+      5
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      9
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-gen": {
+    "number": 39,
+    "zh": "蹇",
+    "en": "Obstruction",
+    "shift": 1,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      8,
+      10,
+      0
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      8,
+      10,
+      0
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      7,
+      8,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-dui": {
+    "number": 41,
+    "zh": "损",
+    "en": "Decrease",
+    "shift": 1,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      3,
+      4,
+      8
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      3,
+      4,
+      8
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      4,
+      8,
+      9
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "qian-xun": {
+    "number": 44,
+    "zh": "姤",
+    "en": "Coming to Meet",
+    "shift": 11,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      11,
+      1,
+      3
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      11,
+      1,
+      3
+    ],
+    "sorted": [
+      1,
+      3,
+      4,
+      5,
+      9,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-kun": {
+    "number": 45,
+    "zh": "萃",
+    "en": "Gathering Together",
+    "shift": 9,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      6,
+      9,
+      11
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      6,
+      9,
+      11
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      6,
+      9,
+      11
+    ],
+    "signedShift": -3,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-xun": {
+    "number": 48,
+    "zh": "井",
+    "en": "The Well",
+    "shift": 1,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      8,
+      10,
+      0
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      8,
+      10,
+      0
+    ],
+    "sorted": [
+      0,
+      4,
+      5,
+      8,
+      9,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-li": {
+    "number": 49,
+    "zh": "革",
+    "en": "Revolution",
+    "shift": 11,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      8,
+      11,
+      1
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      8,
+      11,
+      1
+    ],
+    "sorted": [
+      0,
+      1,
+      3,
+      4,
+      8,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-dui": {
+    "number": 54,
+    "zh": "归妹",
+    "en": "Marrying Maiden",
+    "shift": 10,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      5,
+      10,
+      11
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      5,
+      10,
+      11
+    ],
+    "sorted": [
+      0,
+      2,
+      5,
+      9,
+      10,
+      11
+    ],
+    "signedShift": -2,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-li": {
+    "number": 55,
+    "zh": "丰",
+    "en": "Abundance",
+    "shift": 1,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      8,
+      1,
+      2
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      8,
+      1,
+      2
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-kan": {
+    "number": 59,
+    "zh": "涣",
+    "en": "Dispersion",
+    "shift": 1,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      5,
+      6,
+      10
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      5,
+      6,
+      10
+    ],
+    "sorted": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-dui": {
+    "number": 61,
+    "zh": "中孚",
+    "en": "Inner Truth",
+    "shift": 1,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      5,
+      6,
+      10
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      5,
+      6,
+      10
+    ],
+    "sorted": [
+      0,
+      2,
+      5,
+      6,
+      9,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-li": {
+    "number": 63,
+    "zh": "既济",
+    "en": "After Completion",
+    "shift": 0,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      7,
+      9,
+      11
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      7,
+      9,
+      11
+    ],
+    "sorted": [
+      0,
+      3,
+      4,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "li-kan": {
+    "number": 64,
+    "zh": "未济",
+    "en": "Before Completion",
+    "shift": 0,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      0,
+      3,
+      4
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      0,
+      3,
+      4
+    ],
+    "sorted": [
+      0,
+      3,
+      4,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "kun-kan": {
+    "number": 7,
+    "zh": "师",
+    "en": "The Army",
+    "shift": 0,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      0,
+      1,
+      2
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      0,
+      1,
+      2
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "kan-kun": {
+    "number": 8,
+    "zh": "比",
+    "en": "Holding Together",
+    "shift": 0,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      7,
+      9,
+      11
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      7,
+      9,
+      11
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "qian-dui": {
+    "number": 10,
+    "zh": "履",
+    "en": "Treading",
+    "shift": 1,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      1,
+      3,
+      5
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      1,
+      3,
+      5
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      9
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-qian": {
+    "number": 11,
+    "zh": "泰",
+    "en": "Peace",
+    "shift": 9,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      9,
+      10,
+      11
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      9,
+      10,
+      11
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      9,
+      10,
+      11
+    ],
+    "signedShift": -3,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "qian-kun": {
+    "number": 12,
+    "zh": "否",
+    "en": "Standstill",
+    "shift": 3,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      3,
+      5,
+      7
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-gen": {
+    "number": 15,
+    "zh": "谦",
+    "en": "Modesty",
+    "shift": 11,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      11,
+      0,
+      1
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      11,
+      0,
+      1
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-kun": {
+    "number": 16,
+    "zh": "豫",
+    "en": "Enthusiasm",
+    "shift": 10,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      5,
+      10,
+      11
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      11
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      11
+    ],
+    "signedShift": -2,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-xun": {
+    "number": 18,
+    "zh": "蛊",
+    "en": "Work on the Decayed",
+    "shift": 0,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      2,
+      3,
+      7
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      2,
+      3,
+      7
+    ],
+    "sorted": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "xun-kun": {
+    "number": 20,
+    "zh": "观",
+    "en": "Contemplation",
+    "shift": 0,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      4,
+      5,
+      9
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      9
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "gen-li": {
+    "number": 22,
+    "zh": "贲",
+    "en": "Grace",
+    "shift": 11,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      1,
+      2,
+      6
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      1,
+      2,
+      6
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-kun": {
+    "number": 23,
+    "zh": "剥",
+    "en": "Splitting Apart",
+    "shift": 1,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      3,
+      4,
+      8
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      8
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-zhen": {
+    "number": 24,
+    "zh": "复",
+    "en": "Return",
+    "shift": 2,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      2,
+      3,
+      4
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-zhen": {
+    "number": 27,
+    "zh": "颐",
+    "en": "Nourishment",
+    "shift": 1,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      3,
+      4,
+      8
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      3,
+      4,
+      8
+    ],
+    "sorted": [
+      0,
+      1,
+      3,
+      4,
+      7,
+      8
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "li-li": {
+    "number": 30,
+    "zh": "离",
+    "en": "The Clinging",
+    "shift": 2,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      2,
+      5,
+      6
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      2,
+      5,
+      6
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-xun": {
+    "number": 32,
+    "zh": "恒",
+    "en": "Duration",
+    "shift": 0,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      7,
+      0,
+      1
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      7,
+      0,
+      1
+    ],
+    "sorted": [
+      0,
+      1,
+      4,
+      5,
+      7,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "li-kun": {
+    "number": 35,
+    "zh": "晋",
+    "en": "Progress",
+    "shift": 3,
+    "lower": [
+      0,
+      1,
+      2
+    ],
+    "upper": [
+      3,
+      6,
+      7
+    ],
+    "pcs": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      7
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      7
+    ],
+    "signedShift": 3,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      0,
+      1,
+      2,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-li": {
+    "number": 36,
+    "zh": "明夷",
+    "en": "Darkening of the Light",
+    "shift": 9,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      9,
+      10,
+      11
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      9,
+      10,
+      11
+    ],
+    "sorted": [
+      0,
+      3,
+      4,
+      9,
+      10,
+      11
+    ],
+    "signedShift": -3,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-li": {
+    "number": 37,
+    "zh": "家人",
+    "en": "The Family",
+    "shift": 1,
+    "lower": [
+      0,
+      3,
+      4
+    ],
+    "upper": [
+      5,
+      6,
+      10
+    ],
+    "pcs": [
+      0,
+      3,
+      4,
+      5,
+      6,
+      10
+    ],
+    "sorted": [
+      0,
+      3,
+      4,
+      5,
+      6,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      0,
+      3,
+      4,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-zhen": {
+    "number": 42,
+    "zh": "益",
+    "en": "Increase",
+    "shift": 0,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      4,
+      5,
+      9
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      4,
+      5,
+      9
+    ],
+    "sorted": [
+      0,
+      1,
+      4,
+      5,
+      7,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "dui-qian": {
+    "number": 43,
+    "zh": "夬",
+    "en": "Breakthrough",
+    "shift": 1,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      10,
+      1,
+      3
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      10,
+      1,
+      3
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 4,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kun-xun": {
+    "number": 46,
+    "zh": "升",
+    "en": "Pushing Upward",
+    "shift": 0,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      0,
+      1,
+      2
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      0,
+      1,
+      2
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      0,
+      1,
+      2
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      0,
+      1,
+      2
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "li-xun": {
+    "number": 50,
+    "zh": "鼎",
+    "en": "The Cauldron",
+    "shift": 11,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      11,
+      2,
+      3
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      11,
+      2,
+      3
+    ],
+    "sorted": [
+      2,
+      3,
+      4,
+      5,
+      9,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "gen-gen": {
+    "number": 52,
+    "zh": "艮",
+    "en": "Keeping Still",
+    "shift": 2,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      4,
+      5,
+      9
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      4,
+      5,
+      9
+    ],
+    "sorted": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      9
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      2,
+      3,
+      7
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      2,
+      3,
+      7
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-gen": {
+    "number": 53,
+    "zh": "渐",
+    "en": "Development",
+    "shift": 0,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      4,
+      5,
+      9
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      4,
+      5,
+      9
+    ],
+    "sorted": [
+      2,
+      3,
+      4,
+      5,
+      7,
+      9
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "li-gen": {
+    "number": 56,
+    "zh": "旅",
+    "en": "The Wanderer",
+    "shift": 1,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      1,
+      4,
+      5
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      1,
+      4,
+      5
+    ],
+    "sorted": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      0,
+      3,
+      4
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      0,
+      3,
+      4
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "xun-xun": {
+    "number": 57,
+    "zh": "巽",
+    "en": "The Gentle",
+    "shift": 2,
+    "lower": [
+      4,
+      5,
+      9
+    ],
+    "upper": [
+      6,
+      7,
+      11
+    ],
+    "pcs": [
+      4,
+      5,
+      9,
+      6,
+      7,
+      11
+    ],
+    "sorted": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      4,
+      5,
+      9
+    ],
+    "raw": [
+      4,
+      5,
+      9,
+      4,
+      5,
+      9
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-dui": {
+    "number": 58,
+    "zh": "兑",
+    "en": "The Joyous",
+    "shift": 1,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      10,
+      1,
+      3
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      10,
+      1,
+      3
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      9,
+      10
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "dui-kan": {
+    "number": 60,
+    "zh": "节",
+    "en": "Limitation",
+    "shift": 1,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      10,
+      1,
+      3
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      10,
+      1,
+      3
+    ],
+    "sorted": [
+      1,
+      3,
+      7,
+      9,
+      10,
+      11
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      9,
+      0,
+      2
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      9,
+      0,
+      2
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-dui": {
+    "number": 60,
+    "zh": "节",
+    "en": "Limitation",
+    "shift": 11,
+    "lower": [
+      9,
+      0,
+      2
+    ],
+    "upper": [
+      6,
+      8,
+      10
+    ],
+    "pcs": [
+      9,
+      0,
+      2,
+      6,
+      8,
+      10
+    ],
+    "sorted": [
+      0,
+      2,
+      6,
+      8,
+      9,
+      10
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      9,
+      0,
+      2,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-gen": {
+    "number": 62,
+    "zh": "小过",
+    "en": "Small Exceeding",
+    "shift": 11,
+    "lower": [
+      2,
+      3,
+      7
+    ],
+    "upper": [
+      6,
+      11,
+      0
+    ],
+    "pcs": [
+      2,
+      3,
+      7,
+      6,
+      11,
+      0
+    ],
+    "sorted": [
+      0,
+      2,
+      3,
+      6,
+      7,
+      11
+    ],
+    "signedShift": -1,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      2,
+      3,
+      7,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 5,
+    "reason": "minimum-disjoint-shift"
+  },
+  "zhen-zhen": {
+    "number": 51,
+    "zh": "震",
+    "en": "The Arousing",
+    "shift": 2,
+    "lower": [
+      7,
+      0,
+      1
+    ],
+    "upper": [
+      9,
+      2,
+      3
+    ],
+    "pcs": [
+      7,
+      0,
+      1,
+      9,
+      2,
+      3
+    ],
+    "sorted": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      9
+    ],
+    "signedShift": 2,
+    "originalUpper": [
+      7,
+      0,
+      1
+    ],
+    "raw": [
+      7,
+      0,
+      1,
+      7,
+      0,
+      1
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  },
+  "kan-qian": {
+    "number": 5,
+    "zh": "需",
+    "en": "Waiting",
+    "shift": 0,
+    "lower": [
+      0,
+      2,
+      4
+    ],
+    "upper": [
+      7,
+      9,
+      11
+    ],
+    "pcs": [
+      0,
+      2,
+      4,
+      7,
+      9,
+      11
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      0,
+      2,
+      4,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "qian-kan": {
+    "number": 6,
+    "zh": "讼",
+    "en": "Conflict",
+    "shift": 0,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      0,
+      2,
+      4
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      0,
+      2,
+      4
+    ],
+    "sorted": [
+      0,
+      2,
+      4,
+      7,
+      9,
+      11
+    ],
+    "signedShift": 0,
+    "originalUpper": [
+      0,
+      2,
+      4
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      0,
+      2,
+      4
+    ],
+    "rawDistinct": 6,
+    "reason": "already-disjoint"
+  },
+  "kan-kan": {
+    "number": 29,
+    "zh": "坎",
+    "en": "The Abysmal",
+    "shift": 1,
+    "lower": [
+      7,
+      9,
+      11
+    ],
+    "upper": [
+      8,
+      10,
+      0
+    ],
+    "pcs": [
+      7,
+      9,
+      11,
+      8,
+      10,
+      0
+    ],
+    "sorted": [
+      0,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "signedShift": 1,
+    "originalUpper": [
+      7,
+      9,
+      11
+    ],
+    "raw": [
+      7,
+      9,
+      11,
+      7,
+      9,
+      11
+    ],
+    "rawDistinct": 3,
+    "reason": "minimum-disjoint-shift"
+  }
+}

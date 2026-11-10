@@ -1,29 +1,60 @@
-# 最小干预规则更新包 / Minimum-intervention rules v2
+# 易经作曲系统网站更新包
 
-张睿哲 Ruizhe Zhang · 21 October 2026
+本版以此前保存的最小干预规则网站源码为基础，界面更新日期为 2026 年 11 月 10 日。音乐规则沿用 2026 年 11 月 9 日整理的版本。
 
-## 上传网站 / Website replacement
-用 index.html 替换原 GitHub 仓库中的同名文件，完整保留原 assets 文件夹。未自动推送或部署。rules-preview.html 可单独预览规则页；主网站已内嵌规则及入门图，不需额外引用 rule-engine.js。主网站的作品资源仍依赖原 assets。
-Replace index.html and retain the original assets folder. No remote push or deployment has been performed. The main file embeds its rules and explanatory graphics. Portfolio media still require the existing assets folder.
+## 使用与上传
 
-## 规则优先级 / Rule priority
-1. 纯乾明确保留全音极点：CDE + F# G# A#，上卦 +6。此为艺术约束，不称为不受限制的最小移位。
-2. 其余卦：原始上下音核没有共同音级，就保留原样（T0）。例如需卦 CDE + GAB。
-3. 有重音才固定下卦，整体移动上卦，依次尝试 0,+1,-1,+2,-2,+3,-3,+4,-4,+5,-5,+6；取首个六音互异方案。保持三音核内部音程，等距时优先向上。纯坤自然得到 +3：CC#D + D#EF。
-4. 不同卦可以共享集合，不再以64集合互异为目标。音序、中心、节奏、技法、音色、织体及曲式也构成差异。
-5. 上卦整体移位、单声部动爻、变卦重新生成是三个操作。详细规则页默认关闭动爻；试听和 MIDI 使用页面最后一行的发声音高。动爻后重音可以作为声部汇合保留。
-6. 文化参照独立选择。中国、欧洲、日本、匈牙利式及希贾兹四音核等仅是有条件的创作参照；不把一个十二平均律音阶当成完整 raga 或 maqam，不把唐代雅乐、敦煌、宋代曲调混称一个古调式。历史对应须注明具体谱本、转译及律制。
+1. 解压后打开 index.html。首页、图解与七阶段规则可以直接阅读。
+2. 将 index.html、laboratory.html、fortune.html、全部 CSS 和 JS 文件以及 assets 文件夹一并上传到原 GitHub 仓库根目录。
+3. 保持文件名大小写和目录结构，等待原有 Vercel 项目部署成功后访问网站。
 
-English summary: preserve the whole-tone Qian pole as an explicit +6 exception; otherwise retain disjoint nuclei and shift only overlapping upper cells by the smallest circular semitone distance, with upward tie-breaking. Kun uses the ordinary +3 minimum. Different hexagrams may share collections. Upper transposition, one-node slides and changed-hexagram regeneration remain separate. Cultural references do not establish historical derivation.
+ZIP 需要先解压，再上传里面的文件。完整目录共 23 个文件，包含两部作品的音频与乐谱。
 
-## Word 文件 / Word documents
-修订标注版包含原有批注、本次中文批注和真实 Word 增删修订。Word 中选择“审阅 → 所有标记”查看；选择“无标记”可看最终文本。阅读版是接受同一组修订后的整洁副本。原主体样式、页面设置与旧图保留，需卦图更新，并在摘要后、背景前加入两张中英文图。新增说明不代表已完成实证验证。
-The marked copy has native Word insertions/deletions plus Chinese comments. Review > All Markup displays the edits. The reading copy accepts the same edits. Existing formatting and page setup are retained; the Xu example is updated and two bilingual introductory figures are placed before the background. Proposed evaluation is not presented as completed evidence.
+## 本次更新
 
-## 建议的研究记录 / Research documentation
-每次保存规则版本、原始音列、移位理由、手动覆盖、动爻、发声音高、文化来源及排练反馈。用原始拼合、推荐最小干预、自由改配作对照；评价动机保持、听觉连续性、可演奏性和文化解释，而非只数音高。
-Save rule versions, raw cells, shift reasons, overrides, slide settings, sounding pitches, cultural sources and rehearsal feedback. Compare raw, recommended and freely remapped studies. Assess motivic identity, continuity, performability and cultural interpretation, not just pitch counts.
+- 新增研究首页、可点击的易经生成图解、七阶段规则面板及原始研究图放大与下载。
+- 太极、两仪、四象、八卦与六十四卦按新的开放规则修订，中英文共用同一份研究内容。
+- 加入低速轨道动画、阶段切换、可选循环演示及起卦六爻成形动画。动态开关与系统减少动态设置均可停止动画。
+- 《太初》《九域天籁》的作者提供乐谱、音频及预览随包提供，采用站内相对路径。
+- 保留原有六十四卦最小干预计算、试听、MIDI、文化调式、个人卦象、AI 网关设置及委托需求单入口。
+- 补齐命格作曲的八卦下拉菜单、六个爻位及六十四卦表格英文。英文表格显示卦序与英文名称，中文与英文切换保留当前音乐设置。
+- 首页与两个创作板块新增需、乾、坤三个试听入口，比较原始双三音核、合成核心和当前发声。需保留 T0，纯乾使用 T+6，纯坤使用 T+3。命格作曲继续应用其默认单音动爻滑动，作曲实验室可关闭滑动。
+- 新增创作实验记录，保存当前音乐参数、研究阶段、材料出处、自由改配理由与反思。支持恢复、JSON 导入与导出，以及打印研究记录页或通过浏览器另存 PDF。
+- 细化入门卡片、分阶段试听、音高提示、研究记录表单与六十四卦表格的视觉层次。窄屏表格横向滚动，动态服从现有开关与系统偏好。
+- 修正命格作曲非 C 主音下 MIDI 导出与试听的八度一致性。
 
-## 核对范围 / Verification
-64 个默认方案及 63 个普通最小移位规则已通过检查；无重音的组合均保持T0；纯乾极点例外单独检查。DOM 执行检查覆盖中英切换、自由移位、恢复推荐、动爻关闭／开启、非C主音下试听与MIDI一致性及命格板块同源数据。Word修订、批注、图像、样式和页面设置结构核对通过；图像已目视核对。当前环境无法进行浏览器视觉验收，且缺少LibreOffice，Word分页未渲染核对。请正式上传或提交前在浏览器和Word中打开检查。
-Data and DOM tests passed. Native Word revisions/comments, matching accepted content, figures, styles and page setup checked. Graphics visually inspected. Browser visual rendering and Word pagination remain unverified in this environment.
+## 实验记录
+
+记录保存在当前浏览器与当前网站地址的本地存储中。换浏览器、清除网站数据、从本地预览切换至线上域名时，需要先导出 JSON，再在目标地址导入。
+
+每次保存生成一条新记录。导入同一 JSON 时生成新的本地编号，便于保留之前的实验。作曲实验室与命格作曲的参数范围不同，请在记录原来的板块导入。
+
+记录包含音乐参数与主动填写的研究笔记。已载入的音色采样需要恢复后重新选择。名称、生日、个人提问及 AI 网关设置属于原命格表单，新的实验记录不自动采集这些字段。
+
+“打印 / 保存 PDF”打开英文或中文研究记录页，再使用浏览器打印功能。浏览器阻止弹出页时，会下载一份可打开并打印的 HTML 记录。
+
+## 内容与连接
+
+默认三音核及七阶段音乐框架由张睿哲提出。文化素材、自由改配及回顾性作品分析分别说明。
+
+命格模块采用原有姓名与出生信息映射。起卦动画展示该映射的生成过程。
+
+AI 解读与 Suno 代理沿用可配置的服务端网关入口。实际调用需配置可用网关，页面中的 Suno 链接可直接打开服务网站。专业人士联系页由使用者填写公开 HTTPS 地址。
+
+本更新包为网站源码与资源交付，线上版本以原仓库的实际部署结果为准。
+
+## English
+
+Upload the complete contents of this folder to the root of the existing GitHub repository. Keep assets and filenames intact. This buildless site contains a research overview, composition laboratory and Fortune-telling Composition module.
+
+Shared bilingual research content is stored in research-content.js. The earlier minimum-intervention engine is retained. AI gateway and practitioner-contact settings remain configurable. Local assets include the composer-supplied recordings, scores and research diagrams. This package supplies source files for the existing hosting workflow.
+
+The modal controls and all 64 matrix entries in Fortune-telling Composition now switch between Chinese and English. The three listening presets compare source nuclei, the combined core and the sounding result. A composition notebook saves musical settings and research notes, restores experiments within their original module, imports and exports JSON, and creates a printable record page.
+
+Records are local to the current browser and site origin. Export JSON before transferring to another browser or domain. Each save and import receives a fresh ID. Instrument samples must be loaded again after restoring a record. The notebook automatically records musical settings and the notes entered in its own fields. Personal casting inputs and gateway settings remain in their existing forms.
+
+## 检查范围
+
+六十四组默认数据、63 组普通最小移位、12 组无需移位的组合、需卦 T0、纯乾与纯坤极点、自由移位恢复、非 C 主音下两个模块的试听与 MIDI 一致性、中英文七阶段规则、英文委托单及本地资源路径均已检查。新增检查覆盖尚未起卦时的完整英文选项与表格、三个示例及三个试听阶段、参数与笔记恢复、JSON 往返、无效导入、存储失败提示及记录文字转义。浏览器预览进程在当前环境启动失败，尚未完成真实浏览器的视觉验收。
+
+Data and DOM checks cover all 64 default profiles, 63 ordinary minimal shifts, 12 disjoint pairs retained at T0, the Qian and Kun poles, free override/reset, audio–MIDI consistency at non-C tonics in both modules, bilingual stage content, the English commission brief and local asset paths. New checks cover English controls and the complete matrix before casting, all presets and playback phases, settings and notes restoration, JSON roundtrips, invalid imports, storage failures and escaped record text. A visual browser review remains outstanding because the local preview process could not start successfully.

@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="An I Ching trichord and modal synthesis laboratory for practice-led contemporary composition research.">
+
+  <title>易经调式合成实验室 | I Ching Modal Synthesis Lab</title>
+
+  <link rel="stylesheet" href="site.css"><style>
+
+    :root { --ink:#10201f; --ink-2:#172c29; --paper:#f4f0e5; --paper-2:#e7e0ce; --gold:#be8c36; --gold-light:#f1cf7e; --jade:#6ea99c; --jade-dark:#2b665e; --red:#c85c4a; --line:rgba(244,240,229,.16); --muted:#aebbb3; }
+
+    * { box-sizing:border-box; }
+
+    html { scroll-behavior:smooth; }
+
+    body { margin:0; min-width:320px; background:var(--ink); color:var(--paper); font-family:"Noto Serif SC", "Songti SC", Georgia, serif; line-height:1.55; }
+
+    body:before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.26; background-image:radial-gradient(circle at 15% 5%, rgba(190,140,54,.22), transparent 31rem), radial-gradient(circle at 88% 19%, rgba(110,169,156,.15), transparent 28rem), linear-gradient(100deg, transparent 49.8%, rgba(244,240,229,.035) 50%, transparent 50.2%); }
+
+    button, select { font:inherit; }
+
+    button { cursor:pointer; }
+
+    button:focus-visible, select:focus-visible { outline:2px solid var(--gold-light); outline-offset:3px; }
+
+    .shell { width:min(1240px, calc(100% - 32px)); margin:auto; position:relative; }
+
+    .eyebrow { color:var(--gold-light); font:600 .72rem/1.1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:.16em; text-transform:uppercase; }
+
+    header { padding:24px 0 20px; display:flex; gap:24px; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+
+    .brand { display:flex; gap:13px; align-items:center; min-width:0; }
+
+    .seal { width:43px; height:43px; display:grid; place-items:center; flex:0 0 auto; border-radius:50%; color:var(--ink); background:var(--gold-light); box-shadow:0 0 0 5px rgba(241,207,126,.12); font-size:26px; }
+
+    h1,h2,h3,p { margin:0; }
+
+    h1 { font-size:clamp(1.1rem, 2vw, 1.48rem); letter-spacing:.045em; font-weight:700; }
+
+    .brand p { color:var(--muted); font-size:.78rem; margin-top:2px; }
+
+    .header-actions { display:flex; align-items:center; gap:10px; }
+
+    .thin-button, .button { border:1px solid var(--line); color:var(--paper); background:rgba(244,240,229,.04); border-radius:7px; transition:.18s ease; }
+
+    .thin-button { padding:8px 11px; font-size:.78rem; }
+
+    .thin-button:hover { border-color:var(--gold); color:var(--gold-light); }
+
+    .button { padding:10px 13px; font-weight:700; font-size:.83rem; }
+
+    .button:hover { transform:translateY(-1px); border-color:var(--gold); background:rgba(190,140,54,.14); }
+
+    .button.primary { background:var(--gold); color:#1d1b15; border-color:var(--gold); }
+
+    .button.primary:hover { background:var(--gold-light); }
+
+    main { padding:34px 0 58px; }
+
+    .hero { display:grid; grid-template-columns:minmax(0, 1.35fr) minmax(260px, .65fr); gap:26px; align-items:stretch; margin-bottom:28px; }
+
+    .hero-copy { padding:30px 0 20px; }
+
+    .hero h2 { max-width:820px; margin:9px 0 13px; font-size:clamp(2rem, 4vw, 3.65rem); letter-spacing:-.04em; line-height:1.13; }
+
+    .hero h2 span { color:var(--gold-light); }
+
+    .hero p { color:#cad3ce; max-width:760px; font-size:1rem; }
+
+    .hero-meta { margin-top:22px; display:flex; flex-wrap:wrap; gap:8px; }
+
+    .chip { border:1px solid var(--line); border-radius:999px; padding:5px 9px; color:var(--muted); background:rgba(255,255,255,.025); font-size:.73rem; }
+
+    .aim-card { padding:22px; border:1px solid rgba(241,207,126,.35); background:linear-gradient(145deg, rgba(190,140,54,.13), rgba(23,44,41,.85)); border-radius:14px; display:flex; flex-direction:column; justify-content:space-between; }
+
+    .aim-card h3 { color:var(--gold-light); font-size:.93rem; letter-spacing:.04em; }
+
+    .aim-card p { margin:9px 0 18px; color:#d7d0bf; font-size:.86rem; }
+
+    .aim-card .micro { color:var(--muted); font: .69rem/1.6 ui-monospace, monospace; letter-spacing:.05em; }
+
+    .research-note { border-left:2px solid var(--jade); padding-left:12px; color:#b8cbc5; font-size:.78rem; }
+
+    .workspace { display:grid; grid-template-columns:330px minmax(0,1fr); gap:20px; align-items:start; }
+
+    .panel { background:rgba(23,44,41,.75); border:1px solid var(--line); border-radius:13px; overflow:hidden; box-shadow:0 18px 45px rgba(0,0,0,.15); }
+
+    .panel-head { padding:16px 18px 14px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+
+    .panel-head h3 { font-size:.98rem; letter-spacing:.035em; }
+
+    .panel-head p { color:var(--muted); font-size:.73rem; margin-top:2px; }
+
+    .controls { padding:16px 18px 18px; display:grid; gap:15px; }
+
+    label { color:#cbd5d0; font-size:.78rem; font-weight:700; display:block; margin-bottom:5px; }
+
+    select { width:100%; color:var(--paper); background:#0d1b1a; border:1px solid rgba(244,240,229,.19); border-radius:7px; padding:10px; font-size:.85rem; }
+
+    .field-note { margin-top:5px; color:var(--muted); font-size:.69rem; }
+
+    .separator { height:1px; background:var(--line); margin:1px 0; }
+
+    .motion-row { display:grid; grid-template-columns:repeat(6,1fr); gap:5px; }
+
+    .motion { min-height:38px; color:#cdd8d3; background:#10201f; border:1px solid var(--line); border-radius:6px; font-size:.75rem; }
+
+    .motion small { display:block; color:var(--muted); font-size:.59rem; margin-top:1px; }
+
+    .motion.active { color:#1c1b15; border-color:var(--gold-light); background:var(--gold-light); }
+
+    .motion.active small { color:#4e4229; }
+
+    .action-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:2px; }
+
+    .output { display:grid; gap:20px; }
+
+    .result-card { padding:21px; }
+
+    .result-top { display:grid; grid-template-columns:150px minmax(0,1fr); gap:22px; align-items:center; }
+
+    .hex-frame { min-height:166px; display:grid; place-items:center; position:relative; border-radius:11px; background:linear-gradient(155deg, rgba(190,140,54,.12), rgba(110,169,156,.06)); border:1px solid rgba(241,207,126,.22); }
+
+    .hex-num { position:absolute; top:10px; left:12px; color:var(--gold-light); font:700 .68rem ui-monospace, monospace; letter-spacing:.1em; }
+
+    .hexagram { width:88px; display:grid; gap:6px; grid-template-rows:repeat(6, 10px); }
+
+    .yao { border-radius:99px; position:relative; background:var(--gold-light); box-shadow:0 0 10px rgba(241,207,126,.2); }
+
+    .yao.yin { background:linear-gradient(90deg, var(--gold-light) 0 41%, transparent 41% 59%, var(--gold-light) 59%); }
+
+    .yao.moving { background:var(--red); box-shadow:0 0 0 2px rgba(200,92,74,.23), 0 0 18px rgba(200,92,74,.75); }
+
+    .yao.yin.moving { background:linear-gradient(90deg, var(--red) 0 41%, transparent 41% 59%, var(--red) 59%); }
+
+    .result-identity h2 { font-size:clamp(1.4rem, 3vw, 2.1rem); line-height:1.13; }
+
+    .result-identity h2 span { color:var(--gold-light); }
+
+    .result-identity p { margin-top:7px; color:#c2cec8; font-size:.85rem; }
+
+    .pairing { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+
+    .pairing span { font-size:.72rem; color:#ced6d2; border-left:2px solid var(--jade); padding-left:7px; }
+
+    .mode-readout { margin-top:19px; padding-top:15px; border-top:1px solid var(--line); display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; }
+
+    .mode-readout strong { display:block; color:var(--gold-light); font:700 1.07rem/1.25 ui-monospace, "Cascadia Mono", monospace; letter-spacing:.015em; overflow-wrap:anywhere; }
+
+    .mode-readout small { color:var(--muted); font-size:.7rem; }
+
+    .mutation-readout { color:#f1b8ab; font-size:.77rem; text-align:right; max-width:230px; }
+
+    .voice-steps { padding:0 21px 20px; display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:8px; }
+
+    .voice { min-height:78px; padding:9px 7px; border:1px solid var(--line); border-radius:8px; background:rgba(13,27,26,.7); text-align:center; }
+
+    .voice .line-no { color:var(--muted); font:.6rem ui-monospace, monospace; }
+
+    .voice .note { display:block; color:var(--gold-light); font:700 1.1rem ui-monospace, monospace; margin:4px 0 1px; }
+
+    .voice .owner { color:#a9c8c0; font-size:.62rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .voice.changed { border-color:var(--red); background:rgba(200,92,74,.13); }
+
+    .method-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+
+    .method { min-height:150px; padding:16px; border:1px solid var(--line); border-radius:11px; background:rgba(23,44,41,.66); }
+
+    .method .index { color:var(--gold-light); font:700 .69rem ui-monospace,monospace; letter-spacing:.11em; }
+
+    .method h3 { margin:6px 0 6px; font-size:.94rem; }
+
+    .method p { color:#bac6c0; font-size:.77rem; }
+
+    .matrix-panel { margin-top:20px; }
+
+    .matrix-wrap { overflow:auto; padding:17px; }
+
+    .matrix { width:100%; min-width:720px; border-collapse:collapse; font-size:.72rem; }
+
+    .matrix th { color:var(--gold-light); font-weight:600; background:#10201f; position:sticky; top:0; z-index:1; }
+
+    .matrix th:first-child { text-align:left; }
+
+    .matrix th, .matrix td { border:1px solid var(--line); padding:7px 5px; text-align:center; }
+
+    .matrix button { width:100%; min-width:71px; min-height:61px; border:0; color:#c7d3cd; background:transparent; border-radius:4px; line-height:1.15; transition:.15s; }
+
+    .matrix button:hover { color:var(--gold-light); background:rgba(190,140,54,.13); }
+
+    .matrix button.selected { color:#1d201d; background:var(--gold-light); font-weight:700; box-shadow:0 0 0 2px rgba(241,207,126,.24); }
+
+    .matrix .mini { display:block; color:var(--jade); font-size:.72rem; margin-bottom:2px; }
+
+    .matrix button.selected .mini { color:#5a4825; }
+
+    .scoring { margin-top:20px; display:grid; grid-template-columns:1.18fr .82fr; gap:20px; }
+
+    .score-body { padding:19px; }
+
+    .score-map { display:grid; gap:10px; }
+
+    .part-row { display:grid; grid-template-columns:106px 1fr; gap:10px; align-items:stretch; }
+
+    .part-label { color:#d7e2dd; padding:10px; font-size:.73rem; background:rgba(110,169,156,.12); border-left:2px solid var(--jade); }
+
+    .part-content { padding:10px; color:#bac8c2; font-size:.77rem; background:rgba(13,27,26,.6); }
+
+    .protocol { padding:19px; color:#bfcbc5; font-size:.79rem; }
+
+    .protocol ol { margin:0; padding-left:20px; display:grid; gap:10px; }
+
+    .protocol strong { color:var(--gold-light); }
+
+    footer { border-top:1px solid var(--line); padding:18px 0 28px; color:#8ea09a; font-size:.72rem; display:flex; justify-content:space-between; gap:18px; }
+
+    .toast { position:fixed; z-index:10; left:50%; bottom:20px; transform:translate(-50%, 130px); opacity:0; border:1px solid rgba(241,207,126,.5); background:#182d29; color:var(--paper); border-radius:9px; padding:10px 13px; font-size:.78rem; box-shadow:0 12px 34px rgba(0,0,0,.35); transition:.25s; }
+
+    .toast.show { transform:translate(-50%,0); opacity:1; }
+
+    @media (max-width:950px) { .workspace { grid-template-columns:1fr; } .controls { grid-template-columns:repeat(2,1fr); align-items:end; } .controls .wide { grid-column:1/-1; } }
+
+    @media (max-width:700px) { .shell { width:min(100% - 22px, 1240px); } header { padding-top:16px; align-items:flex-start; } .brand p { display:none; } .hero, .scoring { grid-template-columns:1fr; } .hero-copy { padding-top:15px; } .result-top { grid-template-columns:112px minmax(0,1fr); gap:14px; } .hex-frame { min-height:140px; } .hexagram { width:70px; gap:5px; grid-template-rows:repeat(6,8px); } .mode-readout { grid-template-columns:1fr; gap:7px; } .mutation-readout { text-align:left; } .voice-steps { grid-template-columns:repeat(3,1fr); padding:0 15px 15px; } .result-card { padding:15px; } .method-grid { grid-template-columns:1fr; } .controls { grid-template-columns:1fr; } .controls .wide { grid-column:auto; } footer { display:block; } footer p + p { margin-top:5px; } }
+
+  </style>
+
+<style>.research-section{margin:0 0 24px;padding:22px;background:rgba(23,44,41,.8);border:1px solid rgba(244,240,229,.18);border-radius:13px}.research-section h2{font-size:1.5rem;color:#f1cf7e;margin:4px 0 12px}.research-section h3{font-size:1rem;color:#f1cf7e;margin:8px 0}.research-section p{color:#c7d4cd;font-size:.86rem;margin:10px 0}.research-section a{color:#f1cf7e}.research-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.research-cell{padding:14px;background:rgba(13,27,26,.7);border-radius:8px;border:1px solid #ffffff18}.case-layout{display:grid;grid-template-columns:180px minmax(0,1fr);gap:20px;align-items:start}.case-layout img{width:100%;border-radius:5px}.case-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.score-preview{display:block;max-width:100%;max-height:650px;margin:14px auto;border-radius:8px}.author-watermark{position:fixed;bottom:9px;right:16px;z-index:8;pointer-events:none;user-select:none;font:600 clamp(11px,1.6vw,17px)/1.4 Georgia,serif;letter-spacing:.06em;color:rgba(241,207,126,.33);text-shadow:0 1px 4px #000}.research-section details{padding:12px;border-top:1px solid #ffffff22}.research-section summary{cursor:pointer;color:#f1cf7e}.research-section audio{width:100%;margin:9px 0}.research-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.research-cards span{padding:9px;background:#10201f;font-size:.78rem;color:#c7d4cd;border-left:2px solid #6ea99c}.atlas-source{min-width:190px;font-size:.69rem;line-height:1.55;text-align:left!important}.atlas-source a{color:#f1cf7e}@media(max-width:700px){.case-layout,.research-grid{grid-template-columns:1fr}.case-layout img{max-width:150px}.research-cards{grid-template-columns:1fr 1fr}}</style><link rel="stylesheet" href="child-upgrade.css"><link rel="stylesheet" href="experiments.css"></head>
+
+<body data-application="laboratory">
+
+  <div class="shell">
+
+    <header>
+
+      <div class="brand">
+
+        <div class="seal" aria-hidden="true">☯</div>
+
+        <div>
+
+          <h1 data-i18n="brand">易经调式合成实验室</h1>
+
+          <p data-i18n="tagline">I CHING TRICHORD &amp; MODAL SYNTHESIS LAB</p>
+
+        </div>
+
+      </div>
+
+      <div class="header-actions">
+
+        <button class="thin-button" id="langButton" type="button" aria-label="Switch language">EN</button>
+
+        <button class="thin-button" type="button" onclick="document.getElementById('matrix').scrollIntoView({behavior:'smooth'})" data-i18n="matrixJump">64 调式矩阵</button>
+
+      </div>
+
+    </header>
+
+
+
+    <main>
+
+      <section id="yijingIntro" class="compact-intro" data-research-ui=""><p data-copy-zh="阅读生成图解与七阶段规则，或直接在下方选择上下卦开始实验。" data-copy-en="Read the generative diagram and seven-stage rules, or begin by selecting two trigrams below.">阅读生成图解与七阶段规则，或直接在下方选择上下卦开始实验。</p><button type="button" class="thin-button" data-parent-section="understanding" data-copy-zh="阅读易经图解 ↗" data-copy-en="Read the I Ching diagram ↗">阅读易经图解 ↗</button></section><section class="hero" aria-labelledby="hero-title">
+
+        <div class="hero-copy">
+
+          <p class="eyebrow" data-i18n="eyebrow">Practice-led composition prototype</p>
+
+          <h2 id="hero-title" data-i18n-html="heroTitle">把 <span>三爻</span> 变成三音列，<br>让 <span>六爻</span> 生长为调式与声部进行。</h2>
+
+          <p data-i18n="heroText">这是一个面向作品集创作的规则原型：下卦给出室内乐基础三音列，上卦给出独奏声部三音列；两者耦合成为六音列或可扩展调式。动爻不被当作命运判断，而被转译为可听见、可标注的横向声部滑动。</p>
+
+          <div class="hero-meta">
+
+            <span class="chip" data-i18n="chip1">微观：阴阳 → 音程 / 发音</span>
+
+            <span class="chip" data-i18n="chip2">中观：八卦 → 三音列</span>
+
+            <span class="chip" data-i18n="chip3">宏观：重卦 → 调式世界</span>
+
+          </div>
+
+        </div>
+
+        <aside class="aim-card">
+
+          <div>
+
+            <h3 data-i18n="aimTitle">研究锚点 / Research anchor</h3>
+
+            <p data-i18n="aimText">以《无极 Primal Chaos》及 2–3 首微型习作为检验场：以琵琶或可替代的世界乐器 / 电子声部，与西方室内乐团构成可排练、可迭代的作曲循环。</p>
+
+          </div>
+
+          <div>
+
+            <p class="micro">WUJI → TAI CHI → LIANG YI → SI XIANG → BA GUA → 64 HEXAGRAMS → WUJI</p>
+
+            <p class="research-note" data-i18n="researchNote">界面提供的是作曲决策与试听草图，不把文化象征压缩为固定的“正确音阶”。每次输出都应在乐器、语境与排练中继续校正。</p>
+
+          </div>
+
+        </aside>
+
+      </section>
+
+
+
+      <section class="panel" style="padding:20px;margin-bottom:20px"><details><summary data-copy-zh="易经入门与七阶段循环" data-copy-en="Reading the I Ching and the seven-stage cycle">易经入门与七阶段循环</summary><img style="display:block;width:100%;max-width:900px;height:auto;margin:20px auto" alt="Reading the I Ching" src="assets/reading-iching.png" loading="lazy"><img style="display:block;width:100%;max-width:900px;height:auto;margin:20px auto" alt="The seven-stage compositional cycle" src="assets/seven-stage-cycle.png" loading="lazy"></details></section><section class="workspace" aria-label="Composition workbench">
+
+        <aside class="panel">
+
+          <div class="panel-head"><div><h3 data-i18n="controlTitle">作曲参数</h3><p data-i18n="controlSub">选择上下卦、主音、动爻与编制</p></div><span class="eyebrow">01 / INPUT</span></div>
+
+          <div class="controls">
+
+            <div><label for="lower" data-i18n="lowerLabel">下卦 / 室内乐基础</label><select id="lower"></select><p class="field-note" id="lowerNote"></p></div>
+
+            <div><label for="upper" data-i18n="upperLabel">上卦 / 独奏声部</label><select id="upper"></select><p class="field-note" id="upperNote"></p></div>
+
+            <div><label for="tonic" data-i18n="tonicLabel">主音 / Tonic</label><select id="tonic"></select><p class="field-note" data-i18n="tonicNote">相对音列据此移调</p></div>
+
+            <div><label for="solo" data-i18n="soloLabel">独奏声部</label><select id="solo"><option value="pipa">琵琶 / Pipa</option><option value="guzheng">古筝 / Guzheng</option><option value="erhu">二胡 / Erhu</option><option value="guitar">古典吉他 / Classical guitar</option><option value="electro">电子声部 / Electroacoustic</option></select></div>
+
+            <div class="wide"><label data-i18n="motionLabel">动爻 / Moving line</label><div class="motion-row" id="motionRow"></div><p class="field-note" data-i18n="motionNote">选择一个动爻。演奏版本只滑动对应声部节点，避免把变卦机械化为全体音高替换。</p></div>
+
+            <div><label for="motionSize" data-i18n="slideLabel">滑动幅度</label><select id="motionSize"><option value="0" data-copy-zh="关闭动爻滑动" data-copy-en="No moving-line slide">关闭动爻滑动</option><option value="1">半音 / semitone</option><option value="2">全音 / whole tone</option></select></div>
+
+            <div><label for="ensemble" data-i18n="ensembleLabel">室内乐团</label><select id="ensemble"><option value="strings">弦乐四重奏 / String quartet</option><option value="mixed">混合室内乐 / Mixed ensemble</option><option value="winds" data-copy-zh="木管与打击乐" data-copy-en="Winds and percussion">木管与打击乐</option><option value="orchestra">交响乐团 / Symphony orchestra</option><option value="hybrid">声学与电子结合 / Acoustic + electronics</option><option value="electronics">电子织体 / Electronics</option></select></div>
+
+            <div class="wide action-row"><button class="button primary" id="listenButton" type="button" data-i18n="listen">试听六音列</button><button class="button" id="midiButton" type="button" data-i18n="midi">导出草图 MIDI</button></div>
+
+          </div>
+
+        </aside>
+
+
+
+        <div class="output">
+
+          <section class="panel" aria-live="polite">
+
+            <div class="panel-head"><div><h3 data-i18n="resultTitle">当前复合调式</h3><p data-i18n="resultSub">三音列 + 三音列 = 可配器的六声核心</p></div><span class="eyebrow">02 / SYNTHESIS</span></div>
+
+            <div class="result-card">
+
+              <div class="result-top">
+
+                <div class="hex-frame"><span class="hex-num" id="hexNumber">#05</span><div class="hexagram" id="hexagram" aria-label="hexagram diagram"></div></div>
+
+                <div class="result-identity"><h2 id="hexName"></h2><p id="hexGloss"></p><div class="pairing"><span id="upperPill"></span><span id="lowerPill"></span><span id="instrumentPill"></span></div></div>
+
+              </div>
+
+              <div class="mode-readout"><div><small data-i18n="pitchSet">音高集合 / Pitch material</small><strong id="pitchSet"></strong><small id="modeCaption"></small></div><div class="mutation-readout" id="mutationText"></div></div>
+
+            </div>
+
+            <div id="sourceTrace" style="padding:0 21px 20px;display:grid;gap:12px;overflow-wrap:anywhere"></div><div class="voice-steps" id="voiceSteps"></div>
+
+          </section>
+
+          <section class="method-grid" aria-label="rules">
+
+            <article class="method"><p class="index">RULE 01 / MICRO</p><h3 data-i18n="r1Title">阴阳到音程与发音</h3><p data-i18n="r1Text">阳爻倾向全音、纯四 / 五度与连音、保持；阴爻倾向半音、小二度 / 增四度、断奏、泛音、气鸣或拨弦摩擦。</p></article>
+
+            <article class="method"><p class="index">RULE 02 / MESO</p><h3 data-i18n="r2Title">八卦到三音列核心</h3><p data-i18n="r2Text">三爻由下而上对应三音列的时间 / 声部顺序。它是具有文化音响取向的细胞，不是静态和弦标签。</p></article>
+
+            <article class="method"><p class="index">RULE 03 / MACRO</p><h3 data-i18n="r3Title">重卦到调式与循环</h3><p data-i18n="r3Text">下卦与上卦耦合生成六音列，并可依作品情境扩展为七声调式；在卦序循环中形成从坤的密集到乾的开阔、再返无极的宏观呼吸。</p></article>
+
+          </section>
+
+        </div>
+
+      </section>
+
+
+
+      <section class="panel matrix-panel" id="matrix">
+
+        <div class="panel-head"><div><h3 data-i18n="matrixTitle">六十四卦调式矩阵</h3><p data-i18n="matrixSub">点击任意单元格，作为新的上下卦作曲起点</p></div><span class="eyebrow">03 / 8 × 8</span></div>
+
+        <div class="matrix-wrap"><table class="matrix" aria-label="64 hexagram compositional matrix"><thead id="matrixHead"></thead><tbody id="matrixBody"></tbody></table></div>
+
+      </section>
+
+
+
+      <section class="panel" style="margin-top:20px"><div class="panel-head"><div><h3 data-copy-zh="文化调式与自由组合" data-copy-en="Cultural modes and free combination">文化调式与自由组合</h3><p>64 个卦象档案 · 双调式 · 泛调性 · 可导入乐器录音</p></div></div><div style="padding:18px;display:grid;gap:12px"><label>组织方式<select id="organisation"><option value="core">互补双三音列（动爻后）</option><option value="expanded">互补音场（动爻前）</option><option value="poly">多调式：上下声部各自调式</option><option value="pan">泛调性：多中心自由交织</option></select></label><label>上声部移调（半音）<select id="layerShift"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select></label><label>乐器音色<select id="realInstrument"><option value="guzheng">古筝 · 合成拨弦</option><option value="pipa">琵琶 · 合成拨弦</option><option value="erhu">二胡 · 合成拉弦</option><option value="dizi">笛子 · 合成吹管</option></select></label><div style="display:flex;gap:10px"><button class="button primary" id="playStudy">试听调式研究草图</button><button class="button" id="stopStudy">停止</button></div><label>真实音色：导入本地单音采样<input type="file" id="sampleFile" accept="audio/*"></label><label>采样原音 MIDI（C4 = 60）<input data-sample-root type="number" min="0" max="127" value="60" style="padding:8px;width:100%"></label><p id="sampleStatus" style="font-size:.75rem;color:#b8cbc5">默认使用合成模型；上传清晰、无伴奏的单音录音后，按原音移调播放。单个样本大幅移调会改变音色。</p><p id="expandedNotes" style="color:#f1cf7e"></p></div></section><section class="scoring">
+
+        <section class="panel"><div class="panel-head"><div><h3 data-i18n="scoreTitle">配器草图</h3><p data-i18n="scoreSub">把上下卦空间化，而非只把它们叠成和弦</p></div><span class="eyebrow">04 / SCORE</span></div><div class="score-body"><div class="score-map" id="scoreMap"></div></div></section>
+
+        <aside class="panel"><div class="panel-head"><div><h3 data-i18n="protocolTitle">排练与研究记录</h3><p data-i18n="protocolSub">把系统输出回到实践中验证</p></div><span class="eyebrow">LOG</span></div><div class="protocol"><ol><li data-i18n-html="p1"><strong>记录参数：</strong>保存当前卦、主音、动爻、速度与编制。</li><li data-i18n-html="p2"><strong>写 30–60 秒草图：</strong>让下卦维持 / 变形，让上卦成为独奏的时间性材料。</li><li data-i18n-html="p3"><strong>听辨滑动：</strong>确认动爻产生的是可感知的横向变化，而非抽象规则展示。</li><li data-i18n-html="p4"><strong>反思并修订：</strong>记录文化联想、演奏可行性和音响结果，再回写规则库。</li></ol></div></aside>
+
+      </section>
+
+    <section class="research-section" id="sevenStageCycle"><p class="eyebrow">WUJI → TAIJI → LIANGYI → SIXIANG → BAGUA → 64 HEXAGRAMS → WUJI</p><h2>七阶段生成与回归循环</h2><p>单首作品与整个作品集均可使用；适用于声学、电子与混合媒介。</p><p>六个演化阶段，加上第七个“归无极”闭环位置。六十四卦是第六阶段，不能替代整个七阶段体系。</p><div class="research-grid"><div class="research-cell"><h3>单首作品的曲式结构</h3><p>在同一首作品中，将七阶段作为段落、乐章或贯穿发展的结构功能。各阶段时长由音乐需要决定；不要求平均分配。</p></div><div class="research-cell"><h3>作品集的大循环</h3><p>让不同作品或组曲承担不同阶段，连成无极到归无极的大循环。《太初》作为无极阶段的开端与锚定案例；其他阶段可由后续作品展开。</p></div><div class="research-cell"><h3>媒介与编制开放</h3><p>室内乐、交响乐、纯电子音乐、声学乐器与电子音乐结合，以及世界乐器参与的混合形式均可承载本体系。具体编制依作品构思与资源决定。</p></div></div><div class="seven-stage-list"><article data-stage="1" style="padding:18px;margin-top:12px;border-left:3px solid #adb6bd;background:rgba(13,27,26,.5)"><h3>1. <span>无极 Wuji</span></h3><p><strong>哲学与音响</strong><br><span>混沌未分、无形与不确定音响。</span></p><p><strong>作曲规则</strong><br><span>自由或无节拍节奏；噪音织体、环境音、非固定音高；刮奏、特殊拨弦、气鸣与敲击；非线性、弥散开篇。《太初》对应本阶段。</span></p></article><article data-stage="2" style="padding:18px;margin-top:12px;border-left:3px solid #78b9e0;background:rgba(13,27,26,.5)"><h3>2. <span>太极 Taiji</span></h3><p><strong>哲学与音响</strong><br><span>从混沌中建立可感知的阴阳二元与极化张力。</span></p><p><strong>作曲规则</strong><br><span>三全音轴（如 C 与 F♯）、三全音与纯五度对置、半音与全音音场对置；持续共振与碎片点描形成两个张力场。</span></p></article><article data-stage="3" style="padding:18px;margin-top:12px;border-left:3px solid #ddbe5e;background:rgba(13,27,26,.5)"><h3>3. <span>两仪 Liangyi</span></h3><p><strong>哲学与音响</strong><br><span>对立元素交织、对话、追逐与相互渗透。</span></p><p><strong>作曲规则</strong><br><span>阳的连续旋律与阴的断奏点描交互；对话、模仿与对位；规则律动和不规则节奏叠置；冲突和声逐步融合。</span></p></article><article data-stage="4" style="padding:18px;margin-top:12px;border-left:3px solid #69ae9f;background:rgba(13,27,26,.5)"><h3>4. <span>四象 Sixiang</span></h3><p><strong>哲学与音响</strong><br><span>四季意象与四种独立音乐性格。</span></p><p><strong>作曲规则</strong><br><span>四种调式或音色组：中国五声、印度拉格、中古调式、人工音阶等文化参照；四度叠置、速度与情绪对照；可顺次铺陈或平行叠加。</span></p></article><article data-stage="5" style="padding:18px;margin-top:12px;border-left:3px solid #d88b55;background:rgba(13,27,26,.5)"><h3>5. <span>八卦 Bagua</span></h3><p><strong>哲学与音响</strong><br><span>八种文化编码的音乐语汇与三音列核心。</span></p><p><strong>作曲规则</strong><br><span>按更新规则构建八组三音列：乾 [1–2–3]、坤半音簇、震 [5–1–♭2]、巽 [3–4–6]、坎 [5–6–7]、离 [1–♭3–3]、艮 [2–♭3–5]、兑 [6–1–2]；同时定义节奏、技法与文化取向。</span></p></article><article data-stage="6" style="padding:18px;margin-top:12px;border-left:3px solid #cf716f;background:rgba(13,27,26,.5)"><h3>6. <span>六十四卦 64 Hexagrams</span></h3><p><strong>哲学与音响</strong><br><span>双三音列复合、多调式与最大化复调。</span></p><p><strong>作曲规则</strong><br><span>上下卦复合为音场，扩展跨文化人工调式；多调性、泛调性、复合节奏及频谱密度叠加；动爻以单音滑动连接调式，形成循环发展的复杂顶点。</span></p></article><article data-stage="7" style="padding:18px;margin-top:12px;border-left:3px solid #9f7bcc;background:rgba(13,27,26,.5)"><h3>7. <span>归无极 Return to Wuji</span></h3><p><strong>哲学与音响</strong><br><span>从复杂性消解回混沌、噪音或静默。</span></p><p><strong>作曲规则</strong><br><span>逐渐消退与简化、音高模糊、节奏消散、音色解体；呼应开篇，完成单曲或作品集的循环闭合。归无极是第七个结构位置，与初始无极相呼应。</span></p></article></div><p style="font-size:.72rem">来源：research aims 汇报中的生成循环、锚定作品与编制灵活性；研究PPT第10–14页的阶段技法、第16–19页的作品与交响／电子方案；以及作者本次明确的七阶段应用方式。</p></section><section class="research-section" id="primordialCase"><p class="eyebrow">PORTFOLIO · COMPOSITION CASE</p><h2>《太初》：无极阶段的作品案例</h2><div class="case-layout"><img src="assets/Primordial-cover.png" alt="Primordial 太初 — Ruizhe Zhang — 2024" loading="lazy"><div><h3>太初 Primordial · 琵琶与弦乐四重奏 · 2024</h3><p>作曲：张睿哲 Ruizhe Zhang · 乐谱27页 · 标注时长6分7秒</p><p>根据乐谱中的作品说明，《太初》通过琵琶与弦乐的碰撞、流动的五声与七声旋律，以及动静对照表现本原意象。其叙事从混沌开端，经由中段爆发，回到平静的原始状态。</p><label for="primordialAudio">播放你提供的音频</label><audio id="primordialAudio" controls preload="metadata" src="assets/Primordial.mp3"></audio><p style="font-size:.72rem">音频由作者提供；录音演奏者与制作方式未在本页另行署名。</p><div class="case-links"><a class="button" href="assets/Primordial-score.pdf" target="_blank" rel="noopener">打开完整乐谱</a><a class="button" href="assets/Primordial.mp3" download>下载音频</a><a class="button" href="assets/Primordial-score.pdf#page=2" target="_blank" rel="noopener">阅读作品说明（PDF第2页）</a></div></div></div><p>阶段定位：无极。作品表现混乱的开始，以琵琶与弦乐四重奏探索未分化音响、扩展技法与本原意象。该作品的内部发展属于无极阶段的音响实践；它不按六十四卦逐一对应，也不承担整个七阶段循环。</p><div class="research-grid"><div class="research-cell"><h3>混沌开端</h3><p>乐谱开端标示 Largo、♩=48、rubato 与 veiled；可结合谱面观察零散事件、休止与拨弦／拉弦转换。</p></div><div class="research-cell"><h3>音色碰撞与发展</h3><p>技法说明包含琵琶的拍、提、摘、弹面板、轮与长轮，以及弦乐左手拨弦。它们为音响与手势研究提供具体材料。</p><a href="assets/Primordial-score.pdf#page=3" target="_blank" rel="noopener">演奏技法说明（PDF第3–4页）</a></div><div class="research-cell"><h3 data-copy-zh="无极阶段内部的音响发展" data-copy-en="Sonic development within Wuji">无极阶段内部的音响发展</h3><p>阶段定位：无极。作品表现混乱的开始，以琵琶与弦乐四重奏探索未分化音响、扩展技法与本原意象。该作品的内部发展属于无极阶段的音响实践；它不按六十四卦逐一对应，也不承担整个七阶段循环。</p></div></div><details><summary>开端谱面预览（PDF第5页）</summary><img class="score-preview" loading="lazy" src="assets/Primordial-opening.png" alt="Primordial opening score, PDF page 5"><p>原始乐谱保留原有标记；预览只是阅读辅助。</p></details></section></main>
+
+<section class="panel" id="revisionControls" style="padding:20px;margin:20px 0;display:grid;gap:12px"></section><section class="panel" style="margin-top:20px"><div class="panel-head"><div><h3>64 卦文化调式档案 / Modal atlas</h3><p>以下为本研究的作曲映射提案；文化参照不表示历史上存在固定卦象与音阶对应。</p></div></div><div style="padding:18px;overflow:auto"><table class="matrix"><thead><tr><th>卦 / 上下卦</th><th>三音列来源</th><th>文化参照</th><th>扩展音级</th><th>规则来源</th><th>你的原创映射</th><th>重复音与声部</th></tr></thead><tbody id="atlasRows"></tbody></table></div><div style="padding:18px;font-size:.8rem;color:#b8cbc5">默认最小干预方案有六个不同音级；不同卦允许共享集合。自由移位与动爻可产生重音，界面分别统计。文化参照独立于原创合成。 / Default minimal-intervention synthesis gives six distinct pitch classes; different hexagrams may share collections. Free shifts and moving lines may introduce repetition; counts are shown separately. Cultural references are independent of original synthesis.</div></section><section class="research-section" id="researchSources"><p class="eyebrow">PROVENANCE · CULTURE · ORIGINAL MAPPING</p><h2>来源与原创边界</h2><div class="research-grid"><div class="research-cell"><h3>传统结构</h3><p>《易经》符号结构提供六爻、上下卦及组合逻辑。基础介绍参考哥伦比亚大学 Asia for Educators；古籍资料可从美国国会图书馆查阅。</p><a href="https://video.afe.easia.columbia.edu/teaching-guides/the-yijing-teaching-guide/" target="_blank" rel="noopener">阅读基础介绍</a><br><a href="https://www.loc.gov/item/2021666491/" target="_blank" rel="noopener">查阅古籍资料</a></div><div class="research-cell"><h3>RP1中的研究与先行实践</h3><p>RP1讨论约翰·凯奇、周文中、赵晓生、钟耀光等先行研究，并提出象、数、理、占与循环创作的实践方向。下列书目来自RP1，作为研究入口，不表示其作者提出了本站全部音高映射。</p><p>Ruizhe Zhang. RP1: <em>Hexagram Resonance: Contemporary Music Composition Practices through the Symbolic System of the I Ching's Sixty-Four Hexagrams.</em></p><p>Xue, K., &amp; Loo, F. Y. (2019). <em>Transcoding the I Ching as Composition Techniques in Chou Wen Chung, Zhao Xiaosheng and Chung Yiu Kwong.</em> Musica Hodie, 19.</p><p>Zhao, X. (1988). <em>Tai Chi composition system.</em> Art of Music, (04), 16–25.</p><p>Chung, Y. K. (1995). <em>I Ching Compositional System.</em> City University of New York.</p></div><div class="research-cell"><h3>作者更新规则与网站实现</h3><p>作者提出阴阳音程与技法、八卦三音列、上下卦耦合与动爻滑动。64卦扩展音级、试听算法和文化标签是网站实现提案；同一音级集合可能用于不同卦象。</p><p>创作者：张睿哲 Ruizhe Zhang</p></div></div></section>    <footer><p data-i18n="footer1">为《易经》生成逻辑与当代室内乐 / 电子音乐实践而设的研究界面。</p><p data-i18n="footer2">V1 · composition prototype · no divination claims</p></footer>
+
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+
+
+  <script>
+
+window.MusicVoices=(()=>{let ctx,active=[],sample=null;function context(){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();ctx.resume();return ctx}function stop(){active.forEach(n=>{try{n.stop()}catch{}});active=[]}async function load(file){sample=await context().decodeAudioData(await file.arrayBuffer())}function play(frequency,time,duration,instrument,yang=true){const c=context(),g=c.createGain();g.connect(c.destination);const begin=Math.max(c.currentTime+.03,time),attack=['erhu','dizi'].includes(instrument)?.08:.008;g.gain.setValueAtTime(0,begin);g.gain.linearRampToValueAtTime(.13,begin+attack);g.gain.exponentialRampToValueAtTime(.0001,begin+duration);if(sample){const s=c.createBufferSource();s.buffer=sample;const root=Number(document.querySelector('[data-sample-root]')?.value||60);s.playbackRate.value=frequency/(440*Math.pow(2,(root-69)/12));s.connect(g);s.start(begin);s.stop(begin+duration);active.push(s);return}if(['pipa','guzheng'].includes(instrument)){const period=Math.max(2,Math.round(c.sampleRate/frequency)),length=Math.round(c.sampleRate*duration),b=c.createBuffer(1,length,c.sampleRate),data=b.getChannelData(0),ring=new Float32Array(period);for(let i=0;i<period;i++)ring[i]=(Math.random()*2-1)*.6;const damp=instrument==='guzheng'?.997:.988;for(let i=0;i<length;i++){const k=i%period;data[i]=ring[k];ring[k]=(ring[k]+ring[(k+1)%period])*.5*damp}const s=c.createBufferSource();s.buffer=b;s.connect(g);s.start(begin);s.stop(begin+duration);active.push(s);return}const o=c.createOscillator(),filter=c.createBiquadFilter();o.type=instrument==='erhu'?'sawtooth':'sine';o.frequency.value=frequency;filter.type='lowpass';filter.frequency.value=instrument==='erhu'?2300:1700;o.connect(filter).connect(g);const vibrato=c.createOscillator(),vg=c.createGain();vibrato.frequency.value=instrument==='erhu'?5.7:4.6;vg.gain.value=instrument==='erhu'?9:3;vibrato.connect(vg).connect(o.detune);o.start(begin);vibrato.start(begin);o.stop(begin+duration);vibrato.stop(begin+duration);active.push(o,vibrato);if(instrument==='dizi'){const b=c.createBuffer(1,c.sampleRate*duration,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.06;const s=c.createBufferSource(),hp=c.createBiquadFilter();s.buffer=b;hp.type='bandpass';hp.frequency.value=frequency*3;s.connect(hp).connect(g);s.start(begin);s.stop(begin+duration);active.push(s)}}return{context,play,stop,load}})();
+
+</script><script>
+
+  (() => {
+
+    'use strict';
+
+    const T = [
+
+      {id:'qian', zh:'乾', en:'Qián / Heaven', symbol:'☰', bits:[1,1,1], pc:[0,2,4], degree:'[1 – 2 – 3]', identityZh:'全音音核、开阔上行', identityEn:'whole-tone nucleus / openness', techniqueZh:'连音、保持、饱满实音', techniqueEn:'legato / tenuto / resonant tone'},
+
+      {id:'kun', zh:'坤', en:'Kūn / Earth', symbol:'☷', bits:[0,0,0], pc:[0,1,2], degree:'[1 – ♭2 – 2]', identityZh:'半音密集、地层暗色', identityEn:'chromatic compression / subterranean density', techniqueZh:'断奏、泛音、摩擦音', techniqueEn:'staccato / harmonics / friction'},
+
+      {id:'zhen', zh:'震', en:'Zhèn / Thunder', symbol:'☳', bits:[1,0,0], pc:[7,0,1], degree:'[5 – 1 – ♭2]', identityZh:'四度大跳与半音挤压', identityEn:'fourth leap / semitone squeeze', techniqueZh:'强起、拨击、突发重音', techniqueEn:'attack / snap / sudden accent'},
+
+      {id:'xun', zh:'巽', en:'Xùn / Wind', symbol:'☴', bits:[0,1,1], pc:[4,5,9], degree:'[3 – 4 – 6]', identityZh:'作者音核、明亮漂浮', identityEn:'author-designed nucleus / brightness', techniqueZh:'轻柔连线、滑音、气息', techniqueEn:'soft linkage / glissando / breath'},
+
+      {id:'kan', zh:'坎', en:'Kǎn / Water', symbol:'☵', bits:[0,1,0], pc:[7,9,11], degree:'[5 – 6 – 7]', identityZh:'作者音核、水态流动', identityEn:'author-designed nucleus / fluidity', techniqueZh:'涟漪式循环、流动织体', techniqueEn:'rippling loop / fluid texture'},
+
+      {id:'li', zh:'离', en:'Lí / Fire', symbol:'☲', bits:[1,0,1], pc:[0,3,4], degree:'[1 – ♭3 – 3]', identityZh:'蓝调摩擦、火焰明灭', identityEn:'blues friction / flame-like brilliance', techniqueZh:'点描、颤动、泛音火花', techniqueEn:'pointillism / tremolo / sparks'},
+
+      {id:'gen', zh:'艮', en:'Gèn / Mountain', symbol:'☶', bits:[0,0,1], pc:[2,3,7], degree:'[2 – ♭3 – 5]', identityZh:'作者音核、静止重心', identityEn:'author-designed nucleus / stillness', techniqueZh:'长音、停顿、静态重心', techniqueEn:'sustain / silence / still center'},
+
+      {id:'dui', zh:'兑', en:'Duì / Lake', symbol:'☱', bits:[1,1,0], pc:[9,0,2], degree:'[6 – 1 – 2]', identityZh:'羽商声调、波光反照', identityEn:'Yu-Shang colour / shimmering joy', techniqueZh:'清脆拨奏、反射性回声', techniqueEn:'bright plucks / reflective echo'}
+
+    ];
+
+    const byId = Object.fromEntries(T.map(x => [x.id,x]));
+
+    const order = ['qian','dui','li','zhen','xun','kan','gen','kun'];
+
+    const NAMES = {
+
+      'qian-qian':[1,'乾','The Creative'], 'kun-kun':[2,'坤','The Receptive'], 'kan-zhen':[3,'屯','Difficulty at the Beginning'], 'gen-kan':[4,'蒙','Youthful Folly'], 'kan-qian':[5,'需','Waiting'], 'qian-kan':[6,'讼','Conflict'], 'kun-kan':[7,'师','The Army'], 'kan-kun':[8,'比','Holding Together'], 'xun-qian':[9,'小畜','Small Taming'], 'qian-dui':[10,'履','Treading'], 'kun-qian':[11,'泰','Peace'], 'qian-kun':[12,'否','Standstill'], 'qian-li':[13,'同人','Fellowship'], 'li-qian':[14,'大有','Great Possession'], 'kun-gen':[15,'谦','Modesty'], 'zhen-kun':[16,'豫','Enthusiasm'], 'dui-zhen':[17,'随','Following'], 'gen-xun':[18,'蛊','Work on the Decayed'], 'kun-dui':[19,'临','Approach'], 'xun-kun':[20,'观','Contemplation'], 'li-zhen':[21,'噬嗑','Biting Through'], 'gen-li':[22,'贲','Grace'], 'gen-kun':[23,'剥','Splitting Apart'], 'kun-zhen':[24,'复','Return'], 'qian-zhen':[25,'无妄','Innocence'], 'gen-qian':[26,'大畜','Great Taming'], 'gen-zhen':[27,'颐','Nourishment'], 'dui-xun':[28,'大过','Great Exceeding'], 'kan-kan':[29,'坎','The Abysmal'], 'li-li':[30,'离','The Clinging'], 'dui-gen':[31,'咸','Influence'], 'zhen-xun':[32,'恒','Duration'], 'qian-gen':[33,'遯','Retreat'], 'zhen-qian':[34,'大壮','Great Power'], 'li-kun':[35,'晋','Progress'], 'kun-li':[36,'明夷','Darkening of the Light'], 'li-xun':[37,'家人','The Family'], 'dui-li':[38,'睽','Opposition'], 'kan-gen':[39,'蹇','Obstruction'], 'zhen-kan':[40,'解','Deliverance'], 'gen-dui':[41,'损','Decrease'], 'xun-zhen':[42,'益','Increase'], 'qian-dui':[43,'夬','Breakthrough'], 'dui-qian':[44,'姤','Coming to Meet'], 'dui-kun':[45,'萃','Gathering Together'], 'kun-dui':[46,'升','Pushing Upward'], 'dui-kan':[47,'困','Oppression'], 'kan-xun':[48,'井','The Well'], 'dui-li':[49,'革','Revolution'], 'li-xun':[50,'鼎','The Cauldron'], 'zhen-zhen':[51,'震','The Arousing'], 'gen-gen':[52,'艮','Keeping Still'], 'xun-gen':[53,'渐','Development'], 'zhen-dui':[54,'归妹','Marrying Maiden'], 'zhen-li':[55,'丰','Abundance'], 'li-gen':[56,'旅','The Wanderer'], 'xun-xun':[57,'巽','The Gentle'], 'dui-dui':[58,'兑','The Joyous'], 'kan-dui':[59,'涣','Dispersion'], 'dui-kan':[60,'节','Limitation'], 'xun-dui':[61,'中孚','Inner Truth'], 'zhen-gen':[62,'小过','Small Exceeding'], 'kan-li':[63,'既济','After Completion'], 'li-kan':[64,'未济','Before Completion']
+
+    };
+
+    // Correct the few pairs whose conventional King Wen names share the same characters in reverse order.
+
+    Object.assign(NAMES, {
+
+      'qian-dui':[10,'履','Treading'], 'dui-qian':[43,'夬','Breakthrough'],
+
+      'qian-xun':[44,'姤','Coming to Meet'],
+
+      'kun-dui':[19,'临','Approach'], 'kun-xun':[46,'升','Pushing Upward'],
+
+      'xun-li':[37,'家人','The Family'], 'li-xun':[50,'鼎','The Cauldron'],
+
+      'li-dui':[38,'睽','Opposition'], 'dui-li':[49,'革','Revolution'],
+
+      'xun-kan':[59,'涣','Dispersion'], 'kan-dui':[60,'节','Limitation']
+
+    });
+
+    const noteNames = ['C','C♯','D','E♭','E','F','F♯','G','A♭','A','B♭','B'];
+
+    const tonicNames = noteNames.map((note, pc) => ({note,pc}));
+
+    let state = {lower:'qian', upper:'kan', tonic:0, moving:2, amount:0, solo:'pipa', ensemble:'strings', lang:'zh'};
+
+    const $ = id => document.getElementById(id);
+
+    const txt = {
+
+      zh:{brand:'易经调式合成实验室',tagline:'I CHING TRICHORD & MODAL SYNTHESIS LAB',matrixJump:'64 调式矩阵',eyebrow:'实践导向的作曲原型',heroTitle:'把 <span>三爻</span> 变成三音列，<br>让 <span>六爻</span> 生长为调式与声部进行。',heroText:'这是一个面向作品集创作的规则原型：下卦给出室内乐基础三音列，上卦给出独奏声部三音列；两者耦合成为六音列或可扩展调式。动爻不被当作命运判断，而被转译为可听见、可标注的横向声部滑动。',chip1:'微观：阴阳 → 音程 / 发音',chip2:'中观：八卦 → 三音列',chip3:'宏观：重卦 → 调式世界',aimTitle:'研究锚点 / Research anchor',aimText:'以《无极 Primal Chaos》及 2–3 首微型习作为检验场：以琵琶或可替代的世界乐器 / 电子声部，与西方室内乐团构成可排练、可迭代的作曲循环。',researchNote:'界面提供的是作曲决策与试听草图，不把文化象征压缩为固定的“正确音阶”。每次输出都应在乐器、语境与排练中继续校正。',controlTitle:'作曲参数',controlSub:'选择上下卦、主音、动爻与编制',lowerLabel:'下卦 / 室内乐基础',upperLabel:'上卦 / 独奏声部',tonicLabel:'主音 / Tonic',tonicNote:'相对音列据此移调',soloLabel:'独奏声部',motionLabel:'动爻 / Moving line',motionNote:'选择一个动爻。演奏版本只滑动对应声部节点，避免把变卦机械化为全体音高替换。',slideLabel:'滑动幅度',ensembleLabel:'室内乐团',listen:'试听六音列',midi:'导出草图 MIDI',resultTitle:'当前复合调式',resultSub:'三音列 + 三音列 = 可配器的六声核心',pitchSet:'音高集合 / Pitch material',r1Title:'阴阳到音程与发音',r1Text:'阳爻倾向全音、纯四 / 五度与连音、保持；阴爻倾向半音、小二度 / 增四度、断奏、泛音、气鸣或拨弦摩擦。',r2Title:'八卦到三音列核心',r2Text:'三爻由下而上对应三音列的时间 / 声部顺序。它是具有文化音响取向的细胞，不是静态和弦标签。',r3Title:'重卦到调式与循环',r3Text:'下卦与上卦耦合生成六音列，并可依作品情境扩展为七声调式；在卦序循环中形成从坤的密集到乾的开阔、再返无极的宏观呼吸。',matrixTitle:'六十四卦调式矩阵',matrixSub:'点击任意单元格，作为新的上下卦作曲起点',scoreTitle:'配器草图',scoreSub:'把上下卦空间化，而非只把它们叠成和弦',protocolTitle:'排练与研究记录',protocolSub:'把系统输出回到实践中验证',p1:'<strong>记录参数：</strong>保存当前卦、主音、动爻、速度与编制。',p2:'<strong>写 30–60 秒草图：</strong>让下卦维持 / 变形，让上卦成为独奏的时间性材料。',p3:'<strong>听辨滑动：</strong>确认动爻产生的是可感知的横向变化，而非抽象规则展示。',p4:'<strong>反思并修订：</strong>记录文化联想、演奏可行性和音响结果，再回写规则库。',footer1:'为《易经》生成逻辑与当代室内乐 / 电子音乐实践而设的研究界面。',footer2:'V1 · 作曲原型 · 不作占卜主张',line:['初爻','二爻','三爻','四爻','五爻','上爻'],lowerRole:'室内乐基础',upperRole:'独奏声部',slideUp:'阴 → 阳：向开阔滑动',slideDown:'阳 → 阴：向紧张滑动',toastMidi:'已下载 MIDI 草图',toastAudio:'正在试听六音列',matrixCorner:'下 \ 上'},
+
+      en:{brand:'I Ching Modal Synthesis Lab',tagline:'I CHING TRICHORD & MODAL SYNTHESIS LAB',matrixJump:'64-mode matrix',eyebrow:'Practice-led composition prototype',heroTitle:'Turn <span>three lines</span> into trichords;<br>let <span>six lines</span> unfold as modes and voice-leading.',heroText:'A prototype for a compositional portfolio: the lower trigram supplies the chamber foundation, the upper trigram the solo trichord; their coupling produces a hexachord or expandable mode. Moving lines are not fortune claims but audible, notatable voice-leading slides.',chip1:'Micro: lines → intervals / attacks',chip2:'Meso: trigrams → trichords',chip3:'Macro: hexagrams → modal worlds',aimTitle:'Research anchor',aimText:'Use Primal Chaos and 2–3 concise study pieces as a testing ground: a Pipa—or a practical world-instrument / electroacoustic substitute—in dialogue with a Western chamber ensemble.',researchNote:'This interface sketches compositional decisions and auditions. It does not reduce cultural symbols to a single “correct scale”; every output needs adjustment through instruments, context and rehearsal.',controlTitle:'Composition parameters',controlSub:'Choose trigrams, tonic, moving line and forces',lowerLabel:'Lower trigram / chamber ground',upperLabel:'Upper trigram / solo voice',tonicLabel:'Tonic',tonicNote:'relative material is transposed here',soloLabel:'Featured voice',motionLabel:'Moving line',motionNote:'Choose one moving line. In performance, slide only its corresponding node rather than mechanically replacing the complete pitch field.',slideLabel:'Slide distance',ensembleLabel:'Chamber resource',listen:'Audition hexachord',midi:'Export sketch MIDI',resultTitle:'Current composite mode',resultSub:'trichord + trichord = orchestratable six-note core',pitchSet:'Pitch material',r1Title:'Lines to intervals and attack',r1Text:'Yang favours whole tones, P4/P5 and legato/tenuto; Yin favours semitone, m2/A4, staccato, harmonics, air tone or plucked friction.',r2Title:'Trigrams to trichord nuclei',r2Text:'Bottom to top, three lines set a temporal / registral ordering. Each cell carries a cultural-spectral tendency, rather than serving as a static chord label.',r3Title:'Hexagrams to modes and cycle',r3Text:'Couple lower and upper trigrams into a hexachord, then expand to seven notes when the piece requires it; a broader cycle breathes from Kun density to Qian openness and back to Wuji.',matrixTitle:'64 hexagram modal matrix',matrixSub:'Click any cell to make it your next compositional starting point',scoreTitle:'Scoring sketch',scoreSub:'Spatialise upper and lower trigrams, not merely stack them',protocolTitle:'Rehearsal and research log',protocolSub:'Validate output in practice',p1:'<strong>Capture parameters:</strong> record the hexagram, tonic, moving line, tempo and forces.',p2:'<strong>Write a 30–60 second sketch:</strong> let the lower trigram sustain / mutate while the upper becomes temporal solo material.',p3:'<strong>Listen for the slide:</strong> test whether the moving line creates audible horizontal change, not just a display of rules.',p4:'<strong>Reflect and revise:</strong> log cultural associations, playability and sonic result, then feed revisions back into the rule library.',footer1:'A research interface for I Ching generative logic in contemporary chamber and electronic practice.',footer2:'V1 · composition prototype · no divination claims',line:['Line 1','Line 2','Line 3','Line 4','Line 5','Line 6'],lowerRole:'chamber ground',upperRole:'solo voice',slideUp:'Yin → Yang: open the line',slideDown:'Yang → Yin: tighten the line',toastMidi:'MIDI sketch downloaded',toastAudio:'Auditioning hexachord',matrixCorner:'Lower \\ Upper'}
+
+    };
+
+    function local(){ return txt[state.lang]; }
+
+    function key(){ return `${state.upper}-${state.lower}`; }
+
+    function nameData(){ return NAMES[key()] || [null, `${byId[state.upper].zh}${byId[state.lower].zh}`, 'Composite']; }
+
+    function getPcs(){ return [...byId[state.lower].pc, ...byId[state.upper].pc]; }
+
+    function allBits(){ return [...byId[state.lower].bits, ...byId[state.upper].bits]; }
+
+    function note(pc){ return noteNames[(pc + state.tonic + 120) % 12]; }
+
+    function selectedNotes(){ return getPcs().map(note); }
+
+    function mutate(){ const pcs=getPcs(); const bits=allBits(); const direction=bits[state.moving] ? -1 : 1; const newPc=(pcs[state.moving]+direction*state.amount+12)%12; return {direction, old:note(pcs[state.moving]), next:note(newPc), pc:newPc, bit:bits[state.moving]}; }
+
+    function symbolLine(bit,moving){ const d=document.createElement('div'); d.className=`yao ${bit ? 'yang':'yin'} ${moving?'moving':''}`; return d; }
+
+    function fillSelects(){
+
+      ['lower','upper'].forEach(id => { $(id).innerHTML=T.map(t=>`<option value="${t.id}">${t.symbol} ${state.lang==='zh'?t.zh+' · '+t.en:t.en}</option>`).join(''); });
+
+      $('lower').value=state.lower; $('upper').value=state.upper;
+
+      $('tonic').innerHTML=tonicNames.map(x=>`<option value="${x.pc}">${x.note}</option>`).join(''); $('tonic').value=state.tonic;
+
+      const row=$('motionRow'); row.innerHTML=''; local().line.forEach((label,i)=>{ const b=document.createElement('button'); b.className='motion'+(i===state.moving?' active':''); b.type='button'; b.innerHTML=`${label}<small>${i<3?local().lowerRole:local().upperRole}</small>`; b.addEventListener('click',()=>{state.moving=i; render();}); row.append(b); });
+
+    }
+
+    function renderCompositionBase(){
+
+      const L=byId[state.lower], U=byId[state.upper], loc=local(), [no,zh,en]=nameData(), bits=allBits(), pcs=getPcs(), notes=selectedNotes(), m=mutate();
+
+      $('lowerNote').textContent=`${L.degree} · ${state.lang==='zh'?L.identityZh:L.identityEn}`; $('upperNote').textContent=`${U.degree} · ${state.lang==='zh'?U.identityZh:U.identityEn}`;
+
+      const hex=$('hexagram'); hex.innerHTML=''; [...bits].reverse().forEach((bit,rev)=>hex.append(symbolLine(bit,5-rev===state.moving)));
+
+      $('hexNumber').textContent=no?`#${String(no).padStart(2,'0')}`:'#––';
+
+      $('hexName').innerHTML=state.lang==='zh'?`${zh} <span>${en}</span>`:`${en} <span>${zh}</span>`;
+
+      $('hexGloss').textContent=state.lang==='zh'?`上${U.zh}${U.symbol} / 下${L.zh}${L.symbol}：从两个三音列出发，形成一个可被配器与变形的复合音场。`:`Upper ${U.en} ${U.symbol} / lower ${L.en} ${L.symbol}: two trichords form an orchestratable, transformable composite field.`;
+
+      $('upperPill').textContent=`${loc.upperRole}: ${U.symbol} ${state.lang==='zh'?U.zh:U.en} ${U.degree}`; $('lowerPill').textContent=`${loc.lowerRole}: ${L.symbol} ${state.lang==='zh'?L.zh:L.en} ${L.degree}`; $('instrumentPill').textContent=`${$('solo').selectedOptions[0].text}`;
+
+      $('pitchSet').textContent=`${notes.join(' · ')}${state.amount ? `  →  ${m.next}`:''}`;
+
+      const unique=new Set(notes).size; $('modeCaption').textContent=state.lang==='zh'?`六个声部位置 · ${unique} 个不同音级 · 主音 ${noteNames[state.tonic]}`:`Six voice positions · ${unique} distinct pitch classes · tonic ${noteNames[state.tonic]}`;
+
+      const directionText=m.bit?loc.slideDown:loc.slideUp; $('mutationText').textContent=`${loc.line[state.moving]} · ${directionText} · ${m.old} → ${m.next} (${state.amount===1?'±1':'±2'} st)`;
+
+      const voices=$('voiceSteps'); voices.innerHTML=''; notes.forEach((n,i)=>{ const div=document.createElement('div'); div.className='voice'+(i===state.moving?' changed':''); const owner=i<3?loc.lowerRole:loc.upperRole; div.innerHTML=`<span class="line-no">${loc.line[i]}</span><span class="note">${i===state.moving?m.next:n}</span><span class="owner">${owner}</span>`; voices.append(div); });
+
+      renderMotion(); renderMatrix(); renderScoring(); drawAtlas(); revisionUI();
+
+    }
+
+    function renderMotion(){ const bits=allBits(); [...$('motionRow').children].forEach((b,i)=>{ b.classList.toggle('active',i===state.moving); const small=b.querySelector('small'); small.textContent=`${i<3?local().lowerRole:local().upperRole} · ${bits[i]?'⚊':'⚋'}`; }); }
+
+    function renderMatrix(){
+
+      const L=local(); $('matrixHead').innerHTML=`<tr><th>${L.matrixCorner}</th>${order.map(id=>`<th>${byId[id].symbol}<br>${state.lang==='zh'?byId[id].zh:byId[id].en.split(' ')[0]}</th>`).join('')}</tr>`;
+
+      const body=$('matrixBody'); body.innerHTML=''; order.forEach(lower=>{ const tr=document.createElement('tr'); tr.innerHTML=`<th>${byId[lower].symbol} ${state.lang==='zh'?byId[lower].zh:byId[lower].en.split(' ')[0]}</th>`; order.forEach(upper=>{ const [no,zh,en]=NAMES[`${upper}-${lower}`] || [null,`${byId[upper].zh}${byId[lower].zh}`,'Composite']; const td=document.createElement('td'); const b=document.createElement('button'); b.className=(upper===state.upper&&lower===state.lower)?'selected':''; b.innerHTML=`<span class="mini">${byId[upper].symbol}/${byId[lower].symbol} · ${no||'–'}</span>${state.lang==='zh'?zh:en}`; b.addEventListener('click',()=>{state.upper=upper;state.lower=lower;fillSelects();render();}); td.append(b);tr.append(td); }); body.append(tr); });
+
+    }
+
+    function renderScoring(){
+
+      const L=byId[state.lower],U=byId[state.upper], loc=local(), m=mutate(), solo=$('solo').selectedOptions[0].text, ensemble=$('ensemble').selectedOptions[0].text;
+
+      const lowerNotes=selectedNotes().slice(0,3).join(' · '), upperNotes=selectedNotes().slice(3).join(' · ');
+
+      $('scoreMap').innerHTML=`<div class="part-row"><div class="part-label">${loc.lowerRole}<br><strong>${ensemble}</strong></div><div class="part-content"><strong>${L.symbol} ${state.lang==='zh'?L.zh:L.en} · ${lowerNotes}</strong><br>${state.lang==='zh'?L.techniqueZh:L.techniqueEn}。${state.lang==='zh'?'可拉开到不同声部，作为持续音、异速节奏或缓慢内声部。':'Distribute across voices as sustain, polyrhythmic strata, or slow inner movement.'}</div></div><div class="part-row"><div class="part-label">${loc.upperRole}<br><strong>${solo}</strong></div><div class="part-content"><strong>${U.symbol} ${state.lang==='zh'?U.zh:U.en} · ${upperNotes}</strong><br>${state.lang==='zh'?U.techniqueZh:U.techniqueEn}。${state.lang==='zh'?'把三音列作为旋律、音色或手势序列，而非每拍同时按下。':'Treat as a sequence of melodic, timbral, or gestural events rather than a block every beat.'}</div></div><div class="part-row"><div class="part-label">${loc.line[state.moving]}<br><strong>${m.old} → ${m.next}</strong></div><div class="part-content">${state.lang==='zh'?'动爻滑动：保留其余五个声部，令这一节点以':'Moving-line slide: retain the other five positions and move this node by '} ${state.amount} ${state.lang==='zh'?'个半音 / 全音横向连接；以时值、力度、滑音或微分音过渡控制其可感度。':'semitone steps; use duration, dynamics, glissando or microtonal inflection to control audibility.'}</div></div>`;
+
+    }
+
+    function bind(){
+
+      ['lower','upper','tonic','solo','ensemble','motionSize'].forEach(id=>$(id).addEventListener('change',e=>{ if(id==='tonic'||id==='motionSize') state[id==='tonic'?'tonic':'amount']=Number(e.target.value); else state[id]=e.target.value; render(); }));
+
+      $('listenButton').addEventListener('click',audition); $('midiButton').addEventListener('click',downloadMidi); $('langButton').addEventListener('click',()=>{state.lang=state.lang==='zh'?'en':'zh';document.documentElement.lang=state.lang==='zh'?'zh-CN':'en';$('langButton').textContent=state.lang==='zh'?'EN':'中文';applyLanguage();fillSelects();render();});
+
+    }
+
+    function applyLanguageOriginal(){ const L=local(); document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=L[el.dataset.i18n]||''); document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=L[el.dataset.i18nHtml]||''); document.title=state.lang==='zh'?'易经调式合成实验室 | I Ching Modal Synthesis Lab':'I Ching Modal Synthesis Lab'; }
+
+    function flash(message){ const t=$('toast');t.textContent=message;t.classList.add('show');clearTimeout(flash.timer);flash.timer=setTimeout(()=>t.classList.remove('show'),2300); }
+
+    function audition(){
+
+      const C=window.AudioContext||window.webkitAudioContext;if(!C){flash('Web Audio is unavailable');return;} const ctx=new C(), pcs=getPcs(), m=mutate(); pcs[state.moving]=(m.pc-state.tonic+12)%12; const start=ctx.currentTime+.05;
+
+      pcs.forEach((pc,i)=>{ const osc=ctx.createOscillator(), overtone=ctx.createOscillator(), gain=ctx.createGain(), filter=ctx.createBiquadFilter(); const f=261.6256*Math.pow(2,(pc+state.tonic)/12); osc.type=i<3?'triangle':'sine'; osc.frequency.value=f; overtone.type='sine'; overtone.frequency.value=f*2.01; overtone.detune.value=i%2?4:-4; filter.type='lowpass';filter.frequency.value=2100;gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(.10,start+.015+i*.035);gain.gain.exponentialRampToValueAtTime(.0001,start+1.45+i*.08);osc.connect(filter);overtone.connect(filter);filter.connect(gain).connect(ctx.destination);osc.start(start+i*.11);overtone.start(start+i*.11);osc.stop(start+1.8);overtone.stop(start+1.8); }); flash(local().toastAudio); }
+
+    function vlq(n){ const b=[n&127];while(n>>=7)b.unshift((n&127)|128);return b; }
+
+    function downloadMidi(){
+
+      const pcs=getPcs(),m=mutate();pcs[state.moving]=(m.pc-state.tonic+12)%12; const tempo=800000; const events=[0,255,81,3,(tempo>>16)&255,(tempo>>8)&255,tempo&255,0,255,3,12,...new TextEncoder().encode('I Ching Modal')];
+
+      pcs.forEach((pc,i)=>{const midi=60+((pc+state.tonic+12)%12);events.push(...vlq(i?0:0),0x90,midi,76);events.push(...vlq(280),0x80,midi,0);});events.push(0,255,47,0); const len=events.length;const file=new Uint8Array([77,84,104,100,0,0,0,6,0,0,0,1,1,224,77,84,114,107,(len>>>24)&255,(len>>>16)&255,(len>>>8)&255,len&255,...events]); const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([file],{type:'audio/midi'}));a.download=`IChing_${nameData()[1]}_${noteNames[state.tonic]}.mid`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),800);flash(local().toastMidi);
+
+    }
+
+
+
+const cultural={qian:{name:'中国宫调 / 雅乐参照',p:[0,2,4,7,9,11]},kun:{name:'半音 / 弗里吉亚参照',p:[0,1,3,5,7,8,10]},zhen:{name:'匈牙利小调参照',p:[0,2,3,6,7,8,11]},xun:{name:'中国清乐 / 利底亚参照',p:[0,2,4,6,7,9,11]},kan:{name:'中古多利亚 / 燕乐创作参照',p:[0,2,3,5,7,9,10]},li:{name:'弗里吉亚主调式 / 蓝调参照',p:[0,1,4,5,7,8,10]},gen:{name:'日本都节音阶参照',p:[0,1,5,7,8]},dui:{name:'中国商调五声参照',p:[0,2,5,7,9]}};
+
+function expanded(up,lo){const c=cultural[up],base=[...byId[lo].pc,...byId[up].pc];if(up==='kan'&&lo==='qian')return[0,2,4,7,9,11];if(up==='kun'&&lo==='li')return[0,1,4,5,7,10];return [...new Set([...base,...c.p])].sort((a,b)=>a-b)}
+
+function drawAtlas(){const body=document.getElementById('atlasRows');body.innerHTML='';for(const lo of order)for(const up of order){const n=NAMES[up+'-'+lo],base=[...byId[lo].pc,...byId[up].pc],p=expanded(up,lo),row=document.createElement('tr');row.innerHTML='<td>'+n[0]+' '+(state.lang==='en'?n[2]+' ('+n[1]+')':n[1])+' '+byId[up].symbol+'/'+byId[lo].symbol+'</td><td>'+byId[lo].degree+' + '+byId[up].degree+'</td><td>'+cultural[lo].name+' × '+cultural[up].name+' · 人工融合</td><td>'+p.join(' · ')+'</td><td>6 声部 / '+new Set(base).size+' 音级</td>';row.innerHTML+='<td class="atlas-source"><a href="#researchSources">RP1 · Rules 1–3</a><br>结构依据：阴阳六爻、上下三爻、8×8组合。创作依据：RP1研究方向与作者更新的规则1–3。</td><td class="atlas-source">'+byId[lo].degree+' → '+byId[up].degree+'<br>下卦→室内乐基础；上卦→独奏前景；六爻→六个声部位置；动爻→单音滑动。扩展音级由本站算法提出，待作品与排练验证。</td>';body.append(row)}}
+
+function study(){const mode=document.getElementById('organisation').value,shift=Number(document.getElementById('layerShift').value),inst=document.getElementById('realInstrument').value,c=window.MusicVoices.context();window.MusicVoices.stop();let materials;if(mode==='core')materials=[performancePcs().slice(0,3),performancePcs().slice(3)];else if(mode==='expanded')materials=[expanded(state.upper,state.lower),expanded(state.upper,state.lower)];else materials=[referenceFor(state.lower,state.lower)[3],(modalCatalog.find(c=>c[0]===freeReference)||referenceFor(state.upper,state.lower))[3]];const desc=materials.map((p,i)=>p.map(x=>noteNames[(x+state.tonic+(i?shift:0))%12]).join(' · '));document.getElementById('expandedNotes').textContent=desc.join(' / ');for(let layer=0;layer<2;layer++)for(let i=0;i<12;i++){const pool=materials[layer],step=mode==='pan'?(i*5+layer*3)%pool.length:i%pool.length;let midi=(layer?72:60)+state.tonic+pool[step]+(layer?shift:0);if(mode==='pan')midi+=(i%3-1)*2;const f=440*Math.pow(2,(midi-69)/12),bit=byId[layer?state.upper:state.lower].bits[i%3];window.MusicVoices.play(f,c.currentTime+.08+i*(layer?.34:.51),bit?1.25:.55,inst,!!bit)}}
+
+document.getElementById('playStudy').addEventListener('click',study);document.getElementById('stopStudy').addEventListener('click',()=>window.MusicVoices.stop());document.getElementById('sampleFile').addEventListener('change',async e=>{try{if(!e.target.files[0])return;await window.MusicVoices.load(e.target.files[0]);document.getElementById('sampleStatus').textContent='已载入本地真实单音采样；请设置原音 MIDI 后试听。'}catch{document.getElementById('sampleStatus').textContent='音频无法解码，请使用 WAV、MP3 等浏览器支持的格式。'}});
+
+
+
+Object.assign(txt.zh,{aimTitle:'研究范围与阶段锚点',aimText:'《太初 Primordial》定位于无极阶段的混乱开端。七阶段可组织单首作品，也可组成作品集的大循环，支持室内乐、交响乐、电子音乐及声学与电子结合。',researchNote:'根据作品需要选择媒介、编制与各阶段比例；六十四卦调式实验是整个体系中第六阶段的工具。'});Object.assign(txt.en,{aimTitle:'Research scope and stage anchor',aimText:'Primordial belongs to the chaotic opening of the Wuji stage. The seven stages can organise a single work or a macro cycle across a portfolio, supporting chamber, symphonic, electronic and mixed acoustic–electronic music.',researchNote:'Choose media, instrumentation and stage proportions for each work; the 64-hexagram modal laboratory is a tool for stage six of the complete system.'});
+
+
+
+const bilingualPairs=[["文化调式与自由组合 / Cultural modes & free combination","Cultural modes and free combination"],["64 个卦象档案 · 双调式 · 泛调性 · 可导入乐器录音","64 hexagram profiles · polymodality · pantonality · local instrument samples"],["组织方式","Pitch organisation"],["互补双三音列（动爻后）","Complementary paired trichords (after slide)"],["互补音场（动爻前）","Complementary field (before slide)"],["多调式：上下声部各自调式","Polymodality: separate modes for each layer"],["泛调性：多中心自由交织","Pantonality: freely interwoven centres"],["上声部移调（半音）","Upper-layer transposition (semitones)"],["乐器音色","Instrument timbre"],["古筝 · 合成拨弦","Guzheng · synthesised plucked string"],["琵琶 · 合成拨弦","Pipa · synthesised plucked string"],["二胡 · 合成拉弦","Erhu · synthesised bowed string"],["笛子 · 合成吹管","Dizi · synthesised wind"],["试听调式研究草图","Audition modal study"],["停止","Stop"],["真实音色：导入本地单音采样","Real timbre: import a local single-note sample"],["采样原音 MIDI（C4 = 60）","Sample root MIDI note (C4 = 60)"],["默认使用合成模型；上传清晰、无伴奏的单音录音后，按原音移调播放。单个样本大幅移调会改变音色。","Synthesised timbres are used by default. Import an isolated note and set its root pitch for transposed playback. Wide transposition of a single sample changes its timbre."],["已载入本地真实单音采样；请设置原音 MIDI 后试听。","Local single-note sample loaded. Set the root MIDI pitch before auditioning."],["音频无法解码，请使用 WAV、MP3 等浏览器支持的格式。","Could not decode audio. Try WAV, MP3, or another browser-supported format."],["64 卦文化调式档案 / Modal atlas","64-hexagram cultural modal atlas"],["以下为本研究的作曲映射提案；文化参照不表示历史上存在固定卦象与音阶对应。","These are proposed compositional mappings for this research. Cultural references do not imply a historical correspondence between hexagrams and scales."],["卦 / 上下卦","Hexagram / upper and lower trigrams"],["三音列来源","Trichord sources"],["文化参照","Cultural references"],["扩展音级","Extended pitch classes"],["重复音与声部","Repeated pitches and voice positions"],["阴阳发音：阳为连音 / 保持 / 共振，阴为短音 / 泛音 / 气声。六个爻是六个声部位置，不保证六个不同音级。需卦例使用 [1–2–3–5–6–7]；明夷卦的文本示例与固定三音列表不一致，作为独立人工调式方案 [1–♭2–3–4–5–♭7] 展示。唐宋、拉格、都节等为文化参照，具体历史律制仍需另行考证。","Yin–Yang articulation: Yang favours legato, tenuto and resonance; Yin favours short notes, harmonics and air sounds. Six lines represent six voice positions, not necessarily six distinct pitch classes. Xu uses [1–2–3–5–6–7]. The Ming Yi text example differs from the fixed trichord table, so [1–♭2–3–4–5–♭7] is shown as a separate synthetic proposal. Tang/Song, raga and Miyako-bushi references require further historical and tuning research."],["中国宫调 / 雅乐参照","Chinese Gong mode / Yayue reference"],["半音 / 弗里吉亚参照","Chromatic / Phrygian reference"],["匈牙利小调参照","Hungarian minor reference"],["中国清乐 / 利底亚参照","Chinese Qingyue / Lydian reference"],["中古多利亚 / 燕乐创作参照","Medieval Dorian / Yanyue-inspired composition"],["弗里吉亚主调式 / 蓝调参照","Phrygian dominant / blues reference"],["日本都节音阶参照","Japanese Miyako-bushi reference"],["中国商调五声参照","Chinese Shang pentatonic reference"],[" · 人工融合"," · synthetic fusion"],["6 声部 / ","6 voice positions / "],[" 音级"," pitch classes"],["专业道士解读 · 作曲家谱曲 / Personal commission","Professional Taoist reading and composer commission"],["从个人卦象、专业解读到一首专属作品","From a personal hexagram and professional reading to a commissioned composition"],["流程：填写需求 → 联系专业道士或易学顾问 → 确认解读与音乐方向 → 作曲家写作与交付。当前提供委托需求单；平台尚未接入真实人员或预约系统。","Process: prepare a brief → contact a Taoist practitioner or I Ching consultant → agree on the reading and musical direction → commission and receive the composition. This page prepares a brief; no practitioners or booking service are currently connected."],["服务方向 / Service","Service route"],["专业道士解读 + 作曲家谱曲","Taoist practitioner reading + composer commission"],["易学顾问解读 + 作曲家谱曲","I Ching consultant reading + composer commission"],["仅委托作曲家谱曲","Composer commission only"],["作品形式 / Format","Musical format"],["专属流行歌曲","Personal pop song"],["器乐小品 / 琵琶与室内乐","Instrumental miniature / pipa and chamber ensemble"],["电子音乐 / 氛围音景","Electronic music / ambient soundscape"],["待与作曲家商议","To be agreed with the composer"],["预算与交付时间 / Budget & deadline","Budget and deadline"],["专业人士公开联系页 / Contact URL","Practitioner public contact URL"],["音乐喜好与需求 / Musical preferences","Musical preferences and requirements"],["生成委托需求单 / Create brief","Create commission brief"],["复制需求单 / Copy","Copy brief"],["打开专业人士联系页 / Contact","Open practitioner contact page"],["需求单会结合当前卦象与音乐参数。你可以先审阅，再自行发送给专业人士。","The brief includes the current hexagram and musical parameters. Review it before sharing it with your chosen practitioner."],["如：预算待议，希望一个月内交付","e.g. Budget to be agreed; delivery within a month"],["喜欢的风格、乐器、故事主题，以及是否需要歌词或乐谱","Preferred styles, instruments and story themes; whether lyrics or a score are required"],["AI 解读时附带问句（可选；发送至你配置的端点）","Include the personal question in AI readings (optional; sent to your configured endpoint)"],["AI 卦象与运势解读 / AI reading","AI hexagram and fortune reading"],["古筝合成","Guzheng synthesis"],["琵琶合成","Pipa synthesis"],["二胡合成","Erhu synthesis"],["笛子合成","Dizi synthesis"],["仅本地提示词，不联网","Local prompts only · offline"],["Suno REST 代理","Suno REST proxy"],["OpenAI 兼容文本代理","OpenAI-compatible text proxy"],["自定义 JSON 端点","Custom JSON endpoint"],["需求单已复制","Commission brief copied"],["请填写专业人士的 HTTPS 公开联系页","Enter the practitioner’s public HTTPS contact URL"],["请输入 HTTPS 端点，或本机 localhost 地址。","Enter an HTTPS endpoint or a local localhost address."],["下 / 上","Lower / upper"],["名字或创作署名","Name or creative signature"],["本站自定义姓名与日期种子算法；并非传统八字排盘。","Uses this site’s custom name-and-date seed algorithm; it is not traditional Ba Zi charting."],["起卦与作曲计算在本地完成。AI 请求只发送卦象与音乐参数，不发送姓名、生辰和私人问句。","Casting and musical calculations run locally. AI requests include hexagrams and musical parameters. Names and birth details are excluded; a personal question is sent only if you select that option."],["阴 → 阳","Yin → Yang"],["阳 → 阴","Yang → Yin"],["命格作曲委托 / Fortune-telling Composition Commission","Fortune-telling Composition Commission"],["服务：","Service: "],["作品：","Format: "],["预算与时间：","Budget and deadline: "],["主卦：","Primary hexagram: "],["变卦：","Changed hexagram: "],["音乐音高：","Pitch material: "],["动爻：","Moving line: "],["音乐需求：","Musical requirements: "],["专业解读：由委托人和专业人士另行确认后填写","Professional reading: to be agreed by the client and practitioner"],["交付范围：双方确认音频、歌词、乐谱、修改次数、费用及使用权","Deliverables: agree on audio, lyrics, score, revisions, fees and usage rights"],["，",", "],["琵琶 / Pipa","Pipa"],["古筝 / Guzheng","Guzheng"],["二胡 / Erhu","Erhu"],["古典吉他 / Classical guitar","Classical guitar"],["电子声部 / Electroacoustic","Electroacoustic voice"],["弦乐四重奏 / String quartet","String quartet"],["混合室内乐 / Mixed ensemble","Mixed chamber ensemble"],["木管与打击乐 / Winds & percussion","Winds and percussion"],["电子织体 / Electronics","Electronic texture"],["半音 / semitone","Semitone"],["全音 / whole tone","Whole tone"],["对称五度","Symmetric fifth"],["已配置端点；点击按钮才会发送","Endpoint configured; send a request with a button"],["起卦中 · 正在生成本卦","Casting the primary hexagram"],["阴阳交错 · 定位动爻","Yin–Yang transition · locating the moving line"],["卦象成形 · 转译音乐材料","Hexagram formed · translating musical material"],["易经与研究背景","The I Ching and research context"],["从阴阳符号到当代音乐：张睿哲 Ruizhe Zhang 的实践研究","From Yin–Yang symbols to contemporary music: practice research by Ruizhe Zhang"],["《易经》（Yijing / I Ching，Book of Changes）以变化为核心。阴爻为断线，阳爻为实线；三爻组合构成八卦，上下两个八卦组合构成六十四卦。卦象既提供象征图像，也为讨论情境与转变提供结构。","The Yijing (I Ching, Book of Changes) centres on change. A Yin line is broken and a Yang line is solid; three lines form a trigram, and two trigrams form a hexagram. The eight-by-eight combinations produce 64 hexagrams, offering symbolic images and structures for discussing situations and transitions."],["在本研究中，传统符号成为创作的起点：阴阳影响音程与发音，八卦形成三音列，上下卦生成音场，动爻驱动横向声部变化。音高、配器和文化调式的对应属于本研究的创作定义，不能直接当作古代《易经》的音乐规定。","In this research, traditional symbols initiate composition: Yin–Yang affects intervals and articulation, trigrams form trichords, paired trigrams generate pitch fields, and moving lines drive horizontal voice-leading. Pitch, instrumentation and cultural-modal correspondences are compositional definitions in this research, rather than ancient musical prescriptions from the I Ching."],["象：音响形态与文化意象","Xiang: sonic form and cultural imagery"],["数：爻位、组合与参数","Shu: line positions, combinations and parameters"],["理：材料发展与变化逻辑","Li: material development and the logic of change"],["占：材料选择与生成过程","Zhan: material selection and generative process"],["循环叙事与研究方法","Cyclic narrative and research method"],["RP1 将无极、太极、两仪、四象、八卦、六十四卦组织为宏观音乐叙事，并以实践导向的质性研究、作品分析、访谈和创作记录发展系统。网站进一步展示三音列、声部滑动与跨文化调式的更新方案。早期作品与当前规则属于不同迭代阶段。","RP1 organises Wuji, Taiji, Liangyi, Sixiang, Bagua and the 64 hexagrams as a macro musical narrative. Practice-led qualitative inquiry, case analysis, interviews and creative documentation develop the system. This website presents later proposals for trichords, voice-leading slides and cross-cultural modes. The early work and the current rules belong to different stages of development."],["作品案例","Composition case study"],["太初 Primordial · 琵琶与弦乐四重奏 · 2024","Primordial 太初 · pipa and string quartet · 2024"],["作曲：张睿哲 Ruizhe Zhang · 乐谱27页 · 标注时长6分7秒","Composer: Ruizhe Zhang 张睿哲 · 27-page score · stated duration 6 minutes 7 seconds"],["根据乐谱中的作品说明，《太初》通过琵琶与弦乐的碰撞、流动的五声与七声旋律，以及动静对照表现本原意象。其叙事从混沌开端，经由中段爆发，回到平静的原始状态。","According to the programme note in the score, Primordial explores an image of origins through collisions between pipa and strings, flowing pentatonic and heptatonic melodies, and contrasts of motion and stillness. Its narrative moves from initial chaos through an explosive central phase to a tranquil primal state."],["与当前规则的关系：这是研究早期实践的参考案例，可用于观察音色对话、泛调性和循环叙事。现有材料没有证明作品逐一使用了当前64卦三音列规则，因此不将它描述为该规则的完整验证。","Relation to the current rules: this is a reference case from earlier practice, useful for observing timbral dialogue, pantonality and cyclic narrative. The supplied materials do not establish that the piece applies every current 64-hexagram trichord rule, so it is not presented as a complete validation of that system."],["播放你提供的音频","Play the supplied audio"],["音频由作者提供；录音演奏者与制作方式未在本页另行署名。","Audio supplied by the composer; performers and production method are not separately credited on this page."],["打开完整乐谱","Open complete score"],["下载音频","Download audio"],["阅读作品说明（PDF第2页）","Read programme note (PDF page 2)"],["演奏技法说明（PDF第3–4页）","Performance notation (PDF pages 3–4)"],["混沌开端","Initial chaos"],["乐谱开端标示 Largo、♩=48、rubato 与 veiled；可结合谱面观察零散事件、休止与拨弦／拉弦转换。","The opening is marked Largo, quarter note = 48, rubato and veiled. The score invites examination of scattered events, rests and transitions between plucked and bowed textures."],["音色碰撞与发展","Timbral collision and development"],["技法说明包含琵琶的拍、提、摘、弹面板、轮与长轮，以及弦乐左手拨弦。它们为音响与手势研究提供具体材料。","The performance notes describe pipa techniques including pai, lifting and releasing a string, zhai, soundboard strikes, lun and extended lun, alongside left-hand pizzicato for strings. They provide concrete material for sonic and gestural investigation."],["循环与回归","Cycle and return"],["回归平静的叙事来自作者的作品说明；完整过程可通过音频和全谱共同观察。本页未标注未经核对的段落时间。","The return to tranquillity is described in the composer’s programme note. Explore the full process through the audio and complete score; unverified section timestamps are not supplied."],["开端谱面预览（PDF第5页）","Opening score preview (PDF page 5)"],["原始乐谱保留原有标记；预览只是阅读辅助。","The supplied score retains its original markings; the preview is a reading aid."],["规则来源","Rule provenance"],["你的原创映射","Original compositional mapping"],["结构依据：阴阳六爻、上下三爻、8×8组合。创作依据：RP1研究方向与作者更新的规则1–3。","Structural basis: six Yin–Yang lines, upper and lower trigrams, and 8×8 combinations. Compositional basis: the research direction in RP1 and the composer’s revised Rules 1–3."],["文化参照是创作取向；不是经过文献验证的古代卦象调式表。","Cultural references describe creative directions, not a historically verified table of hexagram modes."],["下卦→室内乐基础；上卦→独奏前景；六爻→六个声部位置；动爻→单音滑动。扩展音级由本站算法提出，待作品与排练验证。","Lower trigram → chamber ground; upper trigram → solo foreground; six lines → six voice positions; moving line → a single-note slide. Extended pitch classes are proposed by this site’s algorithm and await compositional and rehearsal validation."],["来源与原创边界","Sources and boundaries of originality"],["传统结构","Traditional structure"],["RP1中的研究与先行实践","Research and prior practice in RP1"],["作者更新规则与网站实现","Revised author rules and website implementation"],["《易经》符号结构提供六爻、上下卦及组合逻辑。基础介绍参考哥伦比亚大学 Asia for Educators；古籍资料可从美国国会图书馆查阅。","The I Ching supplies the six-line structure, upper and lower trigrams, and combinatorial logic. The introductory context refers to Columbia University’s Asia for Educators; historical editions can be consulted through the Library of Congress."],["RP1讨论约翰·凯奇、周文中、赵晓生、钟耀光等先行研究，并提出象、数、理、占与循环创作的实践方向。下列书目来自RP1，作为研究入口，不表示其作者提出了本站全部音高映射。","RP1 discusses prior work by John Cage, Chou Wen-chung, Zhao Xiaosheng and Chung Yiu-kwong, and proposes practice connecting Xiang, Shu, Li and Zhan with cyclic composition. The references below are taken from RP1 as research entry points, not as authorship claims for all pitch mappings on this site."],["作者提出阴阳音程与技法、八卦三音列、上下卦耦合与动爻滑动。64卦扩展音级、试听算法和文化标签是网站实现提案；同一音级集合可能用于不同卦象。","The composer proposes Yin–Yang intervals and techniques, trigram trichords, trigram coupling and moving-line slides. The 64-hexagram extended pitch classes, audition algorithms and cultural labels are website implementation proposals; different hexagrams may share the same pitch-class set."],["阅读基础介绍","Read the introductory guide"],["查阅古籍资料","Consult the historical edition"],["创作者：张睿哲 Ruizhe Zhang","Creator: Ruizhe Zhang 张睿哲"],["七阶段生成与回归循环","Seven-stage cycle of generation and return"],["单首作品与整个作品集均可使用；适用于声学、电子与混合媒介。","Applicable to a single work or an entire portfolio, using acoustic, electronic or mixed media."],["六个演化阶段，加上第七个“归无极”闭环位置。六十四卦是第六阶段，不能替代整个七阶段体系。","Six evolutionary stages plus a seventh position, Return to Wuji. The 64 hexagrams form stage six within the full seven-stage system."],["单首作品的曲式结构","Formal structure within a single work"],["在同一首作品中，将七阶段作为段落、乐章或贯穿发展的结构功能。各阶段时长由音乐需要决定；不要求平均分配。","Within one work, use the seven stages as sections, movements or continuously developing structural functions. Their durations follow musical needs and need not be equal."],["作品集的大循环","Macro cycle across a portfolio"],["让不同作品或组曲承担不同阶段，连成无极到归无极的大循环。《太初》作为无极阶段的开端与锚定案例；其他阶段可由后续作品展开。","Assign stages to different pieces or suites within a macro cycle from Wuji to Return to Wuji. Primordial anchors the opening Wuji stage; subsequent works may develop the other stages."],["媒介与编制开放","Open instrumentation and media"],["室内乐、交响乐、纯电子音乐、声学乐器与电子音乐结合，以及世界乐器参与的混合形式均可承载本体系。具体编制依作品构思与资源决定。","The system can support chamber music, symphonic music, purely electronic music, acoustic instruments with electronics, and mixed forms involving world instruments. Choose forces according to the work and available resources."],["哲学与音响","Concept and sonic character"],["作曲规则","Compositional rules"],["来源：research aims 汇报中的生成循环、锚定作品与编制灵活性；研究PPT第10–14页的阶段技法、第16–19页的作品与交响／电子方案；以及作者本次明确的七阶段应用方式。","Sources: the generative cycle, anchor work and instrumentation flexibility in research aims; stage techniques on slides 10–14 and portfolio, symphonic and electronic proposals on slides 16–19 of the research presentation; and the composer’s current clarification of the seven-stage application."],["《太初》：无极阶段的作品案例","Primordial: a case study of the Wuji stage"],["阶段定位：无极。作品表现混乱的开始，以琵琶与弦乐四重奏探索未分化音响、扩展技法与本原意象。该作品的内部发展属于无极阶段的音响实践；它不按六十四卦逐一对应，也不承担整个七阶段循环。","Stage placement: Wuji. The work embodies a chaotic beginning, exploring undifferentiated sound, extended techniques and primordial imagery through pipa and string quartet. Its internal development belongs to Wuji-stage practice; it neither maps the 64 hexagrams individually nor represents the complete seven-stage cycle."],["研究定位：七阶段体系适用于单首作品或作品集，编制开放。琵琶与弦乐四重奏是《太初》的具体编制，不是体系对所有作品的限制。","Research scope: the seven-stage system applies to a single work or a portfolio with open instrumentation. Pipa and string quartet are the specific forces for Primordial, rather than a restriction on the whole system."],["交响乐团 / Symphony orchestra","Symphony orchestra"],["声学与电子结合 / Acoustic + electronics","Acoustic instruments with electronics"],["无极 Wuji","Wuji / Non-polarity"],["混沌未分、无形与不确定音响。","Undifferentiated chaos, formlessness and indeterminate sound."],["自由或无节拍节奏；噪音织体、环境音、非固定音高；刮奏、特殊拨弦、气鸣与敲击；非线性、弥散开篇。《太初》对应本阶段。","Free or unmetered rhythm; noise, environmental and unpitched textures; scraping, unusual plucking, air sounds and impacts; a diffuse nonlinear opening. Primordial belongs to this stage."],["太极 Taiji","Taiji / Supreme polarity"],["从混沌中建立可感知的阴阳二元与极化张力。","Establish perceptible Yin–Yang duality and polarised tension within chaos."],["三全音轴（如 C 与 F♯）、三全音与纯五度对置、半音与全音音场对置；持续共振与碎片点描形成两个张力场。","A tritone axis such as C and F-sharp; tritone versus perfect fifth, chromatic versus whole-tone fields; sustained resonance opposed to fragmented pointillism."],["两仪 Liangyi","Liangyi / Two modes"],["对立元素交织、对话、追逐与相互渗透。","Opposing elements intertwine, converse, pursue and permeate each other."],["阳的连续旋律与阴的断奏点描交互；对话、模仿与对位；规则律动和不规则节奏叠置；冲突和声逐步融合。","Continuous Yang melody interacts with detached Yin gestures; dialogue, imitation and counterpoint; regular pulse layered with irregular rhythms; gradual integration of conflicting harmonies."],["四象 Sixiang","Sixiang / Four symbols"],["四季意象与四种独立音乐性格。","Seasonal imagery and four distinct musical characters."],["四种调式或音色组：中国五声、印度拉格、中古调式、人工音阶等文化参照；四度叠置、速度与情绪对照；可顺次铺陈或平行叠加。","Four modal or timbral groups referencing Chinese pentatonic material, Indian raga, medieval modes or synthetic scales; quartal structures and contrasting tempi and moods; sequential presentation or parallel layering."],["八卦 Bagua","Bagua / Eight trigrams"],["八种文化编码的音乐语汇与三音列核心。","Eight culturally coded musical vocabularies and trichord nuclei."],["按更新规则构建八组三音列：乾 [1–2–3]、坤半音簇、震 [5–1–♭2]、巽 [3–4–6]、坎 [5–6–7]、离 [1–♭3–3]、艮 [2–♭3–5]、兑 [6–1–2]；同时定义节奏、技法与文化取向。","Use the revised eight trichords: Qian [1–2–3], Kun chromatic cluster, Zhen [5–1–♭2], Xun [3–4–6], Kan [5–6–7], Li [1–♭3–3], Gen [2–♭3–5], Dui [6–1–2]; define rhythmic, technical and cultural tendencies."],["六十四卦 64 Hexagrams","64 Hexagrams"],["双三音列复合、多调式与最大化复调。","Paired-trichord synthesis, polymodality and maximal polyphony."],["上下卦复合为音场，扩展跨文化人工调式；多调性、泛调性、复合节奏及频谱密度叠加；动爻以单音滑动连接调式，形成循环发展的复杂顶点。","Couple upper and lower trigrams into pitch fields and cross-cultural synthetic modes; layer polytonality, pantonality, polyrhythm and spectral density; use moving-line slides to connect modes at the cycle’s complex culmination."],["归无极 Return to Wuji","Return to Wuji / Cyclic closure"],["从复杂性消解回混沌、噪音或静默。","Dissolve complexity into chaos, noise or silence."],["逐渐消退与简化、音高模糊、节奏消散、音色解体；呼应开篇，完成单曲或作品集的循环闭合。归无极是第七个结构位置，与初始无极相呼应。","Progressive fading and simplification, pitch blurring, rhythmic dispersal and timbral dissolution; recall the opening to close a work or portfolio cycle. The return is the seventh structural position, echoing the initial Wuji."]].sort((a,b)=>b[0].length-a[0].length),translationCache=new WeakMap();
+
+function translatedText(text){let result=text;for(const [zh,en] of bilingualPairs)result=result.split(zh).join(en);return result}
+
+function translateSupplement(){const lang=typeof state!=='undefined'?state.lang:st.lang;const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=walk.nextNode()){if(['SCRIPT','STYLE'].includes(n.parentElement?.tagName)||n.parentElement?.closest('[data-research-ui],[data-copy-zh]'))continue;let item=translationCache.get(n);if(!item||n.nodeValue!==item.last)item={source:n.nodeValue};const value=lang==='en'?translatedText(item.source):item.source;if(n.nodeValue!==value)n.nodeValue=value;item.last=value;translationCache.set(n,item)}for(const el of document.querySelectorAll('[placeholder],[aria-label]')){for(const attr of ['placeholder','aria-label']){if(!el.hasAttribute(attr))continue;const key='bilingual-'+attr;let item=el[key];if(!item||el.getAttribute(attr)!==item.last)item={source:el.getAttribute(attr)};const value=lang==='en'?translatedText(item.source):item.source;el.setAttribute(attr,value);item.last=value;el[key]=item}}}
+
+function activateSupplement(){for(const select of document.querySelectorAll('#serviceRoute,#musicFormat,#gatewayProvider'))for(const option of select.options)if(!option.hasAttribute('value'))option.value=option.textContent;let queued=false;const observer=new MutationObserver(()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;observer.disconnect();translateSupplement();observer.observe(document.body,{childList:true,subtree:true,characterData:true})})});translateSupplement();observer.observe(document.body,{childList:true,subtree:true,characterData:true});window.setSiteLanguage=(lang)=>{const holder=typeof state!=='undefined'?state:st;if(holder.lang===lang)return;if(typeof state!=='undefined'){state.lang=lang;document.documentElement.lang=lang==='zh'?'zh-CN':'en';document.getElementById('langButton').textContent=lang==='zh'?'EN':'中文';applyLanguage();fillSelects();render()}else toggleLanguage();translateSupplement()};}
+
+
+
+function applyLanguage(){applyLanguageOriginal();if(document.body&&typeof NodeFilter!=="undefined")translateSupplement()}
+
+
+
+// Minimal-intervention rules v2: retain disjoint cells; Qian is an explicit whole-tone pole constraint.
+
+const revisionProfiles={"qian-qian": {"number": 1, "zh": "乾", "en": "The Creative", "shift": 6, "lower": [0, 2, 4], "upper": [6, 8, 10], "pcs": [0, 2, 4, 6, 8, 10], "sorted": [0, 2, 4, 6, 8, 10], "signedShift": 6, "originalUpper": [0, 2, 4], "raw": [0, 2, 4, 0, 2, 4], "rawDistinct": 3, "reason": "whole-tone-pole"}, "kun-kun": {"number": 2, "zh": "坤", "en": "The Receptive", "shift": 3, "lower": [0, 1, 2], "upper": [3, 4, 5], "pcs": [0, 1, 2, 3, 4, 5], "sorted": [0, 1, 2, 3, 4, 5], "signedShift": 3, "originalUpper": [0, 1, 2], "raw": [0, 1, 2, 0, 1, 2], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "kan-zhen": {"number": 3, "zh": "屯", "en": "Difficulty at the Beginning", "shift": 11, "lower": [7, 0, 1], "upper": [6, 8, 10], "pcs": [7, 0, 1, 6, 8, 10], "sorted": [0, 1, 6, 7, 8, 10], "signedShift": -1, "originalUpper": [7, 9, 11], "raw": [7, 0, 1, 7, 9, 11], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "qian-zhen": {"number": 25, "zh": "无妄", "en": "Innocence", "shift": 2, "lower": [7, 0, 1], "upper": [2, 4, 6], "pcs": [7, 0, 1, 2, 4, 6], "sorted": [0, 1, 2, 4, 6, 7], "signedShift": 2, "originalUpper": [0, 2, 4], "raw": [7, 0, 1, 0, 2, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-qian": {"number": 34, "zh": "大壮", "en": "Great Power", "shift": 10, "lower": [0, 2, 4], "upper": [5, 10, 11], "pcs": [0, 2, 4, 5, 10, 11], "sorted": [0, 2, 4, 5, 10, 11], "signedShift": -2, "originalUpper": [7, 0, 1], "raw": [0, 2, 4, 7, 0, 1], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-kan": {"number": 40, "zh": "解", "en": "Deliverance", "shift": 1, "lower": [7, 9, 11], "upper": [8, 1, 2], "pcs": [7, 9, 11, 8, 1, 2], "sorted": [1, 2, 7, 8, 9, 11], "signedShift": 1, "originalUpper": [7, 0, 1], "raw": [7, 9, 11, 7, 0, 1], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "gen-kan": {"number": 4, "zh": "蒙", "en": "Youthful Folly", "shift": 1, "lower": [7, 9, 11], "upper": [3, 4, 8], "pcs": [7, 9, 11, 3, 4, 8], "sorted": [3, 4, 7, 8, 9, 11], "signedShift": 1, "originalUpper": [2, 3, 7], "raw": [7, 9, 11, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-qian": {"number": 9, "zh": "小畜", "en": "Small Taming", "shift": 1, "lower": [0, 2, 4], "upper": [5, 6, 10], "pcs": [0, 2, 4, 5, 6, 10], "sorted": [0, 2, 4, 5, 6, 10], "signedShift": 1, "originalUpper": [4, 5, 9], "raw": [0, 2, 4, 4, 5, 9], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "qian-li": {"number": 13, "zh": "同人", "en": "Fellowship", "shift": 9, "lower": [0, 3, 4], "upper": [9, 11, 1], "pcs": [0, 3, 4, 9, 11, 1], "sorted": [0, 1, 3, 4, 9, 11], "signedShift": -3, "originalUpper": [0, 2, 4], "raw": [0, 3, 4, 0, 2, 4], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "li-qian": {"number": 14, "zh": "大有", "en": "Great Possession", "shift": 3, "lower": [0, 2, 4], "upper": [3, 6, 7], "pcs": [0, 2, 4, 3, 6, 7], "sorted": [0, 2, 3, 4, 6, 7], "signedShift": 3, "originalUpper": [0, 3, 4], "raw": [0, 2, 4, 0, 3, 4], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "dui-zhen": {"number": 17, "zh": "随", "en": "Following", "shift": 2, "lower": [7, 0, 1], "upper": [11, 2, 4], "pcs": [7, 0, 1, 11, 2, 4], "sorted": [0, 1, 2, 4, 7, 11], "signedShift": 2, "originalUpper": [9, 0, 2], "raw": [7, 0, 1, 9, 0, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kun-dui": {"number": 19, "zh": "临", "en": "Approach", "shift": 3, "lower": [9, 0, 2], "upper": [3, 4, 5], "pcs": [9, 0, 2, 3, 4, 5], "sorted": [0, 2, 3, 4, 5, 9], "signedShift": 3, "originalUpper": [0, 1, 2], "raw": [9, 0, 2, 0, 1, 2], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "li-zhen": {"number": 21, "zh": "噬嗑", "en": "Biting Through", "shift": 11, "lower": [7, 0, 1], "upper": [11, 2, 3], "pcs": [7, 0, 1, 11, 2, 3], "sorted": [0, 1, 2, 3, 7, 11], "signedShift": -1, "originalUpper": [0, 3, 4], "raw": [7, 0, 1, 0, 3, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "gen-qian": {"number": 26, "zh": "大畜", "en": "Great Taming", "shift": 3, "lower": [0, 2, 4], "upper": [5, 6, 10], "pcs": [0, 2, 4, 5, 6, 10], "sorted": [0, 2, 4, 5, 6, 10], "signedShift": 3, "originalUpper": [2, 3, 7], "raw": [0, 2, 4, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "dui-xun": {"number": 28, "zh": "大过", "en": "Great Exceeding", "shift": 1, "lower": [4, 5, 9], "upper": [10, 1, 3], "pcs": [4, 5, 9, 10, 1, 3], "sorted": [1, 3, 4, 5, 9, 10], "signedShift": 1, "originalUpper": [9, 0, 2], "raw": [4, 5, 9, 9, 0, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "dui-gen": {"number": 31, "zh": "咸", "en": "Influence", "shift": 11, "lower": [2, 3, 7], "upper": [8, 11, 1], "pcs": [2, 3, 7, 8, 11, 1], "sorted": [1, 2, 3, 7, 8, 11], "signedShift": -1, "originalUpper": [9, 0, 2], "raw": [2, 3, 7, 9, 0, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "qian-gen": {"number": 33, "zh": "遯", "en": "Retreat", "shift": 9, "lower": [2, 3, 7], "upper": [9, 11, 1], "pcs": [2, 3, 7, 9, 11, 1], "sorted": [1, 2, 3, 7, 9, 11], "signedShift": -3, "originalUpper": [0, 2, 4], "raw": [2, 3, 7, 0, 2, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "li-dui": {"number": 38, "zh": "睽", "en": "Opposition", "shift": 1, "lower": [9, 0, 2], "upper": [1, 4, 5], "pcs": [9, 0, 2, 1, 4, 5], "sorted": [0, 1, 2, 4, 5, 9], "signedShift": 1, "originalUpper": [0, 3, 4], "raw": [9, 0, 2, 0, 3, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kan-gen": {"number": 39, "zh": "蹇", "en": "Obstruction", "shift": 1, "lower": [2, 3, 7], "upper": [8, 10, 0], "pcs": [2, 3, 7, 8, 10, 0], "sorted": [0, 2, 3, 7, 8, 10], "signedShift": 1, "originalUpper": [7, 9, 11], "raw": [2, 3, 7, 7, 9, 11], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "gen-dui": {"number": 41, "zh": "损", "en": "Decrease", "shift": 1, "lower": [9, 0, 2], "upper": [3, 4, 8], "pcs": [9, 0, 2, 3, 4, 8], "sorted": [0, 2, 3, 4, 8, 9], "signedShift": 1, "originalUpper": [2, 3, 7], "raw": [9, 0, 2, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "qian-xun": {"number": 44, "zh": "姤", "en": "Coming to Meet", "shift": 11, "lower": [4, 5, 9], "upper": [11, 1, 3], "pcs": [4, 5, 9, 11, 1, 3], "sorted": [1, 3, 4, 5, 9, 11], "signedShift": -1, "originalUpper": [0, 2, 4], "raw": [4, 5, 9, 0, 2, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "dui-kun": {"number": 45, "zh": "萃", "en": "Gathering Together", "shift": 9, "lower": [0, 1, 2], "upper": [6, 9, 11], "pcs": [0, 1, 2, 6, 9, 11], "sorted": [0, 1, 2, 6, 9, 11], "signedShift": -3, "originalUpper": [9, 0, 2], "raw": [0, 1, 2, 9, 0, 2], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "kan-xun": {"number": 48, "zh": "井", "en": "The Well", "shift": 1, "lower": [4, 5, 9], "upper": [8, 10, 0], "pcs": [4, 5, 9, 8, 10, 0], "sorted": [0, 4, 5, 8, 9, 10], "signedShift": 1, "originalUpper": [7, 9, 11], "raw": [4, 5, 9, 7, 9, 11], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "dui-li": {"number": 49, "zh": "革", "en": "Revolution", "shift": 11, "lower": [0, 3, 4], "upper": [8, 11, 1], "pcs": [0, 3, 4, 8, 11, 1], "sorted": [0, 1, 3, 4, 8, 11], "signedShift": -1, "originalUpper": [9, 0, 2], "raw": [0, 3, 4, 9, 0, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-dui": {"number": 54, "zh": "归妹", "en": "Marrying Maiden", "shift": 10, "lower": [9, 0, 2], "upper": [5, 10, 11], "pcs": [9, 0, 2, 5, 10, 11], "sorted": [0, 2, 5, 9, 10, 11], "signedShift": -2, "originalUpper": [7, 0, 1], "raw": [9, 0, 2, 7, 0, 1], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-li": {"number": 55, "zh": "丰", "en": "Abundance", "shift": 1, "lower": [0, 3, 4], "upper": [8, 1, 2], "pcs": [0, 3, 4, 8, 1, 2], "sorted": [0, 1, 2, 3, 4, 8], "signedShift": 1, "originalUpper": [7, 0, 1], "raw": [0, 3, 4, 7, 0, 1], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-kan": {"number": 59, "zh": "涣", "en": "Dispersion", "shift": 1, "lower": [7, 9, 11], "upper": [5, 6, 10], "pcs": [7, 9, 11, 5, 6, 10], "sorted": [5, 6, 7, 9, 10, 11], "signedShift": 1, "originalUpper": [4, 5, 9], "raw": [7, 9, 11, 4, 5, 9], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-dui": {"number": 61, "zh": "中孚", "en": "Inner Truth", "shift": 1, "lower": [9, 0, 2], "upper": [5, 6, 10], "pcs": [9, 0, 2, 5, 6, 10], "sorted": [0, 2, 5, 6, 9, 10], "signedShift": 1, "originalUpper": [4, 5, 9], "raw": [9, 0, 2, 4, 5, 9], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kan-li": {"number": 63, "zh": "既济", "en": "After Completion", "shift": 0, "lower": [0, 3, 4], "upper": [7, 9, 11], "pcs": [0, 3, 4, 7, 9, 11], "sorted": [0, 3, 4, 7, 9, 11], "signedShift": 0, "originalUpper": [7, 9, 11], "raw": [0, 3, 4, 7, 9, 11], "rawDistinct": 6, "reason": "already-disjoint"}, "li-kan": {"number": 64, "zh": "未济", "en": "Before Completion", "shift": 0, "lower": [7, 9, 11], "upper": [0, 3, 4], "pcs": [7, 9, 11, 0, 3, 4], "sorted": [0, 3, 4, 7, 9, 11], "signedShift": 0, "originalUpper": [0, 3, 4], "raw": [7, 9, 11, 0, 3, 4], "rawDistinct": 6, "reason": "already-disjoint"}, "kun-kan": {"number": 7, "zh": "师", "en": "The Army", "shift": 0, "lower": [7, 9, 11], "upper": [0, 1, 2], "pcs": [7, 9, 11, 0, 1, 2], "sorted": [0, 1, 2, 7, 9, 11], "signedShift": 0, "originalUpper": [0, 1, 2], "raw": [7, 9, 11, 0, 1, 2], "rawDistinct": 6, "reason": "already-disjoint"}, "kan-kun": {"number": 8, "zh": "比", "en": "Holding Together", "shift": 0, "lower": [0, 1, 2], "upper": [7, 9, 11], "pcs": [0, 1, 2, 7, 9, 11], "sorted": [0, 1, 2, 7, 9, 11], "signedShift": 0, "originalUpper": [7, 9, 11], "raw": [0, 1, 2, 7, 9, 11], "rawDistinct": 6, "reason": "already-disjoint"}, "qian-dui": {"number": 10, "zh": "履", "en": "Treading", "shift": 1, "lower": [9, 0, 2], "upper": [1, 3, 5], "pcs": [9, 0, 2, 1, 3, 5], "sorted": [0, 1, 2, 3, 5, 9], "signedShift": 1, "originalUpper": [0, 2, 4], "raw": [9, 0, 2, 0, 2, 4], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "kun-qian": {"number": 11, "zh": "泰", "en": "Peace", "shift": 9, "lower": [0, 2, 4], "upper": [9, 10, 11], "pcs": [0, 2, 4, 9, 10, 11], "sorted": [0, 2, 4, 9, 10, 11], "signedShift": -3, "originalUpper": [0, 1, 2], "raw": [0, 2, 4, 0, 1, 2], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "qian-kun": {"number": 12, "zh": "否", "en": "Standstill", "shift": 3, "lower": [0, 1, 2], "upper": [3, 5, 7], "pcs": [0, 1, 2, 3, 5, 7], "sorted": [0, 1, 2, 3, 5, 7], "signedShift": 3, "originalUpper": [0, 2, 4], "raw": [0, 1, 2, 0, 2, 4], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "kun-gen": {"number": 15, "zh": "谦", "en": "Modesty", "shift": 11, "lower": [2, 3, 7], "upper": [11, 0, 1], "pcs": [2, 3, 7, 11, 0, 1], "sorted": [0, 1, 2, 3, 7, 11], "signedShift": -1, "originalUpper": [0, 1, 2], "raw": [2, 3, 7, 0, 1, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-kun": {"number": 16, "zh": "豫", "en": "Enthusiasm", "shift": 10, "lower": [0, 1, 2], "upper": [5, 10, 11], "pcs": [0, 1, 2, 5, 10, 11], "sorted": [0, 1, 2, 5, 10, 11], "signedShift": -2, "originalUpper": [7, 0, 1], "raw": [0, 1, 2, 7, 0, 1], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "gen-xun": {"number": 18, "zh": "蛊", "en": "Work on the Decayed", "shift": 0, "lower": [4, 5, 9], "upper": [2, 3, 7], "pcs": [4, 5, 9, 2, 3, 7], "sorted": [2, 3, 4, 5, 7, 9], "signedShift": 0, "originalUpper": [2, 3, 7], "raw": [4, 5, 9, 2, 3, 7], "rawDistinct": 6, "reason": "already-disjoint"}, "xun-kun": {"number": 20, "zh": "观", "en": "Contemplation", "shift": 0, "lower": [0, 1, 2], "upper": [4, 5, 9], "pcs": [0, 1, 2, 4, 5, 9], "sorted": [0, 1, 2, 4, 5, 9], "signedShift": 0, "originalUpper": [4, 5, 9], "raw": [0, 1, 2, 4, 5, 9], "rawDistinct": 6, "reason": "already-disjoint"}, "gen-li": {"number": 22, "zh": "贲", "en": "Grace", "shift": 11, "lower": [0, 3, 4], "upper": [1, 2, 6], "pcs": [0, 3, 4, 1, 2, 6], "sorted": [0, 1, 2, 3, 4, 6], "signedShift": -1, "originalUpper": [2, 3, 7], "raw": [0, 3, 4, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "gen-kun": {"number": 23, "zh": "剥", "en": "Splitting Apart", "shift": 1, "lower": [0, 1, 2], "upper": [3, 4, 8], "pcs": [0, 1, 2, 3, 4, 8], "sorted": [0, 1, 2, 3, 4, 8], "signedShift": 1, "originalUpper": [2, 3, 7], "raw": [0, 1, 2, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kun-zhen": {"number": 24, "zh": "复", "en": "Return", "shift": 2, "lower": [7, 0, 1], "upper": [2, 3, 4], "pcs": [7, 0, 1, 2, 3, 4], "sorted": [0, 1, 2, 3, 4, 7], "signedShift": 2, "originalUpper": [0, 1, 2], "raw": [7, 0, 1, 0, 1, 2], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "gen-zhen": {"number": 27, "zh": "颐", "en": "Nourishment", "shift": 1, "lower": [7, 0, 1], "upper": [3, 4, 8], "pcs": [7, 0, 1, 3, 4, 8], "sorted": [0, 1, 3, 4, 7, 8], "signedShift": 1, "originalUpper": [2, 3, 7], "raw": [7, 0, 1, 2, 3, 7], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "li-li": {"number": 30, "zh": "离", "en": "The Clinging", "shift": 2, "lower": [0, 3, 4], "upper": [2, 5, 6], "pcs": [0, 3, 4, 2, 5, 6], "sorted": [0, 2, 3, 4, 5, 6], "signedShift": 2, "originalUpper": [0, 3, 4], "raw": [0, 3, 4, 0, 3, 4], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "zhen-xun": {"number": 32, "zh": "恒", "en": "Duration", "shift": 0, "lower": [4, 5, 9], "upper": [7, 0, 1], "pcs": [4, 5, 9, 7, 0, 1], "sorted": [0, 1, 4, 5, 7, 9], "signedShift": 0, "originalUpper": [7, 0, 1], "raw": [4, 5, 9, 7, 0, 1], "rawDistinct": 6, "reason": "already-disjoint"}, "li-kun": {"number": 35, "zh": "晋", "en": "Progress", "shift": 3, "lower": [0, 1, 2], "upper": [3, 6, 7], "pcs": [0, 1, 2, 3, 6, 7], "sorted": [0, 1, 2, 3, 6, 7], "signedShift": 3, "originalUpper": [0, 3, 4], "raw": [0, 1, 2, 0, 3, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kun-li": {"number": 36, "zh": "明夷", "en": "Darkening of the Light", "shift": 9, "lower": [0, 3, 4], "upper": [9, 10, 11], "pcs": [0, 3, 4, 9, 10, 11], "sorted": [0, 3, 4, 9, 10, 11], "signedShift": -3, "originalUpper": [0, 1, 2], "raw": [0, 3, 4, 0, 1, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-li": {"number": 37, "zh": "家人", "en": "The Family", "shift": 1, "lower": [0, 3, 4], "upper": [5, 6, 10], "pcs": [0, 3, 4, 5, 6, 10], "sorted": [0, 3, 4, 5, 6, 10], "signedShift": 1, "originalUpper": [4, 5, 9], "raw": [0, 3, 4, 4, 5, 9], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-zhen": {"number": 42, "zh": "益", "en": "Increase", "shift": 0, "lower": [7, 0, 1], "upper": [4, 5, 9], "pcs": [7, 0, 1, 4, 5, 9], "sorted": [0, 1, 4, 5, 7, 9], "signedShift": 0, "originalUpper": [4, 5, 9], "raw": [7, 0, 1, 4, 5, 9], "rawDistinct": 6, "reason": "already-disjoint"}, "dui-qian": {"number": 43, "zh": "夬", "en": "Breakthrough", "shift": 1, "lower": [0, 2, 4], "upper": [10, 1, 3], "pcs": [0, 2, 4, 10, 1, 3], "sorted": [0, 1, 2, 3, 4, 10], "signedShift": 1, "originalUpper": [9, 0, 2], "raw": [0, 2, 4, 9, 0, 2], "rawDistinct": 4, "reason": "minimum-disjoint-shift"}, "kun-xun": {"number": 46, "zh": "升", "en": "Pushing Upward", "shift": 0, "lower": [4, 5, 9], "upper": [0, 1, 2], "pcs": [4, 5, 9, 0, 1, 2], "sorted": [0, 1, 2, 4, 5, 9], "signedShift": 0, "originalUpper": [0, 1, 2], "raw": [4, 5, 9, 0, 1, 2], "rawDistinct": 6, "reason": "already-disjoint"}, "li-xun": {"number": 50, "zh": "鼎", "en": "The Cauldron", "shift": 11, "lower": [4, 5, 9], "upper": [11, 2, 3], "pcs": [4, 5, 9, 11, 2, 3], "sorted": [2, 3, 4, 5, 9, 11], "signedShift": -1, "originalUpper": [0, 3, 4], "raw": [4, 5, 9, 0, 3, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "gen-gen": {"number": 52, "zh": "艮", "en": "Keeping Still", "shift": 2, "lower": [2, 3, 7], "upper": [4, 5, 9], "pcs": [2, 3, 7, 4, 5, 9], "sorted": [2, 3, 4, 5, 7, 9], "signedShift": 2, "originalUpper": [2, 3, 7], "raw": [2, 3, 7, 2, 3, 7], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "xun-gen": {"number": 53, "zh": "渐", "en": "Development", "shift": 0, "lower": [2, 3, 7], "upper": [4, 5, 9], "pcs": [2, 3, 7, 4, 5, 9], "sorted": [2, 3, 4, 5, 7, 9], "signedShift": 0, "originalUpper": [4, 5, 9], "raw": [2, 3, 7, 4, 5, 9], "rawDistinct": 6, "reason": "already-disjoint"}, "li-gen": {"number": 56, "zh": "旅", "en": "The Wanderer", "shift": 1, "lower": [2, 3, 7], "upper": [1, 4, 5], "pcs": [2, 3, 7, 1, 4, 5], "sorted": [1, 2, 3, 4, 5, 7], "signedShift": 1, "originalUpper": [0, 3, 4], "raw": [2, 3, 7, 0, 3, 4], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "xun-xun": {"number": 57, "zh": "巽", "en": "The Gentle", "shift": 2, "lower": [4, 5, 9], "upper": [6, 7, 11], "pcs": [4, 5, 9, 6, 7, 11], "sorted": [4, 5, 6, 7, 9, 11], "signedShift": 2, "originalUpper": [4, 5, 9], "raw": [4, 5, 9, 4, 5, 9], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "dui-dui": {"number": 58, "zh": "兑", "en": "The Joyous", "shift": 1, "lower": [9, 0, 2], "upper": [10, 1, 3], "pcs": [9, 0, 2, 10, 1, 3], "sorted": [0, 1, 2, 3, 9, 10], "signedShift": 1, "originalUpper": [9, 0, 2], "raw": [9, 0, 2, 9, 0, 2], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "dui-kan": {"number": 60, "zh": "节", "en": "Limitation", "shift": 1, "lower": [7, 9, 11], "upper": [10, 1, 3], "pcs": [7, 9, 11, 10, 1, 3], "sorted": [1, 3, 7, 9, 10, 11], "signedShift": 1, "originalUpper": [9, 0, 2], "raw": [7, 9, 11, 9, 0, 2], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "kan-dui": {"number": 60, "zh": "节", "en": "Limitation", "shift": 11, "lower": [9, 0, 2], "upper": [6, 8, 10], "pcs": [9, 0, 2, 6, 8, 10], "sorted": [0, 2, 6, 8, 9, 10], "signedShift": -1, "originalUpper": [7, 9, 11], "raw": [9, 0, 2, 7, 9, 11], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-gen": {"number": 62, "zh": "小过", "en": "Small Exceeding", "shift": 11, "lower": [2, 3, 7], "upper": [6, 11, 0], "pcs": [2, 3, 7, 6, 11, 0], "sorted": [0, 2, 3, 6, 7, 11], "signedShift": -1, "originalUpper": [7, 0, 1], "raw": [2, 3, 7, 7, 0, 1], "rawDistinct": 5, "reason": "minimum-disjoint-shift"}, "zhen-zhen": {"number": 51, "zh": "震", "en": "The Arousing", "shift": 2, "lower": [7, 0, 1], "upper": [9, 2, 3], "pcs": [7, 0, 1, 9, 2, 3], "sorted": [0, 1, 2, 3, 7, 9], "signedShift": 2, "originalUpper": [7, 0, 1], "raw": [7, 0, 1, 7, 0, 1], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}, "kan-qian": {"number": 5, "zh": "需", "en": "Waiting", "shift": 0, "lower": [0, 2, 4], "upper": [7, 9, 11], "pcs": [0, 2, 4, 7, 9, 11], "sorted": [0, 2, 4, 7, 9, 11], "signedShift": 0, "originalUpper": [7, 9, 11], "raw": [0, 2, 4, 7, 9, 11], "rawDistinct": 6, "reason": "already-disjoint"}, "qian-kan": {"number": 6, "zh": "讼", "en": "Conflict", "shift": 0, "lower": [7, 9, 11], "upper": [0, 2, 4], "pcs": [7, 9, 11, 0, 2, 4], "sorted": [0, 2, 4, 7, 9, 11], "signedShift": 0, "originalUpper": [0, 2, 4], "raw": [7, 9, 11, 0, 2, 4], "rawDistinct": 6, "reason": "already-disjoint"}, "kan-kan": {"number": 29, "zh": "坎", "en": "The Abysmal", "shift": 1, "lower": [7, 9, 11], "upper": [8, 10, 0], "pcs": [7, 9, 11, 8, 10, 0], "sorted": [0, 7, 8, 9, 10, 11], "signedShift": 1, "originalUpper": [7, 9, 11], "raw": [7, 9, 11, 7, 9, 11], "rawDistinct": 3, "reason": "minimum-disjoint-shift"}};
+
+const modalCatalog=[["gong", "中国宫五声", "Chinese gong pentatonic", [0, 2, 4, 7, 9], "中国五声参照；不等同某一唐宋作品", "Chinese pentatonic reference; not a specific Tang/Song piece"], ["shang", "中国商五声", "Chinese shang pentatonic", [0, 2, 5, 7, 10], "中国五声旋转，固定主音记谱", "Rotation of a Chinese pentatonic collection, with fixed tonic"], ["yu", "中国羽五声", "Chinese yu pentatonic", [0, 3, 5, 7, 10], "中国五声旋转，固定主音记谱", "Rotation of a Chinese pentatonic collection, with fixed tonic"], ["dorian", "多利亚式", "Dorian-type", [0, 2, 3, 5, 7, 9, 10], "欧洲中古与现代复兴参照；凯尔特风格可选，不代表统一凯尔特音阶", "Medieval/modern reference; optional Celtic-inspired use, not a single Celtic scale"], ["phrygian", "弗里吉亚式", "Phrygian-type", [0, 1, 3, 5, 7, 8, 10], "欧洲教会调式的现代音阶抽象", "Modern scalar abstraction of a European church mode"], ["lydian", "利底亚式", "Lydian-type", [0, 2, 4, 6, 7, 9, 11], "欧洲调式参照；不等同中国清乐", "European modal reference; not identical to Chinese qingyue"], ["mixolydian", "混合利底亚式", "Mixolydian-type", [0, 2, 4, 5, 7, 9, 10], "欧洲调式与当代民间风格参照", "European modal and contemporary folk-style reference"], ["aeolian", "爱奥利亚式", "Aeolian-type", [0, 2, 3, 5, 7, 8, 10], "欧洲自然小调式参照", "European natural-minor reference"], ["in", "日本阴音阶式", "Japanese in-type", [0, 1, 5, 7, 8], "日本音阶的十二平均律简化；不定义完整传统", "12-TET simplification; does not define the complete tradition"], ["hirajoshi", "平调子式", "Hirajoshi-type", [0, 2, 3, 7, 8], "常见现代转写形式；版本与调弦可能不同", "Common modern transcription; tunings and versions vary"], ["hungarian", "匈牙利小调式", "Hungarian-minor-type", [0, 2, 3, 6, 7, 8, 11], "现代音阶名称；不将罗姆音乐概括成单一音阶", "Modern scale name; Roma music is not reduced to one scale"], ["hijaz", "希贾兹四音核参照", "Hijaz-tetrachord reference", [0, 1, 4, 5], "仅四音核的平均律示意，不等同完整 maqam", "Equal-tempered tetrachord illustration, not a complete maqam"], ["whole", "全音阶", "Whole-tone", [0, 2, 4, 6, 8, 10], "人工对称音阶；乾卦默认极点", "Symmetrical collection; default Qian pole"], ["chromatic6", "六音半音簇", "Chromatic hexachord", [0, 1, 2, 3, 4, 5], "人工半音音场；坤卦默认极点", "Synthetic chromatic field; default Kun pole"], ["octatonic", "八声音阶", "Octatonic", [0, 1, 3, 4, 6, 7, 9, 10], "人工对称音阶", "Synthetic symmetrical collection"], ["acoustic", "声学音阶", "Acoustic scale", [0, 2, 4, 6, 7, 9, 10], "现代人工／调式参照", "Modern synthetic/modal reference"]];
+
+let freeShift=null, freeReference=null;
+
+function compositionPcs(lower=state.lower,upper=state.upper){const p=revisionProfiles[upper+'-'+lower];const shift=freeShift===null?p.shift:freeShift;return [...byId[lower].pc,...byId[upper].pc.map(n=>(n+shift)%12)];}
+
+function getPcs(){return compositionPcs();}
+
+function referenceFor(up,lo){if(up===lo&&up==='qian')return modalCatalog.find(c=>c[0]==='whole');if(up===lo&&up==='kun')return modalCatalog.find(c=>c[0]==='chromatic6');const index=(order.indexOf(lo)*8+order.indexOf(up))%modalCatalog.length;return modalCatalog[index];}
+
+function expanded(up,lo){return [...new Set(compositionPcs(lo,up))].sort((a,b)=>a-b);}
+
+function performancePcs(){const p=getPcs();p[state.moving]=mutate().pc;return p;}
+
+function revisionUI(){
+
+ const en=state.lang==='en', p=revisionProfiles[key()], raw=p.raw, base=getPcs(), sounding=performancePcs();
+
+ const shift=freeShift===null?p.signedShift:(freeShift<=6?freeShift:freeShift-12), automatic=freeShift===null;
+
+ const format=a=>a.map(note).join(' · '), signed=n=>(n>0?'+':'')+n;
+
+ let reason=!automatic?(en?'Manual override: repetition is allowed.':'手动改配：允许重音。'):p.reason==='whole-tone-pole'?(en?'Pure Qian is an explicit exception: T+6 preserves a complete whole-tone collection, not the smallest unrestricted shift.':'纯乾是明确例外：T+6 保留完整全音阶，不采用不受限制的最小移位。'):p.shift===0?(en?'The cells already have no shared pitch classes: retain both; no shift is needed.':'原始两个音核没有共同音级：全部保留，不需要移位。'):(en?'The original cells share pitches. Use the smallest circular semitone shift that separates them; choose upwards on a tie.':'原始音核有共同音级，才选择能消除重音的最小半音移位；等距时默认向上。');
+
+ $('pitchSet').textContent=format(base);
+
+ $('modeCaption').textContent=en?`Core before slide: ${new Set(base).size}/6 distinct; after slide: ${new Set(sounding).size}/6. Upper T${signed(shift)}.`:`合成核心（动爻前）${new Set(base).size}/6 音级；动爻后 ${new Set(sounding).size}/6。上卦 T${signed(shift)}。`;
+
+ $('upperNote').textContent=`${byId[state.upper].degree} · ${format(raw.slice(3))} → T${signed(shift)} → ${format(base.slice(3))}`;
+
+ $('upperPill').textContent=`${en?'Upper nucleus':'上卦音核'}: ${format(raw.slice(3))} → ${format(base.slice(3))}`;
+
+ $('lowerPill').textContent=`${en?'Lower nucleus retained':'下卦音核保留'}: ${format(raw.slice(0,3))}`;
+
+ $('mutationText').textContent=state.amount===0?(en?'Moving-line slide is off; all six positions retain the core.':'动爻试听已关闭；六个声部保持合成核心。'):`${local().line[state.moving]}: ${mutate().old} → ${mutate().next} (${signed(mutate().direction*state.amount)} st)`;
+
+ $('sourceTrace').innerHTML=`<p><strong>${en?'1 Original cells':'1 原始三音列'}</strong><br>${format(raw.slice(0,3))} ＋ ${format(raw.slice(3))} · ${new Set(raw).size}/6</p><p><strong>${en?'2 Upper-cell treatment':'2 上卦处理'}</strong><br>T${signed(shift)} · ${reason}</p><p><strong>${en?'3 Core before slide':'3 合成核心（动爻前）'}</strong><br>${format(base)}</p><p><strong>${en?'4 Sounding pitches after slide':'4 发声音高（动爻后）'}</strong><br>${format(sounding)}<br>${en?'The six voice cards, core audition and MIDI use this last row.':'下方六声部卡片、核心试听和 MIDI 均使用这一行。'}</p>`;
+
+ const host=$('revisionControls');
+
+ host.innerHTML=`<h3>${en?'Minimum-intervention synthesis':'最小干预合成规则'}</h3><ol><li>${en?'Keep both ordered nuclei when there are no shared pitch classes.':'没有重音时，保留上下两个有序音核。'}</li><li>${en?'If pitches overlap, retain the lower cell and try upper shifts 0,+1,-1,+2,-2,+3,-3,+4,-4,+5,-5,+6; choose the first six-distinct result.':'有重音时固定下卦，上卦依次尝试 0、+1、−1、+2、−2、+3、−3、+4、−4、+5、−5、+6 半音，取第一个六音互异方案。'}</li><li>${en?'Explicit pole constraint: Qian/Qian uses T+6 for whole-tone openness. Kun/Kun uses the ordinary minimum T+3 for chromatic compression.':'极点约束：纯乾明确使用 T+6 保持全音开阔；纯坤按普通最小规则取 T+3，保持半音密集。'}</li><li>${en?'Different hexagrams may share a collection. Distinguish them through ordering, tonal centres, rhythm, timbre, texture and form.':'不同卦可以共享集合，通过音序、调式中心、节奏、音色、织体与曲式区分。'}</li><li>${en?'A moving-line slide is optional and alters one node only. Repetition after the slide can be an intentional voice convergence.':'动爻可关闭，只改变一个节点；动爻后的重音可以作为有意的声部汇合。'}</li></ol><label for="coreShift">${en?'Upper-cell shift':'上卦移位'}</label><select id="coreShift"><option value="auto">${en?'Recommended rule':'规则推荐'} · T${signed(p.signedShift)}</option>${Array.from({length:12},(_,i)=>`<option value="${i}">${en?'Manual':'手动'} T${signed(i<=6?i:i-12)}</option>`).join('')}</select><button class="button" id="resetRule">${en?'Reset to recommended rule':'恢复规则推荐'}</button><button class="button" id="rawAudio">${en?'Audition original unshifted cells':'试听原始拼合（无移位／无动爻）'}</button><label for="referenceChoice">${en?'Independent cultural or synthetic reference':'独立的文化或人工音阶参照'}</label><select id="referenceChoice">${modalCatalog.map(c=>`<option value="${c[0]}">${c[en?2:1]}</option>`).join('')}</select><p id="referenceDetail"></p><p>${en?'A selected cultural scale is an independent compositional reference, not a mode proven by the hexagram or by three notes. Tang, Dunhuang and Song claims require specific score editions and tuning evidence.':'所选文化音阶是独立的创作参照，不是卦象或三个音能证明的历史调式。唐代、敦煌、宋代的对应须明确曲谱版本与律制证据。'}</p><button class="button" id="referenceAudio">${en?'Audition reference scale only':'仅试听所选参照音阶'}</button><button class="button" id="profileExport">${en?'Export reproducible configuration':'导出可复现配置'}</button>`;
+
+ $('coreShift').value=automatic?'auto':String(freeShift);
+
+ const ref=modalCatalog.find(c=>c[0]===freeReference)||referenceFor(state.upper,state.lower);
+
+ $('referenceChoice').value=ref[0];$('referenceDetail').textContent=`${ref[en?2:1]}: ${format(ref[3])}. ${ref[en?5:4]}`;
+
+ $('coreShift').onchange=e=>{freeShift=e.target.value==='auto'?null:Number(e.target.value);render()};
+
+ $('resetRule').onclick=()=>{freeShift=null;freeReference=null;render()};
+
+ $('referenceChoice').onchange=e=>{freeReference=e.target.value;revisionUI()};
+
+ const playPool=pool=>{const c=window.MusicVoices.context();window.MusicVoices.stop();pool.forEach((pc,i)=>window.MusicVoices.play(440*Math.pow(2,(60+((pc+state.tonic)%12)-69)/12),c.currentTime+.05+i*.35,.7,$('realInstrument').value,true))};
+
+ $('referenceAudio').onclick=()=>playPool(ref[3]);$('rawAudio').onclick=()=>playPool(raw);
+
+ $('profileExport').onclick=()=>{const record={version:'2026-10-21-minimal-v2',ruleMode:automatic?'recommended':'manual',hexagram:nameData(),lower:state.lower,upper:state.upper,tonic:state.tonic,originalCells:raw,upperSignedShift:shift,reason,beforeSlide:base,afterSlide:sounding,movingLine:state.moving+1,slide:state.amount,reference:ref,distinctRaw:new Set(raw).size,distinctBefore:new Set(base).size,distinctAfter:new Set(sounding).size};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(record,null,2)],{type:'application/json'}));a.download='iching-configuration.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+
+}
+
+function drawAtlas(){const body=$('atlasRows');body.innerHTML='';const en=state.lang==='en';for(const lo of order)for(const up of order){const p=revisionProfiles[up+'-'+lo],ref=referenceFor(up,lo),row=document.createElement('tr');for(const text of [`${p.number} ${en?p.en:p.zh}`,`${byId[lo].pc.join(',')} + T${p.signedShift}(${byId[up].pc.join(',')})`,`${ref[en?2:1]} — ${ref[en?5:4]}`,p.sorted.join(' · '),en?'Structure: Yijing; pitches: original mapping':'符号结构：《易经》；音高：作者原创映射',en?'Retain if disjoint; otherwise minimal shift; Qian pole exception':'无重音保留；否则最小移位；纯乾极点例外',en?'6 positions / 6 distinct pitches (default)':'6 声部／6 音级（默认）']){const td=document.createElement('td');td.textContent=text;row.append(td)}body.append(row)}}
+
+function audition(){const c=window.MusicVoices.context();window.MusicVoices.stop();performancePcs().forEach((pc,i)=>window.MusicVoices.play(440*Math.pow(2,(60+((pc+state.tonic)%12)-69)/12),c.currentTime+.05+i*.3,.85,$('realInstrument').value,!!allBits()[i]));flash(local().toastAudio)}
+
+function downloadMidi(){const pcs=performancePcs(),title=new TextEncoder().encode('I Ching Modal'),events=[0,255,81,3,12,53,0,0,255,3,title.length,...title];pcs.forEach(pc=>{const midi=60+((pc+state.tonic)%12);events.push(0,144,midi,76,...vlq(280),128,midi,0)});events.push(0,255,47,0);const n=events.length,b=new Uint8Array([77,84,104,100,0,0,0,6,0,0,0,1,1,224,77,84,114,107,n>>>24&255,n>>>16&255,n>>>8&255,n&255,...events]);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([b],{type:'audio/midi'}));a.download=`IChing_${nameData()[0]}.mid`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);flash(local().toastMidi)}
+
+Object.assign(txt.zh,{r2Text:'三爻整体选择三音列音核；爻位规定音列的时间／声部次序。音高是作者的查表映射，不是三条爻自动推出三个音程。',r3Text:'原始音核无重音则不移位；有重音才固定下卦，对上卦作最小消重音移位。不同卦允许共享音高集合；纯乾使用 T+6 保留全音极点。动爻滑动与变卦重新生成是两个不同操作。'});
+
+Object.assign(txt.en,{r2Text:'The complete trigram selects a lookup nucleus; line positions order events or voices. Three lines do not automatically generate three intervals.',r3Text:'Retain disjoint cells; only transpose the upper minimally when pitches overlap. Defaults have six distinct pitch classes, with no requirement for 64 unique pitch sets; pure Qian preserves the whole-tone pole with T+6. A moving-line slide is separate from regenerating a changed hexagram.'});
+
+
+
+
+
+Object.assign(txt.zh,{pitchSet:'合成核心（动爻前）',resultSub:'无重音保留；重音才最小移位；纯乾全音极点例外',listen:'试听当前发声音高',slideLabel:'动爻滑动（可关闭）'});
+
+Object.assign(txt.en,{pitchSet:'Core before moving-line slide',resultSub:'Retain disjoint cells; minimal shifts for overlap; explicit whole-tone Qian exception',listen:'Audition current sounding pitches',slideLabel:'Moving-line slide (optional)'});
+
+Object.assign(txt.zh,{"heroTitle": "<span>上下卦</span>与音高材料", "heroText": "从两组默认三音核出发，查看原始材料、移位过程与发声音高。通过调式重配、节奏、音色与编制，让规则进入具体作品。", "aimTitle": "从规则到实践", "aimText": "以《太初》、正在创作的《帝女花》弦乐四重奏及《九域天籁》等案例考察系统。根据作品目的选择室内乐、管弦乐、电子或混合媒介。", "researchNote": "记录默认材料、文化来源与自由调整，结合乐谱、录音及排练反馈评估其音乐结果。", "lowerLabel": "下卦 / 材料层 A", "upperLabel": "上卦 / 材料层 B", "lowerRole": "材料层 A", "upperRole": "材料层 B", "ensembleLabel": "编制与媒介", "r1Text": "先为具体作品确定阴阳的主要对比维度。主题清晰度、连续性、节拍、音色与音程均可承担两极，并可在发展中交换属性。", "r2Text": "完整三爻查表选取默认音核，并可结合节奏、发音、音区、密度与音色。记录自选音核的来源、变形与创作理由。", "r3Text": "无重音时保留 T0；有重音时固定下卦，为上卦寻找最小消重音移位。纯乾 T+6 保留全音极点，纯坤 T+3 形成半音核。动爻单音滑动与变卦重新生成分别处理。", "footer1": "张睿哲的易经作曲系统 · 当代音乐创作实践研究", "footer2": "研究修订版 · 2026"});
+Object.assign(txt.en,{"heroTitle": "<span>Paired trigrams</span> and pitch material", "heroText": "Begin with two default trichord nuclei. Inspect their source material, transposition and sounding pitches, then develop modes, rhythm, timbre and instrumentation within a composition.", "aimTitle": "From rules to practice", "aimText": "Explore the system through Primordial, the developing Flower Princess quartet and Celestial Harmonies. Choose chamber, orchestral, electronic or mixed media according to the work’s artistic purpose.", "researchNote": "Document default materials, cultural sources and free adjustments. Evaluate musical outcomes through scores, recordings and rehearsal feedback.", "lowerLabel": "Lower trigram / material A", "upperLabel": "Upper trigram / material B", "lowerRole": "Material A", "upperRole": "Material B", "ensembleLabel": "Forces and media", "r1Text": "Define the principal yin-yang contrast for each work. Thematic clarity, continuity, pulse, timbre and intervals may establish poles and exchange attributes during development.", "r2Text": "The whole trigram selects a default nucleus. Combine it with rhythm, articulation, register, density and timbre. Document sources, transformations and reasons for freely selected nuclei.", "r3Text": "Retain T0 for disjoint cells. For overlap, hold the lower nucleus and find the smallest disjoint upper shift. Pure Qian uses T+6 for its whole-tone pole, and pure Kun T+3 for a chromatic core. Moving-line slides and regeneration are separate operations.", "footer1": "Ruizhe Zhang’s I Ching Composition System · Contemporary composition research", "footer2": "Research revision · 2026"});
+    applyLanguage(); fillSelects(); bind(); render();
+
+activateSupplement();
+
+  
+function render(){renderCompositionBase();document.dispatchEvent(new CustomEvent('iching-composition-change'));}
+// This adapter runs inside the laboratory's existing closure.
+function experimentOption(id,value){return typeof value==='string'&&[...$(id).querySelectorAll('option')].some(option=>option.value===value);}
+function validateExperimentParameters(input){
+  if(!input||typeof input!=='object'||!Object.hasOwn(byId,input.lower)||!Object.hasOwn(byId,input.upper))throw Error('invalid-parameters');
+  const integer=(value,min,max)=>Number.isInteger(value)&&value>=min&&value<=max;
+  if(!integer(input.tonic,0,11)||!integer(input.moving,0,5)||!integer(input.slide,0,2))throw Error('invalid-parameters');
+  if(input.freeShift!==null&&!integer(input.freeShift,0,11))throw Error('invalid-parameters');
+  if(input.reference!==null&&!modalCatalog.some(item=>item[0]===input.reference))throw Error('invalid-parameters');
+  for(const [field,id] of [['solo','solo'],['ensemble','ensemble'],['organisation','organisation'],['layerShift','layerShift'],['instrument','realInstrument']])if(!experimentOption(id,input[field]))throw Error('invalid-parameters');
+  return {...input};
+}
+window.IChingExperimentAdapter={
+  module:'laboratory',
+  snapshot(){
+    const profile=revisionProfiles[key()],core=getPcs(),sounding=performancePcs();
+    const reference=modalCatalog.find(item=>item[0]===freeReference)||referenceFor(state.upper,state.lower);
+    return {
+      module:'laboratory',ruleVersion:window.IChingResearch?.revision||'2026-11-09',
+      parameters:{lower:state.lower,upper:state.upper,tonic:state.tonic,moving:state.moving,slide:state.amount,freeShift,reference:freeReference,solo:$('solo').value,ensemble:$('ensemble').value,organisation:$('organisation').value,layerShift:$('layerShift').value,instrument:$('realInstrument').value},
+      hexagram:{number:profile.number,zh:profile.zh,en:profile.en},
+      material:{raw:[...profile.raw],core:[...core],sounding:[...sounding],bits:allBits(),rawNotes:profile.raw.map(note),coreNotes:core.map(note),soundingNotes:sounding.map(note)},
+      rule:{upperShift:freeShift===null?profile.signedShift:(freeShift<=6?freeShift:freeShift-12),automatic:freeShift===null,reason:freeShift===null?profile.reason:'manual-override'},
+      culturalReference:{id:reference[0],zh:reference[1],en:reference[2],pitchClasses:[...reference[3]]}
+    };
+  },
+  validate:validateExperimentParameters,
+  restore(input){
+    const value=validateExperimentParameters(input);
+    Object.assign(state,{lower:value.lower,upper:value.upper,tonic:value.tonic,moving:value.moving,amount:value.slide,solo:value.solo,ensemble:value.ensemble});
+    freeShift=value.freeShift;freeReference=value.reference;
+    for(const [id,field] of [['solo','solo'],['ensemble','ensemble'],['organisation','organisation'],['layerShift','layerShift'],['realInstrument','instrument']])$(id).value=value[field];
+    $('motionSize').value=String(value.slide);fillSelects();render();
+  },
+  preset(id){
+    const pair={xu:['qian','kan'],qian:['qian','qian'],kun:['kun','kun']}[id];
+    if(!pair)throw Error('invalid-preset');
+    this.restore({...this.snapshot().parameters,lower:pair[0],upper:pair[1],tonic:0,moving:2,slide:0,freeShift:null,reference:null,organisation:'core',layerShift:'0'});
+  }
+};
+
+})();
+
+  </script>
+
+<div class="author-watermark" aria-hidden="true">张睿哲 · Ruizhe Zhang</div><script src="research-content.js"></script><script src="research-ui.js"></script><script src="child-bridge.js"></script><script src="experiments.js"></script></body>
+
+</html>
