@@ -1,14 +1,22 @@
 # 易经作曲系统网站更新包
 
-本版以此前保存的最小干预规则网站源码为基础，界面更新日期为 2026 年 11 月 12 日。音乐规则沿用 2026 年 11 月 9 日整理的版本。
+本版界面更新日期为 2026 年 11 月 20 日。音乐规则沿用 2026 年 11 月 9 日整理的版本。
 
 ## 使用与上传
 
-1. 解压后打开 index.html。首页、图解与七阶段规则可以直接阅读。
+1. 解压后打开 index.html。点击卦象即可试听，点击调式名称可听参照音阶。
 2. 将 index.html、laboratory.html、fortune.html、全部 CSS 和 JS 文件以及 assets 文件夹一并上传到原 GitHub 仓库根目录。
 3. 保持文件名大小写和目录结构，等待原有 Vercel 项目部署成功后访问网站。
 
-ZIP 需要先解压，再上传里面的文件。完整目录共 27 个文件，包含两部作品的音频与乐谱。
+ZIP 需要先解压，再上传里面的文件。目录包含两部作品的音频与乐谱，以及钢琴采样。
+
+## 象、数、理、占与钢琴试听 · 2026 年 11 月 20 日
+
+- 首页《易经》入门新增「象、数、理、占」的中英对照说明。首页、七阶段、作曲实验室和命格作曲的主要英文说明已简化。
+- 点击试听区的卦象或卦表条目可听该卦音高，点击调式选项可听对应参照音阶。三阶段试听、原始和当前音高、参照音阶、双层调式草图及命格音高统一使用真实钢琴录音。采样来源见 [Piano sample credits](assets/piano-credits.html)。
+- 点同一个卦象试听按钮可停止。音频数据随站点提供，解压后可试听。
+
+The introduction explains Xiang, Shu, Li and Zhan in Chinese and English. Built-in previews use recorded piano, including the three listening stages, reference scales and layered studies. To try a local sample in the lab, load a recording under “Try your own single-note recording” and use its own play button.
 
 ## 每日与问题起卦 · 2026 年 11 月 12 日
 

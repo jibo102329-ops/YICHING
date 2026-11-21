@@ -372,3 +372,75 @@ body[data-application] .coin-value small { font-size: 10px; }
 body[data-application] .coin-value b { font: 25px/1.5 var(--serif); color: #6b7553; }
 body[data-application] .coin-value.moving b { color: #a35339; }
 body[data-application] .coin-value span { font-size: 9px; line-height: 1.7; }
+.four-ideas {
+  margin-block: 2rem;
+  padding-block: 1.4rem;
+  border-block: 1px solid #a48d5659;
+}
+.four-ideas h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.four-ideas dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin: 0;
+}
+.four-ideas dt {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.four-ideas .idea-character {
+  color: #9d463a;
+  font-family: "KaiTi", "Noto Serif SC", serif;
+  font-size: 1.85rem;
+  font-weight: 400;
+}
+.four-ideas dd {
+  margin: .3rem 0 0;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+@media (max-width: 750px) {
+  .four-ideas dl {grid-template-columns: repeat(2, minmax(0, 1fr));}
+}
+
+button.hex-listen {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: .55rem;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color .18s, background-color .18s;
+}
+button.xu-listen {
+  padding: .4rem;
+  background: #e9e2cd57;
+  border: 1px solid #a48d5650;
+  border-radius: .4rem;
+}
+button.hex-listen:is(:hover, [aria-pressed="true"]) {
+  border-color: #9d463a;
+  background-color: #edd7c26b;
+}
+button.hex-listen:focus-visible {
+  outline: 2px solid #9d463a;
+  outline-offset: 3px;
+}
+.hex-listen .hex-listen-label {
+  color: #853b34;
+  font-size: .875rem;
+  line-height: 1.2;
+  padding-inline: .1rem;
+}
+.mode-audio-status {
+  color: #853b34;
+  font-size: .875rem;
+}
+.mode-audio-status:empty {margin: 0;}

@@ -4,10 +4,10 @@
   if(!adapter)return;
   const PREFIX='iching.experiment.v1.';
   const SCHEMA='iching-composition-experiment';
-  const APP_VERSION='2026-11-12.2';
+  const APP_VERSION='2026-11-20.2';
   const strings={
     zh:{examples:'先听懂三个例子',examplesSub:'选择一个默认方案，再比较音核处理的前后。',xu:'需 · 保留原位',qian:'乾 · 全音极点',kun:'坤 · 半音密集',xuNote:'C–D–E 与 G–A–B 保持 T0。',qianNote:'重复的乾音核，经 T+6 展开。',kunNote:'重复的坤音核，经 T+3 分开。',raw:'原始双三音核',rawStatus:'此处保留原始音核；上卦移位发生在下一步合成中。',coreStatus:'此处为动爻前的合成核心，单音滑动另在当前发声阶段呈现。',core:'合成核心',sounding:'当前发声',listen:'试听所选阶段',stop:'停止试听',positions:'个声部位置',distinct:'个不同音级',shift:'上卦移位',automatic:'默认规则',manual:'自由移位',slideOff:'动爻滑动关闭，合成核心与当前发声相同。',slideOn:'动爻作用于一个音，当前发声可能包含重音。',notebook:'保存创作实验',notebookSub:'保存音乐参数和研究笔记，在同一板块恢复或通过 JSON 迁移。',title:'实验标题',titlePlaceholder:'例如：需卦的流动音色研究',stage:'研究阶段',stageNone:'尚未指定',source:'材料来源与参考版本',sourcePlaceholder:'填写曲谱、录音、文献链接或自创材料说明',mapping:'自由改配与选择理由',mappingPlaceholder:'记录音核、移调、音色或材料层的选择',reflection:'聆听与创作反思',reflectionPlaceholder:'听到了什么？下一次准备修改什么？',save:'保存当前实验',export:'导出当前 JSON',print:'打印 / 保存 PDF',import:'导入 JSON',saved:'已保存的实验',choose:'选择一条记录',load:'恢复选中记录',exportSaved:'导出选中记录',remove:'删除选中记录',empty:'尚无保存的实验。',local:'音乐参数与笔记保存在当前浏览器，JSON 文件可用于迁移。',savedOk:'实验已保存。',restored:'实验已恢复。',exported:'JSON 记录已导出。',imported:'记录已导入并恢复。',deleted:'所选记录已删除。',chooseFirst:'请先选择一条记录。',storageError:'当前浏览器无法保存记录，请使用 JSON 导出。',invalid:'记录格式或参数无效，当前音乐参数仍可继续使用。',wrongModule:'请在记录原来的作曲板块导入。',unsupported:'此记录版本暂无法导入。',fileLarge:'请选择小于 1 MB 的实验 JSON 文件。',audioError:'浏览器暂时无法播放音频，请再次点击试听。',printReady:'已生成研究记录页，可通过浏览器打印为 PDF。',deleteConfirm:'删除选中的本地实验记录？',reportTitle:'易经作曲实验记录',date:'记录时间',module:'创作板块',lab:'作曲实验室',fortune:'命格作曲',ruleVersion:'规则版本',appVersion:'界面版本',hexagram:'卦象',lower:'下卦',upper:'上卦',tonic:'主音',moving:'动爻',slide:'滑动半音数',settings:'其他音乐参数',material:'音高处理',notes:'研究笔记',recordId:'记录编号',printAction:'打印记录',defaultTitle:'作曲实验',sampleNotice:'本地音色采样可在恢复后重新载入。'},
-    en:{examples:'Hear three starting points',examplesSub:'Select a default pairing, then compare its source nuclei and transformations.',xu:'Xu · retain T0',qian:'Qian · whole-tone pole',kun:'Kun · chromatic density',xuNote:'C–D–E and G–A–B retain T0.',qianNote:'Repeated Qian nuclei unfold through T+6.',kunNote:'Repeated Kun nuclei separate through T+3.',raw:'Source nuclei',rawStatus:'These are the original nuclei. Upper-cell transposition occurs in the next synthesis step.',coreStatus:'This is the core before the moving-line slide. Hear the single-note change in the sounding stage.',core:'Combined core',sounding:'Current sounding pitches',listen:'Audition this stage',stop:'Stop audition',positions:'voice positions',distinct:'distinct pitch classes',shift:'Upper transposition',automatic:'Default rule',manual:'Free transposition',slideOff:'The moving-line slide is off, so the core and sounding pitches coincide.',slideOn:'The moving line changes one pitch. The sounding result may include shared pitches.',notebook:'Save a composition experiment',notebookSub:'Save musical parameters and research notes. Restore them in the same module or transfer them through JSON.',title:'Experiment title',titlePlaceholder:'For example, a study of fluid timbres in Xu',stage:'Research stage',stageNone:'Not specified',source:'Material sources and editions',sourcePlaceholder:'Score, recording, reference link or a description of original material',mapping:'Remapping and reasons for choices',mappingPlaceholder:'Document nuclei, transpositions, timbres or the assignment of layers',reflection:'Listening and compositional reflection',reflectionPlaceholder:'What did you hear? What will you revise next?',save:'Save current experiment',export:'Export current JSON',print:'Print / save PDF',import:'Import JSON',saved:'Saved experiments',choose:'Select a record',load:'Restore selected record',exportSaved:'Export selected record',remove:'Delete selected record',empty:'No experiments have been saved yet.',local:'Musical parameters and notes are stored in this browser. JSON files can transfer records.',savedOk:'Experiment saved.',restored:'Experiment restored.',exported:'JSON record exported.',imported:'Record imported and restored.',deleted:'Selected record deleted.',chooseFirst:'Select a saved record first.',storageError:'Browser storage is unavailable. Export a JSON record instead.',invalid:'The record format or parameters are invalid. You can continue with the current musical settings.',wrongModule:'Import this record in its original composition module.',unsupported:'This record version is not supported yet.',fileLarge:'Choose an experiment JSON file smaller than 1 MB.',audioError:'Audio is unavailable at the moment. Try the audition button again.',printReady:'A research record page is ready. Use the browser’s print command to save a PDF.',deleteConfirm:'Delete the selected local experiment record?',reportTitle:'I Ching composition experiment',date:'Recorded at',module:'Composition module',lab:'Composition laboratory',fortune:'Fortune-telling Composition',ruleVersion:'Rule version',appVersion:'Interface version',hexagram:'Hexagram',lower:'Lower trigram',upper:'Upper trigram',tonic:'Tonic',moving:'Moving line',slide:'Slide in semitones',settings:'Other musical parameters',material:'Pitch treatment',notes:'Research notes',recordId:'Record ID',printAction:'Print record',defaultTitle:'Composition experiment',sampleNotice:'Local timbre samples can be loaded again after restoring a record.'}
+    en:{examples:'Hear three starting points',examplesSub:'Choose a starting pair, then compare the notes before and after each change.',xu:'Xu · unchanged (T0)',qian:'Qian · whole-tone pattern',kun:'Kun · chromatic pattern',xuNote:'C–D–E and G–A–B stay unchanged (T0).',qianNote:'Transpose the upper Qian pattern by six semitones (T+6).',kunNote:'Transpose the upper Kun pattern by three semitones (T+3).',raw:'Starting patterns',rawStatus:'These are the two starting patterns, before the upper pattern is transposed.',coreStatus:'These are the combined notes before any moving-line adjustment.',core:'Combined notes',sounding:'Notes after the line change',listen:'Play these notes',stop:'Stop playback',positions:'voice positions',distinct:'distinct pitch classes',shift:'Upper transposition',automatic:'Default rule',manual:'Free transposition',slideOff:'The line adjustment is off, so these notes match the combined notes.',slideOn:'Line adjustments change the selected pitches. The result may contain repeated pitches.',notebook:'Save this experiment',notebookSub:'Keep the settings and your notes. Reopen them in this module or export a JSON backup.',title:'Experiment title',titlePlaceholder:'For example, a study of flowing timbres in Xu',stage:'Research stage',stageNone:'Not specified',source:'Material sources and editions',sourcePlaceholder:'Score, recording, reference link or a description of original material',mapping:'Changes and reasons',mappingPlaceholder:'Record your choice of notes, transpositions, timbres or musical layers',reflection:'Listening notes and next steps',reflectionPlaceholder:'What did you hear? What will you revise next?',save:'Save current experiment',export:'Export current JSON',print:'Print / save PDF',import:'Import JSON',saved:'Saved experiments',choose:'Select a record',load:'Restore selected record',exportSaved:'Export selected record',remove:'Delete selected record',empty:'No experiments have been saved yet.',local:'Your settings and notes are saved in this browser. Export a JSON file to back them up or move them to another device.',savedOk:'Experiment saved.',restored:'Experiment restored.',exported:'JSON record exported.',imported:'Record imported and restored.',deleted:'Selected record deleted.',chooseFirst:'Select a saved record first.',storageError:'Browser storage is unavailable. Export a JSON record instead.',invalid:'The record format or parameters are invalid. You can continue with the current musical settings.',wrongModule:'Import this record in the module where it was created.',unsupported:'This record version is not supported yet.',fileLarge:'Choose an experiment JSON file smaller than 1 MB.',audioError:'Audio is unavailable at the moment. Try the play button again.',printReady:'Your research record is ready. Use the browser’s print command to save a PDF.',deleteConfirm:'Delete the selected local experiment record?',reportTitle:'I Ching composition experiment',date:'Recorded at',module:'Composition module',lab:'Composition laboratory',fortune:'Fortune-telling Composition',ruleVersion:'Rule version',appVersion:'Interface version',hexagram:'Hexagram',lower:'Lower trigram',upper:'Upper trigram',tonic:'Tonic',moving:'Moving line',slide:'Slide in semitones',settings:'Other musical parameters',material:'Pitch treatment',notes:'Research notes',recordId:'Record ID',printAction:'Print record',defaultTitle:'Composition experiment',sampleNotice:'If you used a local audio sample, load it again after reopening the experiment.'}
   };
   const lang=()=>document.documentElement.lang==='en'?'en':'zh';
   const copy=()=>strings[lang()];
@@ -22,14 +22,17 @@
     const modal=document.getElementById('modalLab');modal.querySelector('.studio-body').prepend(examples);modal.after(book);
   }
   const field=id=>book.querySelector('#'+id);
-  let phase='core',playToken=0,playing=false,playTimers=[];
+  let phase='core',playing=false;
   const phases=['raw','core','sounding'];
   function message(key){field('experimentStatus').textContent=copy()[key]||key;}
-  function stopAudio(){
-    playToken++;playTimers.forEach(clearTimeout);playTimers=[];playing=false;
-    window.MusicVoices?.stop();
+  function finishPlayback(){
+    playing=false;
     examples.querySelectorAll('.pitch-chip').forEach(chip=>chip.classList.remove('sounding'));
     updatePlayButton();
+  }
+  function stopAudio(){
+    window.IChingModePreview.stop();
+    finishPlayback();
   }
   function updatePlayButton(){const button=examples.querySelector('.phase-listen');button.textContent=(playing?'Ⅱ  ':'▷  ')+copy()[playing?'stop':'listen'];button.setAttribute('aria-pressed',String(playing));}
   function updateMaterial(){
@@ -47,25 +50,23 @@
     examples.querySelectorAll('[data-preset]').forEach(button=>{const active=button.dataset.preset===selected&&snapshot.parameters.tonic===0&&snapshot.rule.automatic;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
     updatePlayButton();
   }
-  async function audition(){
+  function audition(){
     if(playing){stopAudio();return;}
-    stopAudio();const token=playToken;
-    try{
-      const snapshot=adapter.snapshot(),audio=window.MusicVoices,context=audio.context();
-      if(context.state==='suspended'&&context.resume)await context.resume();
-      if(token!==playToken)return;
-      playing=true;updatePlayButton();
-      const origin=context.currentTime+.05;
-      snapshot.material[phase].forEach((pc,index)=>{
-        const midi=60+pc+snapshot.parameters.tonic;
-        const bit=snapshot.material.bits[index];
-        audio.play(440*Math.pow(2,(midi-69)/12),origin+index*.32,bit?1:.55,snapshot.parameters.instrument,!!bit);
-        if(document.documentElement.dataset.motion!=='off')playTimers.push(setTimeout(()=>{
+    const {material,parameters}=adapter.snapshot();
+    const notes=material[phase].map(pc=>60+pc+parameters.tonic);
+    playing=true;updatePlayButton();
+    window.IChingModePreview.play(notes,{
+      bits:material.bits,
+      onNote(index){
+        if(document.documentElement.dataset.motion!=='off'){
           examples.querySelectorAll('.pitch-chip').forEach(chip=>chip.classList.toggle('sounding',Number(chip.dataset.pitchIndex)===index));
-        },50+index*320));
-      });
-      playTimers.push(setTimeout(()=>{if(token===playToken){playing=false;examples.querySelectorAll('.pitch-chip').forEach(chip=>chip.classList.remove('sounding'));updatePlayButton();}},2650));
-    }catch{if(token===playToken){playing=false;updatePlayButton();message('audioError');}}
+        }
+      },
+      onFinish(reason){
+        finishPlayback();
+        if(reason==='error')message('audioError');
+      }
+    });
   }
   examples.querySelector('.phase-listen').addEventListener('click',audition);
   function renderExamples(){

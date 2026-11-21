@@ -20,6 +20,12 @@
   document.querySelector('.brand-emblem').innerHTML=UI.taiji();
   $('heroSymbol').innerHTML=UI.taiji();
   $('xuSymbol').innerHTML=UI.symbol('xu');
+  $('hearXu').addEventListener('click', event => {
+    document.querySelectorAll('#overviewView audio').forEach(audio => audio.pause());
+    window.IChingModePreview.play([60,62,64,67,69,71],{
+      bits:[1,1,1,0,1,0], button:event.currentTarget, status:$('xuAudioStatus'), name:lang==='zh'?'需':'Xu'
+    });
+  });
   $('orbitalTrigrams').innerHTML=data.trigrams.map((t,i) => {
     const angle=i*Math.PI/4-Math.PI/2;
     return `<span class="orbital-trigram" style="left:${50+47*Math.cos(angle)}%;top:${50+47*Math.sin(angle)}%;transform:translate(-50%,-50%) rotate(${i*45}deg)"><svg viewBox="0 0 40 32" fill="none">${UI.lines(t.bits,2,5,36,10,2.5)}</svg></span>`;
@@ -37,6 +43,7 @@
   }
   function syncFrames() { ['laboratoryFrame','fortuneFrame'].forEach(id => sendConfiguration($(id))); }
   function translate() {
+    window.IChingModePreview.stop();
     document.documentElement.lang=lang==='zh'?'zh-CN':'en';
     document.title=lang==='zh'?'易经作曲系统 · 张睿哲 Ruizhe Zhang':'I Ching Composition System · Ruizhe Zhang';
     document.querySelectorAll('[data-zh][data-en]').forEach(element => element.textContent=element.dataset[lang]);
@@ -57,6 +64,7 @@
       else button.removeAttribute('aria-current');
     });
     if(view!=='overview') {
+      window.IChingModePreview.stop();
       document.querySelectorAll('#overviewView audio').forEach(audio => audio.pause());
       const frame=$(view+'Frame');
       if(!frame.hasAttribute('src')) frame.src=frame.dataset.src;
@@ -110,6 +118,7 @@
   dialog.addEventListener('click',event => {if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeFigure();}});
   dialog.addEventListener('close',() => previousFigureButton?.focus());
   document.querySelectorAll('#overviewView audio').forEach(audio => audio.addEventListener('play',() => {
+    window.IChingModePreview.stop();
     document.querySelectorAll('#overviewView audio').forEach(other => {if(other!==audio)other.pause();});
   }));
   if(typeof IntersectionObserver==='function') {

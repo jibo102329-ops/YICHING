@@ -21,7 +21,7 @@
     document.querySelectorAll('[data-copy-zh][data-copy-en]').forEach(node => node.textContent=language==='zh'?node.dataset.copyZh:node.dataset.copyEn);
   }
   function stopAudio() {
-    window.MusicVoices?.stop();
+    window.IChingModePreview?.stop();
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     cycle?.pause();
   }
@@ -52,6 +52,7 @@
     else location.href='index.html#'+button.dataset.parentSection;
   }));
   document.querySelectorAll('audio').forEach(audio => audio.addEventListener('play',() => {
+    window.IChingModePreview?.stop();
     document.querySelectorAll('audio').forEach(other => {if(other!==audio)other.pause();});
   }));
   syncContent();
