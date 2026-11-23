@@ -13,6 +13,8 @@
   }
   function syncContent() {
     language=document.documentElement.lang==='en'?'en':'zh';
+    const painting=document.querySelector('.entrance-art img');
+    if(painting) painting.alt=language==='zh'?painting.dataset.altZh:painting.dataset.altEn;
     if(cycle) {
       document.getElementById('cycleHeading').textContent=language==='zh'?'七阶段生成与回归循环':'The seven-stage compositional cycle';
       document.getElementById('cycleScope').textContent=language==='zh'?'宏观曲式 → 材料关系 → 具体技法。用于单部作品、多个乐章或作品集；适用于室内乐、交响乐、电子与混合媒介。':'Formal structure → material relationships → techniques. Apply within one work, across movements or across a portfolio, using chamber, orchestral, electronic or mixed media.';

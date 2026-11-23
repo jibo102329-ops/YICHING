@@ -1,6 +1,6 @@
 # 易经作曲系统网站更新包
 
-本版界面更新日期为 2026 年 11 月 20 日。音乐规则沿用 2026 年 11 月 9 日整理的版本。
+本版界面更新日期为 2026 年 11 月 23 日。音乐规则沿用 2026 年 11 月 9 日整理的版本。
 
 ## 使用与上传
 
@@ -9,6 +9,14 @@
 3. 保持文件名大小写和目录结构，等待原有 Vercel 项目部署成功后访问网站。
 
 ZIP 需要先解压，再上传里面的文件。目录包含两部作品的音频与乐谱，以及钢琴采样。
+
+## 山水与题诗 · 2026 年 11 月 23 日
+
+研究与规则首页采用《太初聞弦》，命格作曲页采用《九域天籟》。两幅画的完整题诗保留在画面内。窄屏将画幅移到引言和主要操作下方。进入首页可跳到作曲规则，进入命格作曲页可跳到起卦表单。
+
+全站共享淡墨山水底图，作曲实验室页首另用松崖与瀑布横卷。谱面和表单采用较实的纸色，打印时不显示新增背景。
+
+The research entrance features *Listening to the First Strings*. The Fortune-telling Composition entrance features *Celestial Harmonies of the Realm*. The full paintings and their inscriptions remain visible at all screen widths.
 
 ## 象、数、理、占与钢琴试听 · 2026 年 11 月 20 日
 
